@@ -21,7 +21,7 @@ export const CourseContent = (
 					label='Video-title'
 					name='lecName'
 					fullWidth
-					variant='oulined'
+					variant='outlined'
 					// onChange={(e) => setEmail(e.target.value)}
 					value={""}
 				/>

@@ -42,9 +42,9 @@ const BackWrapper = (props) => {
 							}}
 							end
 						>
-							<ListItemButton startIcon={item.icon} size='large' variant='text'>
+							<Button startIcon={item.icon} size='large' variant='text'>
 								{item.name}
-							</ListItemButton>
+							</Button>
 						</NavLink>
 					)
 				})}
@@ -117,7 +117,8 @@ const BackWrapper = (props) => {
 						overflowY: "auto",
 						bgcolor: "primary.main",
 						margin: 0,
-						padding: 0
+						padding: 0,
+						overflowY: "auto"
 					}}
 				>
 					{props.children}
