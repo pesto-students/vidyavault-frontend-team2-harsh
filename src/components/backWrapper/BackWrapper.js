@@ -117,7 +117,8 @@ const BackWrapper = (props) => {
 						overflowY: "auto",
 						bgcolor: "primary.main",
 						margin: 0,
-						padding: 0
+						padding: 0,
+						overflowY: "auto"
 					}}
 				>
 					{props.children}
