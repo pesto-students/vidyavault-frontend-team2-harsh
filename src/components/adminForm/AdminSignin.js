@@ -25,7 +25,6 @@ let AdminSignin = () => {
 				<Stack direction='column' justifyContent='center' alignItems='center' spacing={3} height='100%' margin={3}>
 					<Typography variant='h3'>Admin Sign in</Typography>
 					<TextField
-						id='outlined-basic'
 						label='Email'
 						name='email'
 						color='third'
@@ -36,7 +35,6 @@ let AdminSignin = () => {
 						value={formData.email}
 					/>
 					<TextField
-						id='outlined-basic'
 						label='Password'
 						name='password'
 						type='password'

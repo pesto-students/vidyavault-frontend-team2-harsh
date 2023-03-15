@@ -31,7 +31,6 @@ let AdminSignup = () => {
 					<Typography variant='h5'>To create your Organization sign up here</Typography>
 					<Typography variant='h3'>Admin Sign up</Typography>
 					<TextField
-						id='outlined-basic'
 						label='Name'
 						name='name'
 						fullWidth
@@ -42,7 +41,6 @@ let AdminSignup = () => {
 						value={formData.name}
 					/>
 					<TextField
-						id='outlined-basic'
 						label='Email'
 						name='email'
 						color='third'
@@ -52,7 +50,6 @@ let AdminSignup = () => {
 						value={formData.email}
 					/>
 					<TextField
-						id='outlined-basic'
 						label='Password'
 						name='password'
 						type='password'
@@ -64,7 +61,6 @@ let AdminSignup = () => {
 					/>
 
 					<TextField
-						id='outlined-basic'
 						label='Organization Name'
 						name='orgName'
 						color='third'
@@ -77,7 +73,6 @@ let AdminSignup = () => {
 					<Box>
 						<Typography variant='h5'>Description</Typography>
 						<TextField
-							id='outlined-basic'
 							label='Goal'
 							name='goal'
 							color='third'
@@ -87,7 +82,6 @@ let AdminSignup = () => {
 							value={formData.goal}
 						/>
 						<TextField
-							id='outlined-basic'
 							label='slogan'
 							name='slogan'
 							color='third'

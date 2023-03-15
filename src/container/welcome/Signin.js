@@ -46,7 +46,7 @@ function Signin() {
 
 	return (
 		<>
-			<BackWrapper menuList={menuList}>
+			<Navbar />
 				<Box
 					sx={{
 						bgcolor: "primary.main",
@@ -66,7 +66,6 @@ function Signin() {
 
 						<TextField
 							color='third'
-							id='outlined'
 							fullWidth
 							name='email'
 							label='Email'
@@ -75,7 +74,6 @@ function Signin() {
 						/>
 						<TextField
 							color='third'
-							id='outlined'
 							type='password'
 							fullWidth
 							name='password'
@@ -103,7 +101,6 @@ function Signin() {
 						</Link>
 					</Stack>
 				</Box>
-			</BackWrapper>
 		</>
 	)
 }
