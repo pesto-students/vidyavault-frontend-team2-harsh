@@ -1,5 +1,3 @@
-import BackWrapper from '../../components/backWrapper/BackWrapper';
-import menuList from './menuList';
 import Button from '@mui/material/Button/Button';
 import Stack from '@mui/material/Stack/Stack';
 import { Divider, Typography } from '@mui/material';
@@ -10,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleIcon from '@mui/icons-material/Google';
 import { setLogin } from '../../store/authSlice';
+import Navbar from '../../components/navbar/Navbar';
 
 function Signin() {
   const nevigate = useNavigate();
@@ -39,7 +38,7 @@ function Signin() {
 
   return (
     <>
-      <BackWrapper menuList={menuList}>
+      <Navbar />
         <Box sx={{ bgcolor: "primary.main", width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" }, height: "90vh", margin: "auto auto", borderRadius: 5 }}>
           <Stack
             direction="column"
@@ -86,7 +85,6 @@ function Signin() {
             </Link>
           </Stack>
         </Box>
-      </BackWrapper>
     </>
   )
 }

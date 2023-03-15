@@ -1,16 +1,15 @@
 import React from 'react'
-import BackWrapper from '../../components/backWrapper/BackWrapper';
-import menuList from './menuList';
 import { Box, Grid } from '@mui/material';
 import Saurabh from '../../components/atoms/assets/Saurabh.webp';
 import abhi from '../../components/atoms/assets/abhi.jpg';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import Navbar from '../../components/navbar/Navbar';
 
 const About = () => {
   return (
-    <BackWrapper menuList={menuList}>
+    <>
+    <Navbar />
       {/* <Box textAlign="center" width="100%"  mt="10vh">
         <Typography variant='h3'>Lorem Ipsum is simply dummy text of the printing and
           typesetting industry. Lorem Ipsum has been the industry's standard dummy
@@ -91,7 +90,7 @@ const About = () => {
         </Box>
 
       </Stack>
-    </BackWrapper>
+    </>
   )
 }
 

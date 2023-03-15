@@ -42,9 +42,9 @@ const BackWrapper = (props) => {
 							}}
 							end
 						>
-							<ListItemButton startIcon={item.icon} size='large' variant='text'>
+							<Button startIcon={item.icon} size='large' variant='text'>
 								{item.name}
-							</ListItemButton>
+							</Button>
 						</NavLink>
 					)
 				})}

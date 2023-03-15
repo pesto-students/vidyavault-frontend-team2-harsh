@@ -1,9 +1,5 @@
-import BackWrapper from '../../components/backWrapper/BackWrapper';
-import menuList from './menuList';
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
@@ -13,49 +9,35 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Divider, Typography } from '@mui/material';
 import { addType } from '../../store/authSlice';
 import { useDispatch } from 'react-redux';
+import Navbar from '../../components/navbar/Navbar';
 
 function Signup() {
-    const dispatch = useDispatch();
-    const [checked, setChecked] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [org, setOrg] = useState('');
-    const [disable, setDisable] = useState(true);
+    // const dispatch = useDispatch();
+    const [formData, setFormData] = React.useState({
+        name: '',
+        email: '',
+        password: ''
+    })
 
-    const switchHandler = (event) => {
-        setChecked(event.target.checked);
-        console.log({ 'Admin': event.target.checked });
-        setDisable(!event.target.checked)
-    };
+    const handleChange = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+
     let submit = async () => {
-        let obj = {
-            "name": name,
-            "email": email,
-            "password": password,
-            "Admin": checked,
-            "org": org,
-        }
-        if (checked) {
-            console.log("Admin")
-            console.log(obj);
-            dispatch(addType("itsAdmin"));
-        } else {
-            console.log("User")
-            // const result = await axios.post('/api/signup', { name, email, password })
-            //     .then((x) => {
-            //         console.log(x);
-            //     })
-            // console.log(result);
-            // // console.log(obj);
-            dispatch(addType("itsUser"));
-        }
+        // dispatch(addType("itsUser"));
+        console.log(formData);
+
     }
 
     return (
         <>
-            <BackWrapper menuList={menuList}>
-                <Box sx={{ bgcolor: "primary.main", width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" }, height: "90vh", margin: "auto auto", borderRadius: 5 }}>
+            <Navbar />
+                <Box sx={{ bgcolor: "primary.main", width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" }, height: "max-content", margin: "auto auto", borderRadius: 5 }}>
                     <Stack
                         direction="column"
                         justifyContent="center"
@@ -74,56 +56,42 @@ function Signup() {
                             fullWidth
                             size='large'
                             variant="standard"
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
+                            name='name'
+                            value={formData.name}
+                            onChange={(e) => handleChange(e)}
                         />
                         <TextField
                             id="standard-basic"
                             label="Email"
                             fullWidth
                             variant="standard"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
+                            name='email'
+                            value={formData.email}
+                            onChange={(e) => handleChange(e)}
                         />
                         <TextField
                             id="standard-basic"
                             label="Password"
                             fullWidth
                             variant="standard"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                        />
-                        <FormControlLabel
-                            value="Admin"
-                            control={<Switch color="third" />}
-                            label="Admin"
-                            labelPlacement="start"
-                            onChange={switchHandler}
-                        />
-                        <TextField
-                            id="standard-basic"
-                            label="organization name"
-                            variant="standard"
-                            fullWidth
-                            disabled={disable}
-                            onChange={(e) => setOrg(e.target.value)}
-                            value={org}
+                            name='password'
+                            value={formData.password}
+                            onChange={(e) => handleChange(e)}
                         />
                         <Button
                             color="secondary"
                             size="large"
                             variant="contained"
                             fullWidth
-                            onClick={() => { submit() }}
+                            onClick={submit}
                         >Sign up</Button>
 
                         <Divider variant='middle' />
                         <Link to="/signin" style={{ textDecoration: 'none' }}>
-                            <Button variant='text' sx={{textTransform: "none"}}><Typography color="secondary">Already have an account?</Typography></Button>
+                            <Button variant='text' sx={{ textTransform: "none" }}><Typography color="secondary">Already have an account?</Typography></Button>
                         </Link>
                     </Stack>
                 </Box>
-            </BackWrapper>
         </>
     )
 }
