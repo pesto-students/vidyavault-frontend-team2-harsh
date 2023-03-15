@@ -6,8 +6,8 @@ import StepLabel from "@mui/material/StepLabel"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { Stack } from "@mui/system"
-import { CourseCreation } from "./CourseCreation"
-import { CourseContent } from "./CourseContent"
+import CourseCreation from "./CourseCreation"
+import CourseContent from "./CourseContent"
 import { UploadIcon, DescriptionIcon, NoteAddIcon } from "../atoms/icons/icons"
 import { useDispatch, useSelector } from "react-redux"
 import { openSnack, closeSnack } from "../../store/systemSlice"
@@ -23,10 +23,24 @@ export default function CreateCourseForm() {
 	let dispatch = useDispatch()
 	let sys = useSelector((state) => state.system)
 	const [activeStep, setActiveStep] = React.useState(0)
-	const [skipped, setSkipped] = React.useState(new Set())
 
-	const isStepOptional = (step) => {
-		return step === 1
+	const [formData, setFormData] = React.useState({
+		courseName: '',
+		description: '',
+		amount: '',
+		moduleName: '',
+		lecName: '',
+		thumbnail: '',
+		path: ''
+	})
+
+	const handleChange = (event) => {
+		const name = event.target.name
+		const value = event.target.value
+		setFormData({
+			...formData,
+			[name]: value
+		})
 	}
 
 	const thumFn = () => {
@@ -41,10 +55,9 @@ export default function CreateCourseForm() {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1)
 	}
 
-	const handleSkip = () => {}
-
-	const handleReset = () => {
-		setActiveStep(0)
+	const handleForm = () => {
+		setActiveStep(0);
+		console.log(formData);
 	}
 
 	return (
@@ -86,17 +99,21 @@ export default function CreateCourseForm() {
 					</Stack>
 				</React.Fragment>
 			) : activeStep == steps.length - 2 ? (
-				<React.Fragment>{CourseContent}</React.Fragment>
+				<React.Fragment>
+					<CourseContent formData={formData} setFormData={setFormData}/>
+				</React.Fragment>
 			) : (
 				<React.Fragment>
-					<Box textAlign='center'>{CourseCreation}</Box>
+					<Box textAlign='center'>
+						<CourseCreation formData={formData} setFormData={setFormData}/>
+					</Box>
 				</React.Fragment>
 			)}
 			{activeStep === steps.length - 1 ? (
 				<React.Fragment>
 					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
 						<Box sx={{ flex: "1 1 auto" }} />
-						<Button onClick={handleReset}>
+						<Button onClick={handleForm}>
 							<Typography variant='h6' color='secondary'>
 								Finish
 							</Typography>
