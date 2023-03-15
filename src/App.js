@@ -1,7 +1,6 @@
 import react, { useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import About from "./container/welcome/About"
-import Help from "./container/welcome/Help"
 import LandingPage from "./container/welcome/LandingPage"
 import Signin from "./container/welcome/Signin"
 import Signup from "./container/welcome/Signup"
@@ -35,7 +34,6 @@ const App = () => {
 					<Route path='/signin' element={<Signin />} />
 					<Route path='/org' element={<Organization />} />
 					<Route path='/about' element={<About />} />
-					<Route path='/help' element={<Help />} />
 
 					<Route path='/dash/' element={<UserDashboard />} />
 					<Route path='/dash/Subscriptions' element={<Subscriptions />} />

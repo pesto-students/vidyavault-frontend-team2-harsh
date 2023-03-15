@@ -1,15 +1,14 @@
-import BackWrapper from "../../components/backWrapper/BackWrapper"
-import menuList from "./menuList"
-import Button from "@mui/material/Button/Button"
-import Stack from "@mui/material/Stack/Stack"
-import { Divider, Typography } from "@mui/material"
-import { Box } from "@mui/system"
-import TextField from "@mui/material/TextField/TextField"
-import React, { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import GoogleIcon from "@mui/icons-material/Google"
-import { setLogin } from "../../store/authSlice"
+import Button from '@mui/material/Button/Button';
+import Stack from '@mui/material/Stack/Stack';
+import { Divider, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import TextField from '@mui/material/TextField/TextField';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import GoogleIcon from '@mui/icons-material/Google';
+import { setLogin } from '../../store/authSlice';
+import Navbar from '../../components/navbar/Navbar';
 
 function Signin() {
 	const nevigate = useNavigate()
