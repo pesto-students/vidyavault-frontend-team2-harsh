@@ -1,116 +1,127 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/system';
-import { CourseCreation } from './CourseCreation';
-import { CourseContent } from './CourseContent';
-import { UploadIcon, DescriptionIcon, NoteAddIcon, } from '../atoms/icons/icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { openSnack, closeSnack } from '../../store/systemSlice';
-import CustomSnackbar from '../snackbar/Snackbar';
+import * as React from "react"
+import Box from "@mui/material/Box"
+import Stepper from "@mui/material/Stepper"
+import Step from "@mui/material/Step"
+import StepLabel from "@mui/material/StepLabel"
+import Button from "@mui/material/Button"
+import Typography from "@mui/material/Typography"
+import { Stack } from "@mui/system"
+import { CourseCreation } from "./CourseCreation"
+import { CourseContent } from "./CourseContent"
+import { UploadIcon, DescriptionIcon, NoteAddIcon } from "../atoms/icons/icons"
+import { useDispatch, useSelector } from "react-redux"
+import { openSnack, closeSnack } from "../../store/systemSlice"
+import CustomSnackbar from "../snackbar/Snackbar"
 
 const steps = [
-    { "title": 'Course Creation', "icon": <NoteAddIcon /> },
-    { "title": 'Course content', "icon": <DescriptionIcon /> },
-    { "title": 'Upload', "icon": <UploadIcon /> },
-];
+	{ title: "Course Creation", icon: <NoteAddIcon /> },
+	{ title: "Course content", icon: <DescriptionIcon /> },
+	{ title: "Upload", icon: <UploadIcon /> }
+]
 
 export default function CreateCourseForm() {
-    let dispatch = useDispatch();
-    let sys = useSelector((state) => state.system);
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [skipped, setSkipped] = React.useState(new Set());
+	let dispatch = useDispatch()
+	let sys = useSelector((state) => state.system)
+	const [activeStep, setActiveStep] = React.useState(0)
+	const [skipped, setSkipped] = React.useState(new Set())
 
-    const isStepOptional = (step) => {
-        return step === 1;
-    };
+	const isStepOptional = (step) => {
+		return step === 1
+	}
 
-    const thumFn = () => {
-        dispatch(openSnack("Saurabh"));
-        console.log(sys);
-    }
+	const thumFn = () => {
+		dispatch(openSnack("Saurabh"))
+		console.log(sys)
+	}
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+	const handleNext = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep + 1)
+	}
+	const handleBack = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep - 1)
+	}
 
-    const handleSkip = () => {
-    };
+	const handleSkip = () => {}
 
-    const handleReset = () => {
-        setActiveStep(0);
-    };
+	const handleReset = () => {
+		setActiveStep(0)
+	}
 
-    return (
-        <Box sx={{ width: '100%', height: "100%", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem" }}>
-            <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
-                    const stepProps = {};
-                    const labelProps = {};
-                    return (
-                        <Step key={index} {...stepProps}>
-                            <StepLabel {...labelProps} icon={label.icon}><Typography variant='h6' color="secondary.main">{label.title}</Typography></StepLabel>
-                        </Step>
-                    );
-                })}
-            </Stepper>
-            {activeStep == steps.length - 1 ? (
-                <React.Fragment>
-                <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                spacing={2}
-                margin={5}
-            >
-                <Typography variant='h6' color="secondary.main">Click on below button to upload course thumbnail</Typography>
-                <Button variant="contained" color="secondary" onClick={() => thumFn()}><Typography>Upload course thumbnail</Typography></Button>
-                <Typography variant='h6' color="secondary.main">Upload your first video of this course</Typography>
-                <Button variant="contained" color="secondary" onClick={() => thumFn()}><Typography>Upload video</Typography></Button>
-                </Stack>
-                </React.Fragment>
-            ) : activeStep == steps.length - 2 ? (
-                <React.Fragment>
-                    {CourseContent}
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    <Box textAlign="center">
-                        {CourseCreation}
-                    </Box>
-                </React.Fragment>
-            )}
-            {activeStep === steps.length - 1 ? (
-                <React.Fragment>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}><Typography variant='h6' color="secondary">Finish</Typography></Button>
-                    </Box>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    {/* <Typography sx={{ mt: 2, mb: 1 }} variant="h6">Step {activeStep + 1}</Typography> */}
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                        >
-                            <Typography variant='h6' color="secondary">Back</Typography>
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext}><Typography variant='h6' color="secondary">Next</Typography></Button>
-                    </Box>
-                </React.Fragment>
-            )}
-            <CustomSnackbar />
-        </Box>
-    );
+	return (
+		<Box sx={{ width: "100%", height: "100%", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem" }}>
+			<Stepper activeStep={activeStep}>
+				{steps.map((label, index) => {
+					const stepProps = {}
+					const labelProps = {}
+					return (
+						<Step key={index} {...stepProps}>
+							<StepLabel
+								{...labelProps}
+								icon={label.icon}
+								sx={{ color: index === activeStep ? "third.main" : "secondary.main" }}
+							>
+								<Typography variant='h6' color={index === activeStep ? "third.main" : "secondary.main"}>
+									{label.title}
+								</Typography>
+							</StepLabel>
+						</Step>
+					)
+				})}
+			</Stepper>
+			{activeStep == steps.length - 1 ? (
+				<React.Fragment>
+					<Stack direction='column' justifyContent='center' alignItems='center' spacing={2} margin={5}>
+						<Typography variant='h6' color='secondary.main'>
+							Click on below button to upload course thumbnail
+						</Typography>
+						<Button variant='contained' color='secondary' onClick={() => thumFn()}>
+							<Typography>Upload course thumbnail</Typography>
+						</Button>
+						<Typography variant='h6' color='secondary.main'>
+							Upload your first video of this course
+						</Typography>
+						<Button variant='contained' color='secondary' onClick={() => thumFn()}>
+							<Typography>Upload video</Typography>
+						</Button>
+					</Stack>
+				</React.Fragment>
+			) : activeStep == steps.length - 2 ? (
+				<React.Fragment>{CourseContent}</React.Fragment>
+			) : (
+				<React.Fragment>
+					<Box textAlign='center'>{CourseCreation}</Box>
+				</React.Fragment>
+			)}
+			{activeStep === steps.length - 1 ? (
+				<React.Fragment>
+					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+						<Box sx={{ flex: "1 1 auto" }} />
+						<Button onClick={handleReset}>
+							<Typography variant='h6' color='secondary'>
+								Finish
+							</Typography>
+						</Button>
+					</Box>
+				</React.Fragment>
+			) : (
+				<React.Fragment>
+					{/* <Typography sx={{ mt: 2, mb: 1 }} variant="h6">Step {activeStep + 1}</Typography> */}
+					<Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+						<Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+							<Typography variant='h6' color='secondary'>
+								Back
+							</Typography>
+						</Button>
+						<Box sx={{ flex: "1 1 auto" }} />
+						<Button onClick={handleNext}>
+							<Typography variant='h6' color='secondary'>
+								Next
+							</Typography>
+						</Button>
+					</Box>
+				</React.Fragment>
+			)}
+			<CustomSnackbar />
+		</Box>
+	)
 }

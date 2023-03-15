@@ -20,7 +20,8 @@ import { useDispatch } from "react-redux"
 import { openLogout } from "../../store/systemSlice"
 import Logout from "../logout/Logout"
 import { Button } from "@mui/material"
-import { SearchFn } from "../../components/Search/Search"
+import { Link } from "react-router-dom"
+import { WhiteLabelBanner } from "../advertise/Ad"
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -62,8 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	}
 }))
 
-export default function CustomAppBar({ data }) {
-	const [datas, setDatas] = React.useState(data)
+export default function CustomAppBar(props) {
 	const dispatch = useDispatch()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -92,10 +92,6 @@ export default function CustomAppBar({ data }) {
 		setMobileMoreAnchorEl(event.currentTarget)
 	}
 
-	const handleSearch = (e) => {
-		setDatas(SearchFn(data, e.target.innerText))
-	}
-
 	const menuId = "primary-search-account-menu"
 	const renderMenu = (
 		<Menu
@@ -113,8 +109,15 @@ export default function CustomAppBar({ data }) {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<Link to='/admindash/profile' style={{ color: "#20262e", textDecoration: "none" }}>
+				<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+			</Link>
+
+			<Link to='/admindash/setup' style={{ color: "#20262e", textDecoration: "none" }}>
+				<MenuItem color='third' onClick={handleMenuClose}>
+					My account
+				</MenuItem>
+			</Link>
 		</Menu>
 	)
 
@@ -169,24 +172,17 @@ export default function CustomAppBar({ data }) {
 	return (
 		<Box sx={{ flexGrow: 1, marginBottom: 3, width: "100%" }}>
 			<AppBar position='static' color='third'>
-				<Toolbar>
-					<Box sx={{ marginLeft: 5 }}>
-						<Search>
-							<SearchIconWrapper>
-								<SearchIcon />
-							</SearchIconWrapper>
-							<StyledInputBase placeholder='Search…' inputProps={{ "aria-label": "search" }} onChange={handleSearch} />
-						</Search>
-					</Box>
+				<Toolbar sx={{ display: "flex", justifyContent: "end" }}>
+					<Typography style={{ flexGrow: 1 / 3 }} variant='h3'>
+						{props.OrgName}
+					</Typography>
 
-					<TuneIcon fontSize='large' />
-					<Logout />
-
-					<Box sx={{ flexGrow: 1 }} />
-					<Button onClick={logOutFn} startIcon={<LogoutIcon />} variant='contained' color='secondary'>
-						Log out
-					</Button>
+					{/* <Box sx={{ flexGrow: 1 }} /> */}
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+						<Logout />
+						<Button onClick={logOutFn} startIcon={<LogoutIcon />} variant='contained' color='secondary'>
+							Log out
+						</Button>
 						<IconButton size='large' aria-label='show 4 new mails' color='inherit'>
 							<Badge badgeContent={4} color='error'>
 								<MailIcon />
@@ -225,6 +221,7 @@ export default function CustomAppBar({ data }) {
 			</AppBar>
 			{renderMobileMenu}
 			{renderMenu}
+			<WhiteLabelBanner />
 		</Box>
 	)
 }
