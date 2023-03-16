@@ -69,32 +69,29 @@ let AdminSignup = () => {
 						onChange={(e) => handleFormDataChange(e)}
 						value={formData.orgName}
 					/>
-
-					<Box>
-						<Typography variant='h5'>Description</Typography>
-						<TextField
-							label='Goal'
-							name='goal'
-							color='third'
-							fullWidth
-							variant='outlined'
-							onChange={(e) => handleFormDataChange(e)}
-							value={formData.goal}
-						/>
-						<TextField
-							label='slogan'
-							name='slogan'
-							color='third'
-							fullWidth
-							variant='outlined'
-							onChange={(e) => handleFormDataChange(e)}
-							value={formData.slogan}
-						/>
-					</Box>
+					<Typography variant='h5'>Description</Typography>
+					<TextField
+						label='Goal'
+						name='goal'
+						color='third'
+						fullWidth
+						variant='outlined'
+						onChange={(e) => handleFormDataChange(e)}
+						value={formData.goal}
+					/>
+					<TextField
+						label='slogan'
+						name='slogan'
+						color='third'
+						fullWidth
+						variant='outlined'
+						onChange={(e) => handleFormDataChange(e)}
+						value={formData.slogan}
+					/>
+					<Button variant='contained' fullWidth color='secondary' onClick={handleSubmit}>
+						Sign up
+					</Button>
 				</Stack>
-				<Button variant='contained' fullWidth color='secondary' onClick={handleSubmit}>
-					Sign up
-				</Button>
 			</Box>
 		</>
 	)

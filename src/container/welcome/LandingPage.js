@@ -47,92 +47,10 @@ const LandingPage = () => {
 
     return (
         <>
-            {/* <Box sx={{ top: 0, zIndex: 100, position: "fixed", width: "100%" }}>
-                <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    bgcolor="secondary.main"
-                    p={2}
-                    spacing={2}
-                >
-                    <Box sx={{ width: "110px", marginLeft: 3 }}>
-                        <img src={logo} height="80px" width="80px" />
-                        <Typography variant='h6' color="third.main" ml={1}>VidyaVault</Typography>
-                    </Box>
-
-                    <Box>
-
-                        <Link to="/">
-                            <Button
-                                color="primary"
-                                size="large"
-                                variant="text"
-                            ><Typography variant='h6' color="primary.main">Home</Typography>
-                            </Button>
-                        </Link>
-
-                        <Link to="/org">
-                            <Button
-                                color="primary"
-                                size="large"
-                                variant="text"
-                            ><Typography variant='h6' color="primary.main" ml={2}>Organization</Typography>
-                            </Button>
-                        </Link>
-
-                        <Link to="/about">
-                            <Button
-                                color="primary"
-                                size="large"
-                                variant="text"
-                            ><Typography variant='h6' color="primary.main" ml={2}>About</Typography>
-                            </Button>
-                        </Link>
-
-                        <Link to="/signup">
-                            <Button
-                                color="third"
-                                variant="contained"
-                                size="large"
-                            ><Typography variant='h6' color="secondary.main" mr={2}>Sign up</Typography>
-                            </Button>
-                        </Link>
-
-                        <Link to="/signin">
-                            <Button
-                                color="third"
-                                variant="contained"
-                                size="large"
-                            ><Typography variant='h6' color="secondary.main" mr={2}>Sign in</Typography>
-                            </Button>
-                        </Link>
-
-                    </Box>
-                </Stack>
-
-            </Box> */}
             <Navbar />
 
             <Box>
-                {/* <div style={nav ? styles.sectionActive : styles.section}> */}
-                <Box sx={{ width: "100%", height: "35vh", bgcolor: "third.main" }}>
-                    <Stack
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        spacing={1}
-                    >
-                        <Typography variant='h3'>Why?</Typography>
-                        <Typography variant='h5'>Something</Typography>
-                        <Typography variant='h5'>Something</Typography>
-                        <Typography variant='h5'>Something</Typography>
-                        <Typography variant='h5'>Something</Typography>
-                    </Stack>
-                </Box>
-                {/* </div> */}
-
-
+    
                 <Box mt={2} mb={2}>
                     <Stack direction="row" flexWrap="wrap" alignItems="center" justifyContent="space-around">
                         <Box sx={{ width: "400px", height: "400px", margin: "2rem", textAlign: "center" }}>
@@ -163,7 +81,7 @@ const LandingPage = () => {
 
                 <hr></hr>
 
-                {/* <Box mt={2} mb={2}>
+                <Box mt={2} mb={2}>
                     <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="space-around">
 
                         <Box m={4} width="50%" textAlign="center">
@@ -277,8 +195,10 @@ const LandingPage = () => {
                         </Box>
 
                     </Stack>
-                </Box> */}
+                </Box>
             </Box>
+
+            <JoinBanner />
 
             <Stack
                 direction="row"
@@ -346,8 +266,6 @@ const LandingPage = () => {
                     </CardContent>
                 </Card>
             </Stack>
-
-            <JoinBanner />
             <Footer />
         </>
     )

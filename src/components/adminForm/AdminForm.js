@@ -48,7 +48,7 @@ export default function AdminForm() {
     };
 
     return (
-        <Box sx={{ width: '100%', height: "100%", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
+        <Box sx={{ width: '100%', height: "fit-content", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
             <Box sx={{ width: "70%" }}>
                 <Stepper activeStep={activeStep}>
                     {steps.map((label, index) => {
@@ -75,7 +75,6 @@ export default function AdminForm() {
                 <React.Fragment>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}><Typography variant='h6' color="secondary">Finish</Typography></Button>
                     </Box>
                 </React.Fragment>
             ) : (
@@ -83,7 +82,7 @@ export default function AdminForm() {
                     {/* <Typography sx={{ mt: 2, mb: 1 }} variant="h6">Step {activeStep + 1}</Typography> */}
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext}><Typography variant='h6' color="secondary">Next</Typography></Button>
+                        <Button onClick={handleNext}><Typography variant='h5' color="secondary">Next</Typography></Button>
                     </Box>
                 </React.Fragment>
             )}

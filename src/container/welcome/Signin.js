@@ -40,6 +40,10 @@ function Signin() {
 		})
 	}
 
+	let HandleDemo = () => {
+		nevigate("/dash")
+	}
+
 	let handleSubmit = (e) => {
 		console.log(formData)
 	}
@@ -47,60 +51,70 @@ function Signin() {
 	return (
 		<>
 			<Navbar />
-				<Box
-					sx={{
-						bgcolor: "primary.main",
-						width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
-						height: "max-content",
-						margin: "auto auto",
-						borderRadius: 5
-					}}
-				>
-					<Stack direction='column' justifyContent='center' alignItems='center' spacing={3} height='100%' margin={3}>
-						<Typography variant='h3'>Sign in</Typography>
-						<Typography variant='h6'>Enter your credentials to continue</Typography>
-						<Button variant='contained' color='third' fullWidth startIcon={<GoogleIcon />}>
-							Sign up with google
-						</Button>
-						<Divider variant='middle'>OR</Divider>
+			<Box
+				sx={{
+					bgcolor: "primary.main",
+					width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
+					height: "max-content",
+					margin: "auto auto",
+					borderRadius: 5
+				}}
+			>
+				<Stack direction='column' justifyContent='center' alignItems='center' spacing={3} height='100%' margin={3}>
+					<Typography variant='h3'>Sign in</Typography>
+					<Typography variant='h6'>Enter your credentials to continue</Typography>
+					<Button variant='contained' color='third' fullWidth startIcon={<GoogleIcon />}>
+						Sign up with google
+					</Button>
+					<Divider variant='middle'>OR</Divider>
 
-						<TextField
-							color='third'
-							fullWidth
-							name='email'
-							label='Email'
-							value={formData.email}
-							onChange={(e) => handleChange(e)}
-						/>
-						<TextField
-							color='third'
-							type='password'
-							fullWidth
-							name='password'
-							label='Password'
-							value={formData.password}
-							onChange={(e) => handleChange(e)}
-						/>
+					<TextField
+						color='third'
+						fullWidth
+						name='email'
+						label='Email'
+						value={formData.email}
+						onChange={(e) => handleChange(e)}
+					/>
+					<TextField
+						color='third'
+						type='password'
+						fullWidth
+						name='password'
+						label='Password'
+						value={formData.password}
+						onChange={(e) => handleChange(e)}
+					/>
 						<Button
-							sx={{ width: 150, borderRadius: 12 }}
 							type='submit'
 							size='large'
 							fullWidth
 							variant='contained'
-							color='third'
+							color='secondary'
 							onClick={handleSubmit}
 						>
 							Sign in
 						</Button>
-						<Link to='/signup' style={{ textDecoration: "none" }}>
-							<Button variant='text'>
-								<Typography color='secondary' sx={{ textTransform: "none" }}>
-									Go to registration/Sign up page
-								</Typography>
-							</Button>
-						</Link>
-					</Stack>
-				</Box>
+						<Button
+							type='submit'
+							size='large'
+							fullWidth
+							variant='contained'
+							color='secondary'
+							onClick={HandleDemo}
+						>
+							User Demo sign in
+						</Button>
+
+					<Link to='/signup' style={{ textDecoration: "none" }}>
+						<Button variant='text'>
+							<Typography color='secondary' sx={{ textTransform: "none" }}>
+								Go to registration/Sign up page
+							</Typography>
+						</Button>
+					</Link>
+				</Stack>
+			</Box>
 		</>
 	)
 }

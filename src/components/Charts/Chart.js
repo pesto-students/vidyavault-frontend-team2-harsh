@@ -46,7 +46,6 @@ function AnalyticsChart({ data }) {
 	return (
 		<div style={chartStyle}>
 			<Chart
-				backgroundColor='#20262e'
 				options={chartData.options}
 				series={chartData.series}
 				type='bar'

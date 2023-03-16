@@ -1,7 +1,9 @@
 import { Box, Button, Divider, FormControlLabel, Stack, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 let AdminSignin = () => {
+	const nevigate = useNavigate()
 	const [formData, setFormData] = useState({
 		email: "",
 		password: ""
@@ -14,6 +16,10 @@ let AdminSignin = () => {
 			...formData,
 			[name]: value
 		})
+	}
+
+	let handleDemo = () => {
+		nevigate("/admindash")
 	}
 
 	let handleSubmit = (e) => {
@@ -46,6 +52,9 @@ let AdminSignin = () => {
 					/>
 					<Button variant='contained' fullWidth color='secondary' onClick={handleSubmit}>
 						Sign in
+					</Button>
+					<Button variant='contained' fullWidth color='secondary' onClick={handleDemo}>
+						Admin demo sign in
 					</Button>
 				</Stack>
 			</Box>
