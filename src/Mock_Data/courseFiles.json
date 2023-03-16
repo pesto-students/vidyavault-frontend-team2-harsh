@@ -1,0 +1,132 @@
+[
+    {
+        "CourseId": "JS12345",
+        "CourseData": [
+            {
+                "moduleName": "First_module",
+                "files": [
+                    {
+                        "lecName": "Introduction to JavaScript",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "functions in js",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "OOPs & prototypes",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Second_module",
+                "files": [
+                    {
+                        "lecName": "Events and event handlers",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "JavaScript ES6",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Fat arrow functions usecases",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Third_module",
+                "files": [
+                    {
+                        "lecName": "brief about NodeJS",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "CLI programme using JavaScript",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Fourth_module",
+                "files": [
+                    {
+                        "lecName": "First JS project",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Web application MERN project",
+                        "path": "/v1/video"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "CourseId": "Astronomy12345",
+        "CourseData": [
+            {
+                "moduleName": "First_module",
+                "files": [
+                    {
+                        "lecName": "Introduction to Astronomy",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Astronomy_1",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Universe",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Second_module",
+                "files": [
+                    {
+                        "lecName": "Universal Events",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Theory",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "Important breakdowns",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Third_module",
+                "files": [
+                    {
+                        "lecName": "Inside the nebula",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "speed",
+                        "path": "/v1/video"
+                    }
+                ]
+            },
+            {
+                "moduleName": "Fourth_module",
+                "files": [
+                    {
+                        "lecName": "Dark particles",
+                        "path": "/v1/video"
+                    },
+                    {
+                        "lecName": "future!",
+                        "path": "/v1/video"
+                    }
+                ]
+            }
+        ]
+    }
+]
