@@ -75,6 +75,7 @@ export default function AdminForm() {
                 <React.Fragment>
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
+                        <Button onClick={handleReset}><Typography variant='h5' color="secondary">Finish</Typography></Button>
                     </Box>
                 </React.Fragment>
             ) : (
