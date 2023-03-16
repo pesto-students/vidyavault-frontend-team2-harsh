@@ -18,7 +18,7 @@ import IconButton from "@mui/material/IconButton"
 import { useState } from "react"
 
 const AdminManage = () => {
-	let [data, setData] = useState([])
+	// let [data, setData] = useState([])
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const coursesPage = (item) => {
@@ -31,7 +31,7 @@ const AdminManage = () => {
 		dispatch(addFiles(current))
 		navigate("/admindash")
 	}
-	setData(courses.entries)
+	let data = courses.entries
 
 	return (
 		<BackWrapper menuList={menuList}>

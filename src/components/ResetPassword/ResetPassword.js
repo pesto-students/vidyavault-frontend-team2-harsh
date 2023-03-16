@@ -1,22 +1,34 @@
-import { Box, Typography } from "@mui/material"
-import React, { useEffect } from "react"
+import { Box, Button, TextField, Typography } from "@mui/material"
+import React, { useState } from "react"
 import menuList from "../../container/admin/menuList"
 import BackWrapper from "../backWrapper/BackWrapper"
 import { useNavigate } from "react-router-dom"
 
 const ResetPassword = () => {
+	const [password, setPassword] = useState("")
 	let navigate = useNavigate()
-	useEffect(() => {
-		setTimeout(() => {
-			navigate("/admindash")
-		}, 2000)
-	}, [])
+
+	const handleClick = () => {
+		let obj = {
+			id: "",
+			token: "",
+			password: password
+		}
+
+		navigate("/signin")
+	}
+
+	const handleChange = (e) => {
+		setPassword(e.target.value)
+	}
 	return (
-		<BackWrapper menuList={menuList}>
-			<Box display='flex' justifyContent='center' alignItems='center'>
-				<Typography variant='body2'>An mail has been sent to registered email</Typography>
-			</Box>
-		</BackWrapper>
+		<Box display='flex' justifyContent='center' alignItems='center'>
+			<TextField color='third' name='password' label='password' value={password} onChange={handleChange} />
+
+			<Button variant='contained' color='third' onClick={handleClick}>
+				Submit
+			</Button>
+		</Box>
 	)
 }
 

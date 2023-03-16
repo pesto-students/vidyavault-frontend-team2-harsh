@@ -10,7 +10,7 @@ import Subscriptions from "./container/user/Subscriptions"
 import Manage from "./container/user/Manage"
 import CreateCourse from "./container/user/CreateCourse"
 import Guidelines from "./container/user/Guidelines"
-import Curriculum from "./components/curriculum/Curriculum"
+import CourseIndex from "./components/curriculum/CourseIndex"
 
 import AdminDash from "./container/admin/AdminDash"
 import AdminCreateCourse from "./container/admin/AdminCreateCourse"
@@ -32,6 +32,7 @@ const App = () => {
 					<Route path='/' element={<LandingPage />} />
 					<Route path='/signup' element={<Signup />} />
 					<Route path='/signin' element={<Signin />} />
+					<Route path='/resetpassword' element={<ResetPassword />} />
 					<Route path='/org' element={<Organization />} />
 					<Route path='/about' element={<About />} />
 
@@ -40,7 +41,7 @@ const App = () => {
 					<Route path='/dash/manage' element={<Manage />} />
 					<Route path='/dash/cc' element={<CreateCourse />} />
 					<Route path='/dash/guidelines' element={<Guidelines />} />
-					<Route path='/dash/curriculum' element={<Curriculum />} />
+					<Route path='/dash/curriculum' element={<CourseIndex />} />
 					<Route path='/dash/edit' element={<EditCourse />} />
 
 					<Route path='/admindash' element={<AdminDash />} />
@@ -52,7 +53,6 @@ const App = () => {
 					<Route path='/admindash/profile' element={<AdminProfile />} />
 					<Route path='/admindash/setup' element={<AdminSetup />} />
 					<Route path='/admindash/analytics' element={<Analytics />} />
-					<Route path='/admindash/reset' element={<ResetPassword />} />
 				</Routes>
 			</BrowserRouter>
 		</>
