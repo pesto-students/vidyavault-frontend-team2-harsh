@@ -7,7 +7,8 @@ const SetupForm = () => {
 	let currentslogan = "Just do it"
 	const [formData, setFormData] = React.useState({
 		goal: currentGoal,
-		slogan: currentslogan
+		slogan: currentslogan,
+		banner: ""
 	})
 
 	const handleChange = (event) => {
@@ -43,6 +44,11 @@ const SetupForm = () => {
 			<Card
 				raised
 				sx={{
+					display: "flex",
+					width: "80%",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
 					boxShadow: 20,
 					bgcolor: "#F2f2f2",
 					p: 5,
@@ -51,26 +57,45 @@ const SetupForm = () => {
 					color: "#F2f2f2"
 				}}
 			>
-				<Typography color='secondary' variant='h3' alignSelf='center' marginBottom={5}>
+				<Typography
+					sx={{ justifySelf: "start", alignSelf: "start" }}
+					color='secondary'
+					variant='h3'
+					alignSelf='center'
+					marginBottom={5}
+				>
 					Change setup
 				</Typography>
 
-				<TextField color='third' id='outlined' name='goal' label='Goal' value={formData.goal} onChange={handleChange} />
+				<TextField
+					fullWidth
+					color='third'
+					id='outlined'
+					name='goal'
+					label='Goal'
+					value={formData.goal}
+					onChange={handleChange}
+				/>
 				<TextField
 					color='third'
+					fullWidth
 					id='outlined'
 					name='slogan'
 					label='Slogan'
 					value={formData.slogan}
 					onChange={handleChange}
 				/>
-
-				<Button
-					sx={{ mt: 12, width: 150, borderRadius: 12, color: "#20262e" }}
-					type='submit'
-					variant='contained'
+				<TextField
 					color='third'
-				>
+					id='outlined'
+					fullWidth
+					name='banner'
+					label='Paste Banner Url'
+					value={formData.banner}
+					onChange={handleChange}
+				/>
+
+				<Button sx={{ mt: 12, width: 150, borderRadius: 12 }} type='submit' variant='contained' color='secondary'>
 					Save
 				</Button>
 			</Card>

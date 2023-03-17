@@ -1,0 +1,132 @@
+[
+    {
+        "_id": "JS12345",
+        "courseName": "JS",
+        "thumbnail": "https://moralis.io/wp-content/uploads/2021/07/Moralis-Blogpost-JavaScript-Explained-07272021-V12.png",
+        "Amount": "00",
+        "description": "Learn JS by Saurabh",
+        "userId": "123451",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Astronomy12345",
+        "courseName": "Astronomy",
+        "thumbnail": "https://eartheclipse.com/wp-content/uploads/2020/08/infinite-space-background-with-silhouette.jpg",
+        "Amount": "00",
+        "description": "Learn Astronomy by Saurabh",
+        "userId": "123451",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Economics12345",
+        "courseName": "Economics",
+        "thumbnail": "https://thumbs.dreamstime.com/b/infographic-showing-economics-trends-39390289.jpg",
+        "Amount": "00",
+        "description": "Learn Economics by Saurabh",
+        "userId": "123451",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Physics12345",
+        "courseName": "Physics",
+        "thumbnail": "https://d20x1nptavktw0.cloudfront.net/wordpress_media/2022/04/Blog-Image-30-654x536.jpg",
+        "Amount": "00",
+        "description": "Learn Physics by Kirti",
+        "userId": "123452",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Chemistry12345",
+        "courseName": "Chemistry",
+        "thumbnail": "https://img.freepik.com/free-vector/hand-drawn-chemistry-background_23-2148164901.jpg?w=2000",
+        "Amount": "00",
+        "description": "Learn Chemistry by Kirti",
+        "userId": "123452",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Biology12345",
+        "courseName": "Biology",
+        "thumbnail": "https://cache.careers360.mobi/media/presets/860X430/article_images/2021/2/8/NCERT-Solutions-for_Class_12-Bio.webp",
+        "Amount": "00",
+        "description": "Learn Biology by Kirti",
+        "userId": "123452",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "DSA12345",
+        "courseName": "DSA",
+        "thumbnail": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221017172544/Introduction-to-Data-Structures-and-Algorithms-DSA.png",
+        "Amount": "00",
+        "description": "Learn DSA by Harsh",
+        "userId": "123453",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "Geography12345",
+        "courseName": "Geography",
+        "thumbnail": "https://thumbs.dreamstime.com/b/set-geography-symbols-equipments-web-banners-vintage-outline-sketch-web-banners-doodle-style-education-concept-back-to-136641038.jpg",
+        "Amount": "00",
+        "description": "Learn Geography by Harsh",
+        "userId": "123453",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "NodeJS12345",
+        "courseName": "NodeJS",
+        "thumbnail": "https://s3.ap-south-1.amazonaws.com/stage.radixweb.com/medium_When_to_Consider_Using_Node_js_0d84032172.jpg",
+        "Amount": "00",
+        "description": "Learn NodeJS by Harsh",
+        "userId": "123453",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    },
+    {
+        "_id": "QuantumPhysics12345",
+        "courseName": "Quantum Physics",
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjddtkpBrCIdtm-DOBjgv3TQJS2VlO6eVoDg&usqp=CAU",
+        "Amount": "00",
+        "description": "Learn Quantum Physics by Harsh",
+        "userId": "123453",
+        "subscribedMembers": [
+            {
+                "memberId": ""
+            }
+        ]
+    }
+]

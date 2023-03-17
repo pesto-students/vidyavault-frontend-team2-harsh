@@ -15,6 +15,7 @@ const EarningsCard = ({ earnings, item }) => {
 						</IconButton>
 					</Link>
 				}
+				titleTypographyProps={{ variant: "h4" }}
 				title={item.name}
 				sx={{ color: "#20262E" }}
 			/>

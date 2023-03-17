@@ -6,9 +6,11 @@ import { Link } from "react-router-dom"
 
 const FooterContainer = styled("footer")({
 	display: "flex",
+	minWidth: "100vw",
 	alignItems: "center",
 	justifyContent: "space-between",
 	flexDirection: "row",
+	flexWrap: "wrap-reverse",
 	padding: "5rem",
 	color: "#F2F2F2",
 	backgroundColor: "#20262e"
@@ -88,7 +90,7 @@ const Footer = () => {
 					</Stack>
 				</LinksContainer>
 			</Stack>
-			<Stack direction='row' gap='2rem'>
+			<Stack sx={{ marginBottom: "4rem" }} display='flex' direction='row' alignSelf='end' flexWrap='wrap' gap='2rem'>
 				<TextField
 					sx={{ width: "30ch" }}
 					id='email-input'
@@ -108,4 +110,4 @@ const Footer = () => {
 	)
 }
 
-export default Footer;
+export default Footer

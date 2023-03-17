@@ -4,9 +4,11 @@ import BackWrapper from "../../components/backWrapper/BackWrapper"
 import axios from "axios"
 import {
 	Avatar,
+	Button,
 	Card,
 	Box,
 	Grid,
+	CardContent,
 	Container,
 	List,
 	ListItem,
@@ -25,36 +27,43 @@ const Members = () => {
 		Avatar: ""
 	})
 
-	axios.get("/api", {})
+	// axios.get("/api", {})
 
 	return (
 		<BackWrapper menuList={menuList}>
-			<Grid paddingLeft={10} item>
-				<Typography sx={{ mt: 4, mb: 2 }} variant='h3' component='div'>
-					Members
-				</Typography>
-				<Box>
-					<List item dense={true}>
-						{MockMembers.map((item, index) => (
-							<Link style={{ textDecoration: "none", color: "#20262e" }} to='/admindash/members/id'>
-								<ListItem
-									sx={{
-										backgroundColor: "secondary",
-										"&:hover": {
-											backgroundColor: "white"
-										}
-									}}
-								>
-									<ListItemAvatar>
-										<Avatar src={Avatar}></Avatar>
-									</ListItemAvatar>
-									<ListItemText primary={item.name} />
-								</ListItem>
-							</Link>
-						))}
-					</List>
-				</Box>
-			</Grid>
+			<Box sx={{ flexGrow: 1 }}>
+				<Grid sx={{ padding: "2rem" }} container spacing={2}>
+					{MockMembers.map((member, index) => (
+						<Grid item xs={12} sm={6} md={4} key={index}>
+							<Card sx={{ height: "100%", boxShadow: "0px 3px 10px #80d3c9" }}>
+								<CardContent sx={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%" }}>
+									<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+										<Avatar
+											alt={member.name}
+											src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
+											sx={{ width: 64, height: 64, mb: 1 }}
+										/>
+										<Typography gutterBottom variant='h5' component='div'>
+											{member.name}
+										</Typography>
+									</Box>
+
+									<Button
+										color='secondary'
+										variant='contained'
+										component={Link}
+										// to={`/members/${member.id}`}
+										to='id'
+										sx={{ mt: 2, borderRadius: 5 }}
+									>
+										View Profile
+									</Button>
+								</CardContent>
+							</Card>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
 		</BackWrapper>
 	)
 }

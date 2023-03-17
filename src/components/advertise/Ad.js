@@ -5,6 +5,7 @@ import { Button } from "@mui/material"
 import img1 from "../atoms/assets/img1.svg"
 import img2 from "../atoms/assets/img2.svg"
 import { Stack } from "@mui/material"
+import { Link } from "react-router-dom"
 
 export const JoinBanner = () => {
 	return (
@@ -15,9 +16,11 @@ export const JoinBanner = () => {
 					<Typography variant='h3'>
 						Share what you know.<br></br>Sign up free today.
 					</Typography>
-					<Button variant='contained' color='secondary' sx={{ marginTop: 1 }}>
-						<Typography variant='h6'>Join for free</Typography>
-					</Button>
+					<Link to='/signin'>
+						<Button variant='contained' color='secondary' sx={{ marginTop: 1 }}>
+							<Typography variant='h6'>Join for free</Typography>
+						</Button>
+					</Link>
 				</Box>
 			</Stack>
 		</Box>
@@ -64,7 +67,7 @@ export const WhiteLabelBanner = ({ img }) => {
 				textAlign: "center"
 			}}
 		>
-			<img style={{ width: "100%", height: "100%" }} src={img1} />
+			<img style={{ width: "100%", height: "100%" }} src={img} />
 		</Box>
 	)
 }

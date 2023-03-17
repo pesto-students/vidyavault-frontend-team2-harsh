@@ -1,8 +1,8 @@
 import { Box, Button, Divider, FormControlLabel, Stack, TextField, Typography } from "@mui/material"
 
 const CourseContent = (props) => {
-	const formData = props.formData;
-	const setFormData = props.setFormData;
+	const formData = props.formData
+	const setFormData = props.setFormData
 
 	const handleChange = (e) => {
 		const name = e.target.name
@@ -31,6 +31,7 @@ const CourseContent = (props) => {
 					<TextField
 						label='Video-title'
 						name='lecName'
+						color='third'
 						fullWidth
 						variant='outlined'
 						onChange={(e) => handleChange(e)}
@@ -42,4 +43,4 @@ const CourseContent = (props) => {
 	)
 }
 
-export default CourseContent;
+export default CourseContent

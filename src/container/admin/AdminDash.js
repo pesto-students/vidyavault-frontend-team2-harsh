@@ -11,6 +11,7 @@ import { data } from "../../Mock_Data/ChartData"
 import AnalyticsChart from "../../components/Charts/Chart"
 import EarningsCard from "../../components/card/EarningsCard"
 import { WhiteLabelBanner } from "../../components/advertise/Ad"
+import Quotes from "../../Mock_Data/Quotes"
 
 const AdminDash = () => {
 	let OrgName = "Saurabh School"
@@ -20,12 +21,18 @@ const AdminDash = () => {
 	return (
 		<BackWrapper menuList={menuList}>
 			<CustomAdminAppBar OrgName={OrgName} />
+			<Box
+				sx={{ padding: "2rem", backgroundColor: "#80d3c9", width: "100%", height: "fit-content", marginBottom: "2rem" }}
+			>
+				<Typography sx={{ opacity: 0.6, textAlign: "center" }} variant='h4'>
+					{Quotes[Math.floor(Math.random() * 9)]}
+				</Typography>
+			</Box>
 			<Container maxWidth={"lg"}>
 				<Grid container spacing={4}>
 					{DashboardList.map((item, index) => {
 						return (
-							<Grid item key={index} xl={4} lg={6} sm={6} xs={12}>
-								{item.name == "Current Earnings" && <EarningsCard earnings={currEarnings} item={item} />}
+							<Grid item key={index} xl={12} lg={12} sm={12} xs={12}>
 								{item.name == "Setup" && (
 									<Card elevation={10} sx={{ borderRadius: 5 }}>
 										<CardHeader
@@ -36,6 +43,7 @@ const AdminDash = () => {
 													</IconButton>
 												</Link>
 											}
+											titleTypographyProps={{ variant: "h4" }}
 											title={item.name}
 											sx={{ color: "#20262E" }}
 										/>
@@ -46,8 +54,9 @@ const AdminDash = () => {
 										</CardContent>
 									</Card>
 								)}
+								{item.name == "Current Earnings" && <EarningsCard earnings={currEarnings} item={item} />}
 								{item.name == "Analytics" && (
-									<Card elevation={10} sx={{ backgroundColor: "#20262E", height: 300, borderRadius: 2 }}>
+									<Card elevation={10} sx={{ width: "100%", backgroundColor: "#20262E", height: 300, borderRadius: 2 }}>
 										<CardHeader
 											action={
 												<Link to={item.path}>
@@ -56,6 +65,7 @@ const AdminDash = () => {
 													</IconButton>
 												</Link>
 											}
+											titleTypographyProps={{ variant: "h4" }}
 											title={`Total Sales:${totalsales}`}
 											sx={{ color: "#F2F2F2" }}
 										/>

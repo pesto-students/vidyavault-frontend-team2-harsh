@@ -87,7 +87,7 @@ const FormComponent = () => {
 						</Button>
 					</Link>
 
-					<Button sx={{ width: 150, borderRadius: 12 }} type='submit' variant='contained' color='third'>
+					<Button sx={{ width: 150, borderRadius: 12 }} type='submit' variant='contained' color='secondary'>
 						Save
 					</Button>
 				</Form>

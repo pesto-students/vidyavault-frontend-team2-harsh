@@ -21,6 +21,7 @@ import { openLogout } from "../../store/systemSlice"
 import Logout from "../logout/Logout"
 import { Button } from "@mui/material"
 import { SearchFn } from "../../components/Search/Search"
+import { Link } from "react-router-dom"
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -113,8 +114,9 @@ export default function CustomAppBar({ data }) {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem component={Link} to='/admindash/profile' onClick={handleMenuClose}>
+				My account
+			</MenuItem>
 		</Menu>
 	)
 
@@ -135,22 +137,6 @@ export default function CustomAppBar({ data }) {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			<MenuItem>
-				<IconButton size='large' aria-label='show 4 new mails' color='inherit'>
-					<Badge badgeContent={4} color='error'>
-						<MailIcon />
-					</Badge>
-				</IconButton>
-				<p>Messages</p>
-			</MenuItem>
-			<MenuItem>
-				<IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
-					<Badge badgeContent={17} color='error'>
-						<NotificationsIcon />
-					</Badge>
-				</IconButton>
-				<p>Notifications</p>
-			</MenuItem>
 			<MenuItem onClick={handleProfileMenuOpen}>
 				<IconButton
 					size='large'
@@ -158,10 +144,12 @@ export default function CustomAppBar({ data }) {
 					aria-controls='primary-search-account-menu'
 					aria-haspopup='true'
 					color='inherit'
+					component={Link}
+					to='/admindash/profile'
 				>
 					<AccountCircle />
 				</IconButton>
-				<p>Profile</p>
+				<p>My Account</p>
 			</MenuItem>
 		</Menu>
 	)
@@ -170,16 +158,6 @@ export default function CustomAppBar({ data }) {
 		<Box sx={{ flexGrow: 1, marginBottom: 3, width: "100%" }}>
 			<AppBar position='static' color='third'>
 				<Toolbar>
-					<Box sx={{ marginLeft: 5 }}>
-						<Search>
-							<SearchIconWrapper>
-								<SearchIcon />
-							</SearchIconWrapper>
-							<StyledInputBase placeholder='Search…' inputProps={{ "aria-label": "search" }} onChange={handleSearch} />
-						</Search>
-					</Box>
-
-					<TuneIcon fontSize='large' />
 					<Logout />
 
 					<Box sx={{ flexGrow: 1 }} />

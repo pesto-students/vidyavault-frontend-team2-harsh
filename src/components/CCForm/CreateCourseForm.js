@@ -1,5 +1,7 @@
-import * as React from "react"
-import Box from "@mui/material/Box"
+import React, { useState } from "react"
+import axios from "axios"
+import { Box, CircularProgress, TextField } from "@mui/material"
+import CheckIcon from "@mui/icons-material/Check"
 import Stepper from "@mui/material/Stepper"
 import Step from "@mui/material/Step"
 import StepLabel from "@mui/material/StepLabel"
@@ -12,6 +14,8 @@ import { UploadIcon, DescriptionIcon, NoteAddIcon } from "../atoms/icons/icons"
 import { useDispatch, useSelector } from "react-redux"
 import { openSnack, closeSnack } from "../../store/systemSlice"
 import CustomSnackbar from "../snackbar/Snackbar"
+import { Cloudinary } from "@cloudinary/base"
+// import { CloudinaryContext, Image } from "@cloudinary/react"
 
 const steps = [
 	{ title: "Course Creation", icon: <NoteAddIcon /> },
@@ -19,19 +23,35 @@ const steps = [
 	{ title: "Upload", icon: <UploadIcon /> }
 ]
 
+// const cloudinary = new Cloudinary({
+// 	cloud: {
+// 		cloudName: "dd2bmcpqv",
+// 		apiKey: "146555182142896",
+// 		apiSecret: "tSBBwwHM9zfYnw9DO0PbBRnNtl4"
+// 	}
+// })
+
 export default function CreateCourseForm() {
 	let dispatch = useDispatch()
 	let sys = useSelector((state) => state.system)
-	const [activeStep, setActiveStep] = React.useState(0)
+	const [activeStep, setActiveStep] = useState(0)
+	const [videoSuccess, setVideoSuccess] = useState(false)
+	const [thumbSuccess, setThumbSuccess] = useState(false)
+	const [thumbloading, setThumbLoading] = useState(false)
+	const [videoloading, setVideoLoading] = useState(false)
+	const [videofile, setVideoFile] = useState("")
+	const [thumbfile, setThumbFile] = useState("")
+	const [thumbUrl, setThumbUrl] = useState("")
+	const [videourl, setVideoUrl] = useState("")
 
-	const [formData, setFormData] = React.useState({
-		courseName: '',
-		description: '',
-		amount: '',
-		moduleName: '',
-		lecName: '',
-		thumbnail: '',
-		path: ''
+	const [formData, setFormData] = useState({
+		courseName: "",
+		description: "",
+		amount: "",
+		moduleName: "",
+		lecName: "",
+		thumbnail: "",
+		path: ""
 	})
 
 	const handleChange = (event) => {
@@ -43,11 +63,50 @@ export default function CreateCourseForm() {
 		})
 	}
 
-	const thumFn = () => {
-		dispatch(openSnack("Saurabh"))
-		console.log(sys)
+	const handleVideoFileChange = (event) => {
+		setVideoFile(event.target.files[0])
 	}
-
+	const handleThumbFileChange = (event) => {
+		setThumbFile(event.target.files[0])
+	}
+	const handleVideoUpload = async () => {
+		setVideoLoading(true)
+		const Data = new FormData()
+		Data.append("file", videofile)
+		Data.append("upload_preset", "rdizbhea")
+		try {
+			const response = await axios.post("https://api.cloudinary.com/v1_1/dd2bmcpqv/upload", Data)
+			setVideoUrl(response.data.secure_url)
+			setFormData({ ...formData, path: response.data.secure_url })
+			console.log(videourl)
+			setVideoSuccess(true)
+			setVideoLoading(false)
+			setTimeout(() => {
+				setVideoSuccess(false)
+			}, 1000)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	const handleThumbUpload = async () => {
+		setThumbLoading(true)
+		const Data = new FormData()
+		Data.append("file", thumbfile)
+		Data.append("upload_preset", "rdizbhea")
+		try {
+			const response = await axios.post("https://api.cloudinary.com/v1_1/dd2bmcpqv/upload", Data)
+			setThumbUrl(response.data.secure_url)
+			setFormData({ ...formData, thumbnail: response.data.secure_url })
+			console.log(thumbUrl)
+			setThumbSuccess(true)
+			setThumbLoading(false)
+			setTimeout(() => {
+				setThumbSuccess(false)
+			}, 1000)
+		} catch (error) {
+			console.error(error)
+		}
+	}
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1)
 	}
@@ -56,8 +115,9 @@ export default function CreateCourseForm() {
 	}
 
 	const handleForm = () => {
-		setActiveStep(0);
-		console.log(formData);
+		setActiveStep(0)
+		setFormData({})
+		console.log(formData)
 	}
 
 	return (
@@ -87,25 +147,82 @@ export default function CreateCourseForm() {
 						<Typography variant='h6' color='secondary.main'>
 							Click on below button to upload course thumbnail
 						</Typography>
-						<Button variant='contained' color='secondary' onClick={() => thumFn()}>
+						<Stack display='flex' direction='row'>
+							<Button
+								variant='outlined'
+								color='secondary'
+								onClick={(e) => {
+									e.target.firstChild.click()
+								}}
+							>
+								<input
+									style={{ width: "100%" }}
+									type='file'
+									accept='image/*'
+									hidden
+									onChange={(e) => handleThumbFileChange(e)}
+								/>
+								Select Thumbnail
+							</Button>
+							<TextField disabled variant='outlined' color='third' value={thumbfile.name} />
+							{thumbSuccess ? (
+								<CheckIcon color='success' />
+							) : (
+								thumbloading && (
+									<Box sx={{ display: "flex", height: "100%", justifyContent: "center", alignItems: "center" }}>
+										<CircularProgress size={20} thickness={4} color='secondary' />
+									</Box>
+								)
+							)}
+						</Stack>
+						<Button variant='contained' color='secondary' onClick={(e) => handleThumbUpload(e)}>
 							<Typography>Upload course thumbnail</Typography>
 						</Button>
+
 						<Typography variant='h6' color='secondary.main'>
 							Upload your first video of this course
 						</Typography>
-						<Button variant='contained' color='secondary' onClick={() => thumFn()}>
+						<Stack display='flex' direction='row'>
+							<Button
+								variant='outlined'
+								color='secondary'
+								onClick={(e) => {
+									e.target.firstChild.click()
+								}}
+							>
+								<input
+									style={{ width: "100%" }}
+									type='file'
+									accept='video/*'
+									hidden
+									onChange={(e) => handleVideoFileChange(e)}
+								/>
+								Select Video
+							</Button>
+							<TextField disabled variant='outlined' color='third' value={videofile.name} />
+							{videoSuccess ? (
+								<CheckIcon color='success' />
+							) : (
+								videoloading && (
+									<Box sx={{ display: "flex", height: "100%", justifyContent: "center", alignItems: "center" }}>
+										<CircularProgress size={20} thickness={4} color='secondary' />
+									</Box>
+								)
+							)}
+						</Stack>
+						<Button variant='contained' color='secondary' onClick={(e) => handleVideoUpload(e)}>
 							<Typography>Upload video</Typography>
 						</Button>
 					</Stack>
 				</React.Fragment>
 			) : activeStep == steps.length - 2 ? (
 				<React.Fragment>
-					<CourseContent formData={formData} setFormData={setFormData}/>
+					<CourseContent formData={formData} setFormData={setFormData} />
 				</React.Fragment>
 			) : (
 				<React.Fragment>
 					<Box textAlign='center'>
-						<CourseCreation formData={formData} setFormData={setFormData}/>
+						<CourseCreation formData={formData} setFormData={setFormData} />
 					</Box>
 				</React.Fragment>
 			)}

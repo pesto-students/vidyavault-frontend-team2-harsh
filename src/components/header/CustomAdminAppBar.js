@@ -64,6 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 export default function CustomAppBar(props) {
+	let img = "https://www.netclipart.com/pp/f/73-733895_blue-banner-transparent-png-image-blue-banner-png.png"
 	const dispatch = useDispatch()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -170,7 +171,7 @@ export default function CustomAppBar(props) {
 	)
 
 	return (
-		<Box sx={{ flexGrow: 1, marginBottom: 3, width: "100%" }}>
+		<Box sx={{ flexGrow: 1, width: "100%" }}>
 			<AppBar position='static' color='third'>
 				<Toolbar sx={{ display: "flex", justifyContent: "end" }}>
 					<Typography style={{ flexGrow: 1 / 3 }} variant='h3'>
@@ -183,16 +184,7 @@ export default function CustomAppBar(props) {
 						<Button onClick={logOutFn} startIcon={<LogoutIcon />} variant='contained' color='secondary'>
 							Log out
 						</Button>
-						<IconButton size='large' aria-label='show 4 new mails' color='inherit'>
-							<Badge badgeContent={4} color='error'>
-								<MailIcon />
-							</Badge>
-						</IconButton>
-						<IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
-							<Badge badgeContent={17} color='error'>
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
+
 						<IconButton
 							size='large'
 							edge='end'
@@ -221,7 +213,7 @@ export default function CustomAppBar(props) {
 			</AppBar>
 			{renderMobileMenu}
 			{renderMenu}
-			<WhiteLabelBanner />
+			<WhiteLabelBanner img={img} />
 		</Box>
 	)
 }
