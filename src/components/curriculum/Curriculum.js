@@ -22,7 +22,7 @@ const Curriculum = () => {
         // console.log(data);
     } else {
         data = res.courses[res.courses.length - 1];
-        CourseData = res.courseFile[res.courseFile.length-1];
+        CourseData = res.courseFile[res.courseFile.length - 1];
     }
 
     useEffect(() => {
@@ -54,7 +54,20 @@ const Curriculum = () => {
                         <Stack alignItems="center">
                             <Typography variant='h4' margin={2}>{data.courseName}</Typography>
                             <Button variant='contained' color="secondary" sx={{ display: { md: "none" } }} onClick={(e) => drawerFn(e)}>Curriculum</Button>
-                            <Box sx={{ height: "500px", width: "100%", bgcolor: "primary.dark", borderRadius: 5 }}>
+                            <Box sx={{ height: "500px", width: "100%", bgcolor: "secondary.main", borderRadius: 5, overflow: "hidden" }}>
+
+                                <video width="100%"
+                                    height="100%"
+                                    controls
+                                    preload="auto"
+                                    loop
+                                    poster='https://icons.veryicon.com/png/o/object/material-design-icons/movie-46.png'
+                                    >
+                                    <source src="https://res.cloudinary.com/dgj1tfu0j/video/upload/v1679123311/samples/sea-turtle.mp4"
+                                        type="video/mp4" />
+                                    <source src="https://res.cloudinary.com/dgj1tfu0j/video/upload/v1679123311/samples/sea-turtle.mp4"
+                                        type="video/ogg" />
+                                </video>
 
                             </Box>
                             <Typography variant='h6' margin={2}>{data.description}</Typography>
@@ -69,7 +82,7 @@ const Curriculum = () => {
                                     <Box key={index} sx={{ width: "100%", height: "100%" }}>
                                         <Button variant='contained' size="small" fullWidth color='third' sx={{ margin: 0.4, textTransform: "none" }} onClick={() => toggleFn(index)}><Typography variant='h5' margin={1} >{item.moduleName}</Typography></Button>
                                         {index == itemIndex && item.files.map((VideoFile, index) => {
-                                            return (<Button variant='contained' size="small" fullWidth key={index} sx={{textTransform: "none"}}><Checkbox color="third" /><Typography variant='h6' margin={1}>{VideoFile.lecName}</Typography></Button>)
+                                            return (<Button variant='contained' size="small" fullWidth key={index} sx={{ textTransform: "none" }}><Typography variant='h6' margin={1}>{VideoFile.lecName}</Typography></Button>)
                                         })}
                                     </Box>
                                 )

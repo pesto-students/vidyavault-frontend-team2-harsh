@@ -6,8 +6,7 @@ import Navbar from '../../components/navbar/Navbar';
 const Organization = () => {
     return (
         <>
-            <Navbar />
-            <Box sx={{ height: "100vh", width: "100%", padding: "1rem", paddingTop: "10vh" }}>
+            <Box sx={{ height: "fit-content", width: "100%", padding: "1rem" }}>
                 <AdminForm />
             </Box>
         </>

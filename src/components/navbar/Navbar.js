@@ -1,77 +1,156 @@
-import { Typography } from '@mui/material';
+import { IconButton, InputBase, TextField, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../atoms/assets/darklogo.png';
 import { Button } from '@mui/material';
+import { MenuIcon, SearchIcon } from '../../components/atoms/icons/icons';
+
+
+let data = [{
+    "id": 1,
+    "text": "Devpulse"
+}, {
+    "id": 2,
+    "text": "Linklinks"
+}, {
+    "id": 3,
+    "text": "Centizu"
+}, {
+    "id": 4,
+    "text": "Dynabox"
+}, {
+    "id": 5,
+    "text": "Avaveo"
+}, {
+    "id": 6,
+    "text": "Demivee"
+}, {
+    "id": 7,
+    "text": "Jayo"
+}, {
+    "id": 8,
+    "text": "Blognation"
+}, {
+    "id": 9,
+    "text": "Podcat"
+}, {
+    "id": 10,
+    "text": "Layo"
+}]
+
+
+function List(props) {
+    //create a new array by filtering the original array
+    const filteredData = data.filter((el) => {
+        //if no input the return the original
+        if (props.input === '') {
+            return el;
+        }
+        //return the item which contains the user input
+        else {
+            return el.text.toLowerCase().includes(props.input)
+        }
+    })
+    return (
+        <ul>
+            {filteredData.map((item) => (
+                <li key={item.id} style={{ color: "white" }}>{item.text}</li>
+            ))}
+        </ul>
+    )
+}
+
+
+
 
 const Navbar = () => {
+    const [inputText, setInputText] = useState("");
+    let inputHandler = (e) => {
+        let lowerCase = e.target.value.toLowerCase();
+        setInputText(lowerCase);
+    }
+
     return (
         <>
-            <Box sx={{ top: 0, width: "100%" }}>
+            <Box sx={{ width: "100%" }}>
                 <Stack
                     direction="row"
                     alignItems="center"
-                    justifyContent="space-between"
+                    justifyContent="space-around"
                     bgcolor="secondary.main"
-                    p={2}
-                    spacing={2}
+                    p={1}
+                    spacing={1}
                 >
                     <Box sx={{ width: "110px", marginLeft: 3 }}>
                         <img src={logo} height="80px" width="80px" />
                         <Typography variant='h6' color="third.main" ml={1}>VidyaVault</Typography>
                     </Box>
 
-                    <Box>
+                    {/* <List input={inputText} /> */}
 
-                        <Link to="/">
+                    <Box>
+                        <InputBase
+                            sx={{ ml: 1, flex: 1, color: "primary.main" }}
+                            placeholder="Search courses..."
+                            onChange={(e) => inputHandler(e)}
+                            inputProps={{ 'aria-label': 'search google maps' }}
+                        />
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" color='primary'>
+                            <SearchIcon />
+                        </IconButton>
+                    </Box>
+
+                    <IconButton edge='start' color='third' aria-label='menu' sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
+                        <MenuIcon />
+                    </IconButton>
+
+                    <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+
+                        <Stack direction="row" spacing={2}>
                             <Button
                                 color="primary"
                                 size="large"
                                 variant="text"
+                                component={Link} to="/"
                             ><Typography variant='h6' color="primary.main">Home</Typography>
                             </Button>
-                        </Link>
 
-                        <Link to="/org">
                             <Button
                                 color="primary"
                                 size="large"
                                 variant="text"
-                            ><Typography variant='h6' color="primary.main" ml={2}>Organization</Typography>
+                                component={Link} to="/org"
+                            ><Typography variant='h6' color="primary.main">Organization</Typography>
                             </Button>
-                        </Link>
 
-                        <Link to="/about">
                             <Button
                                 color="primary"
                                 size="large"
                                 variant="text"
-                            ><Typography variant='h6' color="primary.main" ml={2}>About</Typography>
+                                component={Link} to="/about"
+                            ><Typography variant='h6' color="primary.main">About</Typography>
                             </Button>
-                        </Link>
 
-                        <Link to="/signup">
                             <Button
                                 color="third"
                                 variant="contained"
                                 size="large"
-                            ><Typography variant='h6' color="secondary.main" mr={2}>Sign up</Typography>
+                                component={Link} to="/signup"
+                            ><Typography variant='h6' color="secondary.main">Sign up</Typography>
                             </Button>
-                        </Link>
 
-                        <Link to="/signin">
                             <Button
                                 color="third"
                                 variant="contained"
                                 size="large"
-                            ><Typography variant='h6' color="secondary.main" mr={2}>Sign in</Typography>
+                                component={Link} to="/signin"
+                            ><Typography variant='h6' color="secondary.main">Sign in</Typography>
                             </Button>
-                        </Link>
+                        </Stack>
 
                     </Box>
                 </Stack>
-
             </Box>
         </>
     )

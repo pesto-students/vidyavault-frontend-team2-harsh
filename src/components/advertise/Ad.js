@@ -5,6 +5,7 @@ import { Button } from "@mui/material"
 import img1 from "../atoms/assets/img1.svg"
 import img2 from "../atoms/assets/img2.svg"
 import { Stack } from "@mui/material"
+import { Link } from "react-router-dom"
 
 export const JoinBanner = () => {
 	return (
@@ -13,10 +14,10 @@ export const JoinBanner = () => {
 				<img src={img1} height='250px' width='250px' />
 				<Box>
 					<Typography variant='h3'>
-						Share what you know.<br></br>Sign up free today.
+						Share what you know.<br></br>Sign up today.
 					</Typography>
-					<Button variant='contained' color='secondary' sx={{ marginTop: 1 }}>
-						<Typography variant='h6'>Join for free</Typography>
+					<Button variant='contained' color='secondary' sx={{ marginTop: 1 }} component={Link} to="/signup">
+						<Typography variant='h6'>Join right now</Typography>
 					</Button>
 				</Box>
 			</Stack>

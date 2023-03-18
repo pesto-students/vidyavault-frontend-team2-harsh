@@ -4,6 +4,8 @@ const initialState = {
     isSnackOpen: false,
     snackmsg: "",
     popLogout: false,
+    isModelOpen: false,
+    isLoading: false
 }
 
 const systemSlice = createSlice({
@@ -22,10 +24,22 @@ const systemSlice = createSlice({
         },
         closeLogout(state, action) {
             state.popLogout = false;
+        },
+        openModel(state, action) {
+            state.isModelOpen = true;
+        },
+        closeModel(state, action) {
+            state.isModelOpen = false;
+        },
+        startLoading(state, action) {
+            state.isLoading = true;
+        },
+        stopLoading(state, action) {
+            state.isLoading = false;
         }
     }
 });
 
-export const { openSnack, closeSnack, openLogout, closeLogout } = systemSlice.actions;
+export const { openSnack, closeSnack, openLogout, closeLogout, openModel, closeModel, startLoading, stopLoading } = systemSlice.actions;
 
 export default systemSlice.reducer;

@@ -5,6 +5,7 @@ import abhi from '../../components/atoms/assets/abhi.jpg';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Navbar from '../../components/navbar/Navbar';
+import Footer from '../../components/footer/Footer';
 
 const About = () => {
   return (
@@ -88,8 +89,8 @@ const About = () => {
 
           </Stack>
         </Box>
-
       </Stack>
+      <Footer />
     </>
   )
 }
