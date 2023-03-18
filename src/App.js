@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import About from "./container/welcome/About"
 import LandingPage from "./container/welcome/LandingPage"
 import Signin from "./container/welcome/Signin"
@@ -23,8 +23,35 @@ import AdminProfile from "./container/admin/AdminProfile"
 import UserProfile from "./container/admin/UserProfile"
 import Analytics from "./container/admin/Analytics"
 import ResetPassword from "./components/ResetPassword/ResetPassword"
+import AuthUser from "./components/Auth/AuthUser"
+import AuthAdmin from "./components/Auth/AuthAdmin"
 
 const App = () => {
+	// const [isAdmin, setIsAdmin] = useState();
+	// const [isLoggedIn, setIsLoggedIn] = useState();
+
+	// const resId = localStorage.getItem("userId");
+	// 	const resToken = localStorage.getItem("token");
+	// 	const checkAdmin = localStorage.getItem("isAdmin");
+	// 	const checkLogin = localStorage.getItem("isLoggedIn");
+
+	// const checkLog = () => {
+
+	// 	if (resId == "" || resToken == "" || !resId || !resToken || !isLoggedIn) {
+	// 		return // <Navigate to="/" replace />;
+	// 	} else {
+	// 		let item1 = JSON.parse(resId);
+	// 		let item2 = JSON.parse(resToken);
+	// 		console.log("localStorage", item1, item2);
+	// 		setIsAdmin(checkAdmin);
+	// 		setIsLoggedIn(checkLogin);
+	// 	}
+	// }
+
+	// useEffect(() => {
+	// 	checkLog();
+	// }, [])
+
 	return (
 		<>
 			<BrowserRouter>
@@ -35,23 +62,25 @@ const App = () => {
 					<Route path='/org' element={<Organization />} />
 					<Route path='/about' element={<About />} />
 
-					<Route path='/dash/' element={<UserDashboard />} />
-					<Route path='/dash/Subscriptions' element={<Subscriptions />} />
-					<Route path='/dash/manage' element={<Manage />} />
-					<Route path='/dash/cc' element={<CreateCourse />} />
-					<Route path='/dash/guidelines' element={<Guidelines />} />
-					<Route path='/dash/curriculum' element={<Curriculum />} />
-					<Route path='/dash/edit' element={<EditCourse />} />
+					<Route path='/dash/' element={<AuthUser><UserDashboard /></AuthUser>} />
+					<Route path='/dash/Subscriptions' element={<AuthUser><Subscriptions /></AuthUser>} />
+					<Route path='/dash/manage' element={<AuthUser><Manage /></AuthUser>} />
+					<Route path='/dash/cc' element={<AuthUser><CreateCourse /></AuthUser>} />
+					<Route path='/dash/guidelines' element={<AuthUser><Guidelines /></AuthUser>} />
+					<Route path='/dash/curriculum' element={<AuthUser><Curriculum /></AuthUser>} />
+					<Route path='/dash/edit' element={<AuthUser><EditCourse /></AuthUser>} />
 
-					<Route path='/admindash' element={<AdminDash />} />
+
+
+					<Route path='/admindash' element={<AuthAdmin><AdminDash /></AuthAdmin>} />
 					{/* <Route path="/admindash/" element={<Signup />} /> */}
-					<Route path='/admindash/cc' element={<AdminCreateCourse />} />
-					<Route path='/admindash/manage' element={<AdminManage />} />
-					<Route path='/admindash/members' element={<Members />} />
-					<Route path='/admindash/members/id' element={<UserProfile />} />
-					<Route path='/admindash/profile' element={<AdminProfile />} />
-					<Route path='/admindash/setup' element={<AdminSetup />} />
-					<Route path='/admindash/analytics' element={<Analytics />} />
+					<Route path='/admindash/cc' element={<AuthAdmin><AdminCreateCourse /></AuthAdmin>} />
+					<Route path='/admindash/manage' element={<AuthAdmin><AdminManage /></AuthAdmin>} />
+					<Route path='/admindash/members' element={<AuthAdmin><Members /></AuthAdmin>} />
+					<Route path='/admindash/members/id' element={<AuthAdmin><UserProfile /></AuthAdmin>} />
+					<Route path='/admindash/profile' element={<AuthAdmin><AdminProfile /></AuthAdmin>} />
+					<Route path='/admindash/setup' element={<AuthAdmin><AdminSetup /></AuthAdmin>} />
+					<Route path='/admindash/analytics' element={<AuthAdmin><Analytics /></AuthAdmin>} />
 					<Route path='/admindash/reset' element={<ResetPassword />} />
 				</Routes>
 			</BrowserRouter>
@@ -61,9 +90,9 @@ const App = () => {
 
 {
 	/* {(status.isLogedin && status.type == "itsUser") ? (
-        <UserDash />) : (status.isLogedin && status.type == "itsAdmin") ? (
-          <AdminDash />) : (<Welcome />)
-      } */
+		<UserDash />) : (status.isLogedin && status.type == "itsAdmin") ? (
+		  <AdminDash />) : (<Welcome />)
+	  } */
 }
 
 // function App() {

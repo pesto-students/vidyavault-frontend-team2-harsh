@@ -37,11 +37,11 @@ const UserDashboard = () => {
       <Grid
         container
         direction="row"
-        justifyContent="center"
-        alignItems="flex-start"
+        justifyContent="space-evenly"
+        alignItems="center"
       >
         {courses.map((item, index) => {
-          return (<Box sx={{ margin: 2}} key={index} onClick={() => coursesPage(item)}>
+          return (<Box width="max-content" sx={{ margin: 2 }} key={index} onClick={() => coursesPage(item)}>
             <Card course={item} btn="subscribe" />
           </Box>)
         })}

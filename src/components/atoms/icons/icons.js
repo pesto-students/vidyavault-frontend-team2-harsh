@@ -20,6 +20,7 @@ import UploadIcon from '@mui/icons-material/Upload';
 import DescriptionIcon from '@mui/icons-material/Description';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import TuneIcon from '@mui/icons-material/Tune';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export {
     TuneIcon,
@@ -42,5 +43,6 @@ export {
     SearchIcon,
     LoginIcon,
     LogoutIcon,
-    MenuIcon
+    MenuIcon,
+    KeyboardBackspaceIcon
 }

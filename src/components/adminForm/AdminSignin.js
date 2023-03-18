@@ -28,7 +28,7 @@ let AdminSignin = () => {
 	return (
 		<>
 			<Box sx={{ width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" } }}>
-				<Stack direction='column' justifyContent='center' alignItems='center' spacing={3} height='100%' margin={3}>
+				<Stack direction='column' justifyContent='center' alignItems='center' spacing={4} height='fit-content' margin={3}>
 					<Typography variant='h3'>Admin Sign in</Typography>
 					<TextField
 						label='Email'

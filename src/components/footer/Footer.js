@@ -9,6 +9,7 @@ const FooterContainer = styled("footer")({
 	alignItems: "center",
 	justifyContent: "space-between",
 	flexDirection: "row",
+	flexWrap: "wrap",
 	padding: "5rem",
 	color: "#F2F2F2",
 	backgroundColor: "#20262e"
@@ -101,7 +102,7 @@ const Footer = () => {
 					}}
 				/>
 				<Button variant='contained' color='third'>
-					Subscribe
+					Let us know!
 				</Button>
 			</Stack>
 		</FooterContainer>

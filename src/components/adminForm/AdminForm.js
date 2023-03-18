@@ -12,6 +12,8 @@ import { openSnack, closeSnack } from '../../store/systemSlice';
 import CustomSnackbar from '../snackbar/Snackbar';
 import AdminSignup from './AdminSignup';
 import AdminSignin from './AdminSignin';
+import { KeyboardBackspaceIcon } from '../../components/atoms/icons/icons';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
     { "title": 'Sign up', "icon": <NoteAddIcon /> },
@@ -19,6 +21,7 @@ const steps = [
 ];
 
 export default function AdminForm() {
+    let navigate = useNavigate();
     let dispatch = useDispatch();
     let sys = useSelector((state) => state.system);
     const [activeStep, setActiveStep] = React.useState(0);
@@ -31,6 +34,10 @@ export default function AdminForm() {
     const thumFn = () => {
         dispatch(openSnack("Saurabh"));
         console.log(sys);
+    }
+
+    let goHome = () => {
+        navigate("/");
     }
 
     const handleNext = () => {
@@ -48,46 +55,51 @@ export default function AdminForm() {
     };
 
     return (
-        <Box sx={{ width: '100%', height: "fit-content", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
-            <Box sx={{ width: "70%" }}>
-                <Stepper activeStep={activeStep}>
-                    {steps.map((label, index) => {
-                        const stepProps = {};
-                        const labelProps = {};
-                        return (
-                            <Step key={index} {...stepProps}>
-                                <StepLabel {...labelProps} icon={label.icon}><Typography variant='h5' color="secondary.main">{label.title}</Typography></StepLabel>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
+        <>
+            <Box sx={{ position: "absolute", margin: "0.6rem" }}>
+                <KeyboardBackspaceIcon fontSize="large" onClick={goHome} />
             </Box>
-            {activeStep == steps.length - 1 ? (
-                <React.Fragment>
-                    <AdminSignin />
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
+            <Box sx={{ width: '100%', minHeight: "95vh", height: "fit-content", bgcolor: "primary.main", padding: "1rem", borderRadius: "1rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
+                <Box sx={{ width: "70%" }}>
+                    <Stepper activeStep={activeStep}>
+                        {steps.map((label, index) => {
+                            const stepProps = {};
+                            const labelProps = {};
+                            return (
+                                <Step key={index} {...stepProps}>
+                                    <StepLabel {...labelProps} icon={label.icon}><Typography variant='h5' color="secondary.main">{label.title}</Typography></StepLabel>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
+                </Box>
+                {activeStep == steps.length - 1 ? (
+                    <React.Fragment>
+                        <AdminSignin />
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
                         <AdminSignup />
-                </React.Fragment>
-            )}
-            {activeStep === steps.length - 1 ? (
-                <React.Fragment>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}><Typography variant='h5' color="secondary">Finish</Typography></Button>
-                    </Box>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    {/* <Typography sx={{ mt: 2, mb: 1 }} variant="h6">Step {activeStep + 1}</Typography> */}
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext}><Typography variant='h5' color="secondary">Next</Typography></Button>
-                    </Box>
-                </React.Fragment>
-            )}
-            <CustomSnackbar />
-        </Box>
+                    </React.Fragment>
+                )}
+                {activeStep === steps.length - 1 ? (
+                    <React.Fragment>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                            <Box sx={{ flex: '1 1 auto' }} />
+                            <Button onClick={handleReset}><Typography variant='h5' color="secondary">Finish</Typography></Button>
+                        </Box>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        {/* <Typography sx={{ mt: 2, mb: 1 }} variant="h6">Step {activeStep + 1}</Typography> */}
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                            <Box sx={{ flex: '1 1 auto' }} />
+                            <Button onClick={handleNext}><Typography variant='h5' color="secondary">Next</Typography></Button>
+                        </Box>
+                    </React.Fragment>
+                )}
+                <CustomSnackbar />
+            </Box>
+        </>
     );
 }
