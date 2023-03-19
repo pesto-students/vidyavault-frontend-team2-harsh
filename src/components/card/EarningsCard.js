@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, Typography } from "@mui/material"
 
 const EarningsCard = ({ earnings, item }) => {
 	return (
-		<Card elevation={10} sx={{ borderRadius: 5 }}>
+		<Card elevation={10} sx={{ borderRadius: 5, border: "2px solid #80d3c9" }}>
 			<CardHeader
 				action={
 					<Link to={item.path}>

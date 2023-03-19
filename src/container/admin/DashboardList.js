@@ -1,7 +1,7 @@
 const DashboardList = [
 	{
-		name: "Current Earnings",
-		path: "/admindash/analytics"
+		name: "Members",
+		path: "/admindash/members"
 	},
 	{
 		name: "Setup",

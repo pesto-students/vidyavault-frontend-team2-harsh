@@ -2,7 +2,7 @@ import { Button, Checkbox, Drawer, Typography } from "@mui/material"
 import { Box, Stack } from "@mui/system"
 import React, { useEffect, useState } from "react"
 import BackWrapper from "../backWrapper/BackWrapper"
-import menuList from "../../container/user/menuList"
+import menuList from "../../container/admin/menuList"
 import { useSelector } from "react-redux"
 import { EditIcon, DeleteIcon, AddIcon } from "../atoms/icons/icons"
 
@@ -73,13 +73,14 @@ const Curriculum = () => {
 								Curriculum
 							</Button>
 							<Box sx={{ height: "500px", width: "100%", bgcolor: "primary.dark", borderRadius: 5 }}>
-								<iframe
+								<video
 									allowFullScreen
+									controls='true'
 									style={{ borderRadius: "30px" }}
 									width='100%'
 									height='100%'
-									src='https://res.cloudinary.com/dd2bmcpqv/video/upload/v1679085967/vwkwvyeoc4fiqyyln8ie.mp4'
-								></iframe>
+									src='https://res.cloudinary.com/dd2bmcpqv/video/upload/v1678984529/samples/cld-sample-video.mp4'
+								></video>
 							</Box>
 							<Typography variant='h6' margin={2}>
 								{data.description}

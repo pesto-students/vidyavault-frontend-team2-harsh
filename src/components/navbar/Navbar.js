@@ -36,101 +36,85 @@ const Navbar = () => {
 						VidyaVault
 					</Typography>
 				</Box>
-				{window.innerWidth > 960 ? (
-					<Box>
-						<Link to='/'>
-							<Button sx={{ marginX: 2 }} color='primary' size='large' variant='text'>
-								<Typography variant='h6' color='primary.main'>
-									Home
-								</Typography>
-							</Button>
-						</Link>
 
-						<Link to='/org'>
-							<Button sx={{ marginX: 2 }} color='primary' size='large' variant='text'>
-								<Typography variant='h6' color='primary.main'>
-									Organization
-								</Typography>
-							</Button>
-						</Link>
+				<Box sx={{ display: { xs: "none", sm: "none", md: "flex" }, gap: "1rem" }}>
+					<Button color='primary' size='large' variant='text' component={Link} to='/'>
+						<Typography variant='h6' color='primary.main'>
+							Home
+						</Typography>
+					</Button>
 
-						<Link to='/about'>
-							<Button sx={{ marginX: 2 }} color='primary' size='large' variant='text'>
-								<Typography variant='h6' color='primary.main'>
-									About
-								</Typography>
-							</Button>
-						</Link>
+					<Button color='primary' size='large' variant='text' component={Link} to='/org'>
+						<Typography variant='h6' color='primary.main'>
+							Organization
+						</Typography>
+					</Button>
 
-						<Link style={{ textDecoration: "none" }} to='/signup'>
-							<Button
-								sx={{ borderRadius: 5, marginX: 2, fontSize: { md: "1rem" } }}
-								color='third'
-								variant='contained'
-								size='large'
-							>
-								<Typography variant='h6' color='secondary.main'>
-									Sign up
-								</Typography>
-							</Button>
-						</Link>
+					<Button color='primary' size='large' variant='text' component={Link} to='/about'>
+						<Typography variant='h6' color='primary.main'>
+							About
+						</Typography>
+					</Button>
 
-						<Link style={{ textDecoration: "none" }} to='/signin'>
-							<Button sx={{ borderRadius: 5, marginX: 2 }} color='third' variant='contained' size='large'>
-								<Typography variant='h6' color='secondary.main'>
-									Sign in
-								</Typography>
-							</Button>
-						</Link>
-					</Box>
-				) : (
-					<div>
-						<IconButton edge='start' color='third' aria-label='menu' onClick={handleMenu}>
-							<MenuIcon />
-						</IconButton>
-						<Menu
-							id='menu-appbar'
-							anchorEl={anchorEl}
-							anchorOrigin={{
-								vertical: "top",
-								horizontal: "right"
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "right"
-							}}
-							open={open}
-							onClose={handleClose}
-						>
-							<MenuItem onClick={handleClose}>
-								<Link to='/' style={{ textDecoration: "none", color: "#000" }}>
-									Home
-								</Link>
-							</MenuItem>
-							<MenuItem onClick={handleClose}>
-								<Link to='/org' style={{ textDecoration: "none", color: "#000" }}>
-									Organization
-								</Link>
-							</MenuItem>
-							<MenuItem onClick={handleClose}>
-								<Link to='/about' style={{ textDecoration: "none", color: "#000" }}>
-									About
-								</Link>
-							</MenuItem>
-							<MenuItem onClick={handleClose}>
-								<Link to='/signup' style={{ textDecoration: "none", color: "#000" }}>
-									SignUp
-								</Link>
-							</MenuItem>
-							<MenuItem onClick={handleClose}>
-								<Link to='/signin' style={{ textDecoration: "none", color: "#000" }}>
-									SignIn
-								</Link>
-							</MenuItem>
-						</Menu>
-					</div>
-				)}
+					<Button color='third' variant='contained' size='large' component={Link} to='/signup'>
+						<Typography variant='h6' color='secondary.main'>
+							Sign up
+						</Typography>
+					</Button>
+
+					<Button color='third' variant='contained' size='large' component={Link} to='/signin'>
+						<Typography variant='h6' color='secondary.main'>
+							Sign in
+						</Typography>
+					</Button>
+				</Box>
+
+				<Box sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
+					<IconButton edge='start' color='third' aria-label='menu' onClick={handleMenu}>
+						<MenuIcon />
+					</IconButton>
+					<Menu
+						id='menu-appbar'
+						anchorEl={anchorEl}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "right"
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: "top",
+							horizontal: "right"
+						}}
+						open={open}
+						onClose={handleClose}
+					>
+						<MenuItem onClick={handleClose}>
+							<Link to='/' style={{ textDecoration: "none", color: "#000" }}>
+								Home
+							</Link>
+						</MenuItem>
+						<MenuItem onClick={handleClose}>
+							<Link to='/org' style={{ textDecoration: "none", color: "#000" }}>
+								Organization
+							</Link>
+						</MenuItem>
+						<MenuItem onClick={handleClose}>
+							<Link to='/about' style={{ textDecoration: "none", color: "#000" }}>
+								About
+							</Link>
+						</MenuItem>
+						<MenuItem onClick={handleClose}>
+							<Link to='/signup' style={{ textDecoration: "none", color: "#000" }}>
+								SignUp
+							</Link>
+						</MenuItem>
+						<MenuItem onClick={handleClose}>
+							<Link to='/signin' style={{ textDecoration: "none", color: "#000" }}>
+								SignIn
+							</Link>
+						</MenuItem>
+					</Menu>
+				</Box>
 			</Stack>
 		</Box>
 	)

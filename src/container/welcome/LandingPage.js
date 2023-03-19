@@ -32,10 +32,10 @@ const CourseDescription = styled(Typography)({
 })
 
 const LearnMoreButton = styled(Button)({
-	borderColor: "#3f51b5",
-	color: "#3f51b5",
+	borderColor: "#80d3c9",
+	color: "#80d3c9",
 	"&:hover": {
-		backgroundColor: "#3f51b5",
+		backgroundColor: "#99dcd8",
 		color: "#fff"
 	}
 })

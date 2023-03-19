@@ -19,6 +19,7 @@ import AdminSetup from "./container/admin/AdminSetup"
 import EditCourse from "./components/EditCourse/EditCourse"
 import Organization from "./container/welcome/Organization"
 import AdminManage from "./container/admin/AdminManage"
+import AdminCurriculum from "./components/curriculum/AdminCurriculum"
 import AdminProfile from "./container/admin/AdminProfile"
 import UserProfile from "./container/admin/UserProfile"
 import Analytics from "./container/admin/Analytics"
@@ -47,6 +48,7 @@ const App = () => {
 					{/* <Route path="/admindash/" element={<Signup />} /> */}
 					<Route path='/admindash/cc' element={<AdminCreateCourse />} />
 					<Route path='/admindash/manage' element={<AdminManage />} />
+					<Route path='/admindash/curriculum' element={<AdminCurriculum />} />
 					<Route path='/admindash/members' element={<Members />} />
 					<Route path='/admindash/members/id' element={<UserProfile />} />
 					<Route path='/admindash/profile' element={<AdminProfile />} />

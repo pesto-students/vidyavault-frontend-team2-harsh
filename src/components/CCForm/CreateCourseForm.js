@@ -78,11 +78,12 @@ export default function CreateCourseForm() {
 			const response = await axios.post("https://api.cloudinary.com/v1_1/dd2bmcpqv/upload", Data)
 			setVideoUrl(response.data.secure_url)
 			setFormData({ ...formData, path: response.data.secure_url })
-			console.log(videourl)
+
 			setVideoSuccess(true)
 			setVideoLoading(false)
 			setTimeout(() => {
 				setVideoSuccess(false)
+				console.log(videourl)
 			}, 1000)
 		} catch (error) {
 			console.error(error)
@@ -97,11 +98,12 @@ export default function CreateCourseForm() {
 			const response = await axios.post("https://api.cloudinary.com/v1_1/dd2bmcpqv/upload", Data)
 			setThumbUrl(response.data.secure_url)
 			setFormData({ ...formData, thumbnail: response.data.secure_url })
-			console.log(thumbUrl)
+
 			setThumbSuccess(true)
 			setThumbLoading(false)
 			setTimeout(() => {
 				setThumbSuccess(false)
+				console.log(thumbUrl)
 			}, 1000)
 		} catch (error) {
 			console.error(error)
