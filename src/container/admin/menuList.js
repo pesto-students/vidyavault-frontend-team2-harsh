@@ -1,35 +1,48 @@
-import { HomeIcon, CreateIcon, LogoutIcon, InfoIcon, HelpCenterIcon } from "../../components/atoms/icons/icons"
+import {
+	Settings,
+	InsertEmoticon,
+	LibraryBooks,
+	Person,
+	Analytics,
+	ManageAccounts,
+	AdminPanelSettings
+} from "@mui/icons-material"
 
 const menuList = [
 	{
 		name: "Dashboard",
 		path: "/admindash",
-		icon: <HomeIcon />
+		icon: <AdminPanelSettings />
 	},
 	{
 		name: "Members",
 		path: "/admindash/members",
-		icon: <CreateIcon />
+		icon: <InsertEmoticon />
 	},
 	{
 		name: "Create course",
 		path: "/admindash/cc",
-		icon: <CreateIcon />
+		icon: <LibraryBooks />
 	},
 	{
 		name: "Manage",
 		path: "/admindash/manage",
-		icon: <CreateIcon />
+		icon: <ManageAccounts />
 	},
 	{
 		name: "Profile",
 		path: "/admindash/profile",
-		icon: <CreateIcon />
+		icon: <Person />
 	},
 	{
 		name: "Setup",
 		path: "/admindash/setup",
-		icon: <CreateIcon />
+		icon: <Settings />
+	},
+	{
+		name: "Analytics",
+		path: "/admindash/analytics",
+		icon: <Analytics />
 	}
 ]
 
