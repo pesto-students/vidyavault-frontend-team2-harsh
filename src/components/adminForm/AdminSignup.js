@@ -1,4 +1,5 @@
 import { Box, Button, Divider, FormControlLabel, Stack, TextField, Typography } from "@mui/material"
+import axios from "axios"
 import React, { useState } from "react"
 
 let AdminSignup = () => {
@@ -11,6 +12,24 @@ let AdminSignup = () => {
 		slogan: ""
 	})
 
+	let submit = async () => {
+
+        // dispatch(addType("itsUser"));
+
+        const body = {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+			orgName: formData.orgName,
+			goal: formData.goal,
+			slogan: formData.slogan
+        };
+        axios.post(
+            'https://vidyavault.onrender.com/api/admin/signup',
+            body
+        ).then((x) => console.log(x)).catch((x) => console.log(x));
+    }
+
 	let handleFormDataChange = (e) => {
 		let name = e.target.name
 		let value = e.target.value
@@ -18,10 +37,6 @@ let AdminSignup = () => {
 			...formData,
 			[name]: value
 		})
-	}
-
-	let handleSubmit = (e) => {
-		console.log(formData)
 	}
 
 	return (
@@ -87,7 +102,7 @@ let AdminSignup = () => {
 						onChange={(e) => handleFormDataChange(e)}
 						value={formData.slogan}
 					/>
-					<Button variant='contained' fullWidth color='secondary' onClick={handleSubmit}>
+					<Button variant='contained' fullWidth color='secondary' onClick={submit}>
 						Sign up
 					</Button>
 				</Stack>

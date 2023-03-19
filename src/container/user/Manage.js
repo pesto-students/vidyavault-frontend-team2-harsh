@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BackWrapper from '../../components/backWrapper/BackWrapper';
 import menuList from './menuList';
 import Card from '../../components/card/Card';
@@ -12,8 +12,35 @@ import courseFiles from '../../Mock_Data/courseFiles.json';
 import CustomAppBar from '../../components/header/CustomAppBar';
 import CustomChips from '../../components/header/CustomChips';
 import Snackbar from '../../components/snackbar/Snackbar';
+import { BACKEND_URL } from '../../Constant';
+import axios from 'axios';
 
 const Manage = () => {
+  // const [courses, setCourses] = useState([]);
+
+  // const getCourses = () => {
+  //   const id = localStorage.getItem("userId");
+  //   const ID = JSON.parse(id);
+  //   const token = localStorage.getItem("token");
+  //   const Token = JSON.parse(token);
+  //   axios.get(`${BACKEND_URL}/user/${ID}`,
+  //     {
+  //       headers: { authorization: `Bearer ${Token}` }
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data.data.ownCourses)
+  //       setCourses(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }
+
+
+  // useEffect(() => {
+  //   getCourses()
+  // }, [])
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const coursesPage = (item) => {
@@ -38,7 +65,7 @@ const Manage = () => {
         alignItems="flex-start"
       >
         {courses.map((item, index) => {
-          return (<Box sx={{ margin: 2}} key={index} onClick={() => coursesPage(item)}>
+          return (<Box sx={{ margin: 2 }} key={index} onClick={() => coursesPage(item)}>
             <Card course={item} btn="subscribe" />
           </Box>)
         })}

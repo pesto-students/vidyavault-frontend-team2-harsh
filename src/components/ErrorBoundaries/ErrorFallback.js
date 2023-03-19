@@ -9,7 +9,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
     return (
         <>
             <Box sx={{ width: "310px", height: "320px", margin: "1rem", position: "absolute", top: 0, left: 0, }}>
-                <Box sx={{
+                {/* <Box sx={{
                     borderRadius: 8,
                     height: "50%",
                     bgcolor: "secondary.main",
@@ -22,7 +22,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
                         <img src={Logo} alt="VidyaVault" height={100} width={100} />
                         <Typography variant='h6' color="third.main">VidyaVault</Typography>
                     </Stack>
-                </Box>
+                </Box> */}
             </Box>
             <Box sx={{ width: "100vw", height: "100vh", bgcolor: "primary.light", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                 <Box sx={{ width: { lg: "75%", md: "80%" }, height: "80%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
