@@ -119,7 +119,24 @@ export default function CreateCourseForm() {
 	const handleForm = () => {
 		setActiveStep(0)
 		setFormData({})
-		console.log(formData)
+		// const data = JSON.stringify(formData)
+		// console.log(data)
+		// let id = JSON.parse(localStorage.getItem("userId"))
+		// const token = localStorage.getItem("token")
+		// const Token = JSON.parse(token)
+		// if (localStorage.getItem("isAdmin")) {
+		// 	axios
+		// 		.post(`https://vidyavault.onrender.com/api/admin/cc/${id}`, formData, {
+		// 			headers: { authorization: `Bearer ${Token}`, "Content-Type": "application/json" }
+		// 		})
+		// 		.then((response) => {
+		// 			console.log(response)
+		// 		})
+		// 		.catch((error) => console.log(error))
+		// } else {
+		// 	// axios.post(`https://vidyavault.onrender.com/api/admin/cc/${id}`)
+		// 	return
+		// }
 	}
 
 	return (

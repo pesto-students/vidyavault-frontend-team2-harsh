@@ -7,6 +7,7 @@ import Signup from "./container/welcome/Signup"
 
 import UserDashboard from "./container/user/UserDashboard"
 import Subscriptions from "./container/user/Subscriptions"
+import Memberships from "./components/Memberships/Memberships"
 import Manage from "./container/user/Manage"
 import CreateCourse from "./container/user/CreateCourse"
 import Guidelines from "./container/user/Guidelines"
@@ -62,25 +63,136 @@ const App = () => {
 					<Route path='/org' element={<Organization />} />
 					<Route path='/about' element={<About />} />
 
-					<Route path='/dash/' element={<AuthUser><UserDashboard /></AuthUser>} />
-					<Route path='/dash/Subscriptions' element={<AuthUser><Subscriptions /></AuthUser>} />
-					<Route path='/dash/manage' element={<AuthUser><Manage /></AuthUser>} />
-					<Route path='/dash/cc' element={<AuthUser><CreateCourse /></AuthUser>} />
-					<Route path='/dash/guidelines' element={<AuthUser><Guidelines /></AuthUser>} />
-					<Route path='/dash/curriculum' element={<AuthUser><Curriculum /></AuthUser>} />
-					<Route path='/dash/edit' element={<AuthUser><EditCourse /></AuthUser>} />
+					<Route
+						path='/dash/'
+						element={
+							<AuthUser>
+								<UserDashboard />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/Subscriptions'
+						element={
+							<AuthUser>
+								<Subscriptions />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/manage'
+						element={
+							<AuthUser>
+								<Manage />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/cc'
+						element={
+							<AuthUser>
+								<CreateCourse />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/guidelines'
+						element={
+							<AuthUser>
+								<Guidelines />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/memberships'
+						element={
+							<AuthUser>
+								<Memberships />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/curriculum'
+						element={
+							<AuthUser>
+								<Curriculum />
+							</AuthUser>
+						}
+					/>
+					<Route
+						path='/dash/edit'
+						element={
+							<AuthUser>
+								<EditCourse />
+							</AuthUser>
+						}
+					/>
 
-
-
-					<Route path='/admindash' element={<AuthAdmin><AdminDash /></AuthAdmin>} />
+					<Route
+						path='/admindash'
+						element={
+							<AuthAdmin>
+								<AdminDash />
+							</AuthAdmin>
+						}
+					/>
 					{/* <Route path="/admindash/" element={<Signup />} /> */}
-					<Route path='/admindash/cc' element={<AuthAdmin><AdminCreateCourse /></AuthAdmin>} />
-					<Route path='/admindash/manage' element={<AuthAdmin><AdminManage /></AuthAdmin>} />
-					<Route path='/admindash/members' element={<AuthAdmin><Members /></AuthAdmin>} />
-					<Route path='/admindash/members/id' element={<AuthAdmin><UserProfile /></AuthAdmin>} />
-					<Route path='/admindash/profile' element={<AuthAdmin><AdminProfile /></AuthAdmin>} />
-					<Route path='/admindash/setup' element={<AuthAdmin><AdminSetup /></AuthAdmin>} />
-					<Route path='/admindash/analytics' element={<AuthAdmin><Analytics /></AuthAdmin>} />
+					<Route
+						path='/admindash/cc'
+						element={
+							<AuthAdmin>
+								<AdminCreateCourse />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/manage'
+						element={
+							<AuthAdmin>
+								<AdminManage />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/members'
+						element={
+							<AuthAdmin>
+								<Members />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/members/id'
+						element={
+							<AuthAdmin>
+								<UserProfile />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/profile'
+						element={
+							<AuthAdmin>
+								<AdminProfile />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/setup'
+						element={
+							<AuthAdmin>
+								<AdminSetup />
+							</AuthAdmin>
+						}
+					/>
+					<Route
+						path='/admindash/analytics'
+						element={
+							<AuthAdmin>
+								<Analytics />
+							</AuthAdmin>
+						}
+					/>
 					<Route path='/admindash/reset' element={<ResetPassword />} />
 				</Routes>
 			</BrowserRouter>
