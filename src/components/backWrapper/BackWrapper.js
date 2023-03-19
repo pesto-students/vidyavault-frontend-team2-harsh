@@ -4,12 +4,13 @@ import { Box } from "@mui/system"
 import { Button } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import { MenuIcon } from "../atoms/icons/icons"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import Logo from "./assets/darkerlogo.png"
 // import Link from "@mui/material/Link"
 const drawerWidth = 230
 
 const BackWrapper = (props) => {
+	let navigate = useNavigate();
 	let color = props.color
 	let menuList = props.menuList
 	const [mobileOpen, setMobileOpen] = React.useState(false)

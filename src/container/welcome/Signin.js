@@ -74,9 +74,6 @@ function Signin() {
 	let handleSubmit = async (e) => {
 
 		dispatch(startLoading());
-		//   const config = {
-		//     headers: { Authorization: `Bearer ${token}` }
-		// };
 		const body = {
 			email: formData.email,
 			password: formData.password

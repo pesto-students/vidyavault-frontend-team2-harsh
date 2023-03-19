@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import HomeFeatures from '../../components/section/HomeFeatures';
 import CreatoresCategory from '../../components/section/CreatoresCategory';
+import FeaturedC from '../../components/section/FeaturedC';
 
 const LandingPage = () => {
     // const [nav, setNav] = useState(false);
@@ -29,6 +30,7 @@ const LandingPage = () => {
         <Box bgcolor="primary.main" width="100%">
             <Navbar />
             <HomeFeatures />
+            <FeaturedC />
             <JoinBanner />
             <CreatoresCategory />
             <Footer />
