@@ -12,9 +12,12 @@ import CourseCreation from "./CourseCreation"
 import CourseContent from "./CourseContent"
 import { UploadIcon, DescriptionIcon, NoteAddIcon } from "../atoms/icons/icons"
 import { useDispatch, useSelector } from "react-redux"
-import { openSnack, closeSnack } from "../../store/systemSlice"
+import { openSnack, closeSnack, startLoading, stopLoading } from "../../store/systemSlice"
 import CustomSnackbar from "../snackbar/Snackbar"
 import { Cloudinary } from "@cloudinary/base"
+import { BACKEND_URL } from '../../Constant';
+import { LoadingButton } from "@mui/lab"
+import {SaveIcon} from '../../components/atoms/icons/icons';
 // import { CloudinaryContext, Image } from "@cloudinary/react"
 
 const steps = [
@@ -33,7 +36,11 @@ const steps = [
 
 export default function CreateCourseForm() {
 	let dispatch = useDispatch()
-	let sys = useSelector((state) => state.system)
+	let sys = useSelector((state) => state.system);
+	let loading = sys.isLoading;
+	let auth = useSelector((state) => state.auth)
+
+
 	const [activeStep, setActiveStep] = useState(0)
 	const [videoSuccess, setVideoSuccess] = useState(false)
 	const [thumbSuccess, setThumbSuccess] = useState(false)
@@ -83,10 +90,10 @@ export default function CreateCourseForm() {
 			setVideoLoading(false)
 			setTimeout(() => {
 				setVideoSuccess(false)
-				console.log(videourl)
+				// console.log(videourl)
 			}, 1000)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 		}
 	}
 	const handleThumbUpload = async () => {
@@ -103,10 +110,10 @@ export default function CreateCourseForm() {
 			setThumbLoading(false)
 			setTimeout(() => {
 				setThumbSuccess(false)
-				console.log(thumbUrl)
+				// console.log(thumbUrl)
 			}, 1000)
 		} catch (error) {
-			console.error(error)
+			// console.error(error)
 		}
 	}
 	const handleNext = () => {
@@ -118,8 +125,45 @@ export default function CreateCourseForm() {
 
 	const handleForm = () => {
 		setActiveStep(0)
-		setFormData({})
-		console.log(formData)
+	}
+
+	let handleSubmit = async () => {
+
+		dispatch(startLoading());
+		if (
+			formData.courseName == "" ||
+			formData.lecName == "" ||
+			formData.description == "" ||
+			formData.moduleName == "" ||
+			formData.thumbnail == "" ||
+			formData.path == ""
+		) {
+			dispatch(openSnack({ msg: "Missing credentials", type: "error" }));
+			dispatch(stopLoading());
+			return;
+		}
+
+		const data = {
+			courseName: formData.courseName,
+			thumbnail: formData.thumbnail,
+			description: formData.description,
+			amount: formData.amount,
+			moduleName: formData.moduleName,
+			lecName: formData.lecName,
+			path: formData.path
+		};
+
+		const result = await axios.post(`${BACKEND_URL}/user/cc/${auth.id}`, data, {
+			headers: { authorization: `Bearer ${auth.token}` }
+		});
+
+		if (result.data.status) {
+			dispatch(openSnack({ msg: "congratulations! course created successfuly", type: "success" }));
+			dispatch(stopLoading());
+		} else {
+			dispatch(openSnack({ msg: "Failed", type: "error" }));
+			dispatch(stopLoading());
+		}
 	}
 
 	return (
@@ -215,6 +259,20 @@ export default function CreateCourseForm() {
 						<Button variant='contained' color='secondary' onClick={(e) => handleVideoUpload(e)}>
 							<Typography>Upload video</Typography>
 						</Button>
+						{loading ? (
+							<LoadingButton
+								loading
+								loadingPosition="start"
+								startIcon={<SaveIcon />}
+								variant="outlined"
+								color="secondary"
+							>
+								Signing in
+							</LoadingButton>
+						) : (
+							<Button variant='contained' color='secondary' onClick={(e) => handleSubmit(e)}>
+								<Typography>submit</Typography>
+							</Button>)}
 					</Stack>
 				</React.Fragment>
 			) : activeStep == steps.length - 2 ? (

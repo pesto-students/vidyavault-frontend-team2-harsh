@@ -24,8 +24,8 @@ const BackWrapper = (props) => {
 	const drawer = (
 		<>
 			<Stack alignItems='center' m={2}>
-				<img src={Logo} alt='VidyaVault' height={80} width={80} />
-				<Typography variant='h6' color='third.main'>
+				<img src={Logo} alt='VidyaVault' height={80} width={80} onClick={() => navigate("/")}/>
+				<Typography variant='h6' color='third.main' onClick={() => navigate("/")}>
 					VidyaVault
 				</Typography>
 			</Stack>

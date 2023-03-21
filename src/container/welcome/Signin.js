@@ -11,9 +11,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { setLogin } from '../../store/authSlice';
 import { BACKEND_URL } from '../../Constant';
 import { KeyboardBackspaceIcon } from '../../components/atoms/icons/icons';
-import { startLoading, stopLoading } from '../../store/systemSlice';
+import { openSnack, startLoading, stopLoading } from '../../store/systemSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
-import SaveIcon from '@mui/icons-material/Save';
+import CustomSnackbar from "../../components/snackbar/Snackbar"
+import { SaveIcon } from '../../components/atoms/icons/icons';
 
 function Signin() {
 	const navigate = useNavigate();
@@ -51,7 +52,7 @@ function Signin() {
 					["password"]: "12345678"
 				}
 			})
-		}else {
+		} else {
 			setFormData((form) => {
 				return {
 					...form,
@@ -71,7 +72,13 @@ function Signin() {
 		})
 	}
 
+
 	let handleSubmit = async (e) => {
+
+		if(formData.email == "" || formData.password == "") {
+			dispatch(openSnack({ msg: "Missing credentials", type: "error" }));
+			return;
+		}
 
 		dispatch(startLoading());
 		const body = {
@@ -83,7 +90,6 @@ function Signin() {
 			body
 		)
 			.then((response) => {
-				console.log(response)
 				let id = response.data.data.id;
 				let token = response.data.data.token;
 				localStorage.setItem("userId", JSON.stringify(id));
@@ -96,8 +102,8 @@ function Signin() {
 
 			})
 			.catch((x) => {
+				dispatch(openSnack({ msg: "Sign in Failed, please try again", type: "error" }));
 				dispatch(stopLoading());
-				console.log(x);
 			});
 	}
 
@@ -172,7 +178,7 @@ function Signin() {
 							Sign in
 						</Button>
 					)}
-
+					<CustomSnackbar />
 					<Link to='/signup' style={{ textDecoration: "none" }}>
 						<Button variant='text'>
 							<Typography color='secondary' sx={{ textTransform: "none" }}>

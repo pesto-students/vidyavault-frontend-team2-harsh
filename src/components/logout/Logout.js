@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { closeLogout, openSnack } from '../../store/systemSlice';
+import {addLogin, addType, addId, addToken} from '../../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 
@@ -24,8 +25,19 @@ export default function Logout() {
     };
     const handleLogout = () => {
         dispatch(closeLogout());
+        let keysToRemove = ["isLoggedIn", "isAdmin", "userId", "token"];
+
+        for (let key of keysToRemove) {
+            localStorage.removeItem(key);
+        }
+        dispatch(addLogin(false));
+        dispatch(addType(false));
+        dispatch(addId(""));
+        dispatch(addToken(""));
+        window.location.reload(false);
         dispatch(openSnack("Log out successful"));
     };
+
 
     return (
         <div>

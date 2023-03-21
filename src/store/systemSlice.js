@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isSnackOpen: false,
     snackmsg: "",
+    snackType: "",
     popLogout: false,
     isModelOpen: false,
     isLoading: false
@@ -13,7 +14,8 @@ const systemSlice = createSlice({
     initialState,
     reducers: {
         openSnack(state, action) {
-            state.snackmsg = action.payload;
+            state.snackmsg = action.payload.msg;
+            state.snackType = action.payload.type
             state.isSnackOpen = true;
         },
         closeSnack(state, action) {

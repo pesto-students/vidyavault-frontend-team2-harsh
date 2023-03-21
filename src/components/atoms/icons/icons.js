@@ -21,6 +21,8 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import TuneIcon from '@mui/icons-material/Tune';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import SaveIcon from '@mui/icons-material/Save';
 
 export {
     TuneIcon,
@@ -44,5 +46,7 @@ export {
     LoginIcon,
     LogoutIcon,
     MenuIcon,
-    KeyboardBackspaceIcon
+    KeyboardBackspaceIcon,
+    KeyboardArrowRightIcon,
+    SaveIcon
 }
