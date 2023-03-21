@@ -15,6 +15,7 @@ export default function CustomSnackbar() {
     let sys = useSelector((state) => state.system);
     let open = sys.isSnackOpen;
     let msg = sys.snackmsg;
+    let type = sys.snackType;
 
     const handleClose = (event, reason) => {
         dispatch(closeSnack());
@@ -23,7 +24,7 @@ export default function CustomSnackbar() {
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>
             <Snackbar anchorOrigin={{ vertical: 'top', horizontal: "right" }} open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
                     {msg}
                 </Alert>
             </Snackbar>

@@ -1,5 +1,7 @@
 import react, { useEffect, useState } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { addLogin, addType, addId, addToken } from './store/authSlice';
+
 import About from "./container/welcome/About"
 import LandingPage from "./container/welcome/LandingPage"
 import Signin from "./container/welcome/Signin"
@@ -25,8 +27,26 @@ import Analytics from "./container/admin/Analytics"
 import ResetPassword from "./components/ResetPassword/ResetPassword"
 import AuthUser from "./components/Auth/AuthUser"
 import AuthAdmin from "./components/Auth/AuthAdmin"
+import { useDispatch } from "react-redux"
 
 const App = () => {
+	let dispatch = useDispatch();
+
+	const item1 = localStorage.getItem("isAdmin");
+	const item2 = localStorage.getItem("isLoggedIn");
+	const item3 = localStorage.getItem("userId");
+	const item4 = localStorage.getItem("token");
+
+	let checkAdmin = JSON.parse(item1);
+	let checkLogin = JSON.parse(item2);
+	let id = JSON.parse(item3)
+	let token = JSON.parse(item4)
+
+	dispatch(addLogin(checkLogin));
+	dispatch(addType(checkAdmin));
+	dispatch(addId(id));
+	dispatch(addToken(token));
+
 	// const [isAdmin, setIsAdmin] = useState();
 	// const [isLoggedIn, setIsLoggedIn] = useState();
 

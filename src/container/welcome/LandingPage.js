@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -25,15 +25,21 @@ const LandingPage = () => {
     // }
     // window.addEventListener("scroll", changeBG);
 
+
     return (
         <>
-        <Box bgcolor="primary.main" width="100%">
-            <Navbar />
-            <HomeFeatures />
-            <FeaturedC />
-            <JoinBanner />
-            <CreatoresCategory />
-            <Footer />
+            <Box bgcolor="primary.main" width="100%">
+                <Navbar />
+                <Box bgcolor="secondary.main" width="100%" textAlign="center" height="40vh"  pt="8vh">
+                    <Typography color="third.main" variant='h3' m={1}>|| विद्याधनं  सर्व धनं प्रधानम् ||</Typography>
+                    <Typography color="primary.main" variant='h4'> (Vidya Dhanam Sarva Dhana Pradhanam)  </Typography>
+                    <Typography color="primary.main" variant='h4'>-- Knowledge is the best and the most important wealth among all wealths --</Typography>
+                </Box>
+                <HomeFeatures />
+                <FeaturedC />
+                <JoinBanner />
+                {/* <CreatoresCategory /> */}
+                <Footer />
             </Box>
         </>
     )
