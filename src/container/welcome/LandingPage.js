@@ -36,7 +36,7 @@ const LandingPage = () => {
                     <Typography color="primary.main" variant='h4'>-- Knowledge is the best and the most important wealth among all wealths --</Typography>
                 </Box>
                 <HomeFeatures />
-                <FeaturedC />
+                {/* <FeaturedC /> */}
                 <JoinBanner />
                 {/* <CreatoresCategory /> */}
                 <Footer />

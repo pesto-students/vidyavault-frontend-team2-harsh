@@ -89,9 +89,9 @@ const Footer = () => {
 					</Stack>
 				</LinksContainer>
 			</Stack>
-			<Stack direction='row' gap='2rem'>
+			<Stack direction='row' gap='2rem' flexWrap="wrap">
 				<TextField
-					sx={{ width: "30ch" }}
+					sx={{ width: {xs: "14rem", sm: "18rem"} }}
 					id='email-input'
 					size='small'
 					label='Enter your email'
