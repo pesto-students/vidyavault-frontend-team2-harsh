@@ -28,6 +28,7 @@ import ResetPassword from "./components/ResetPassword/ResetPassword"
 import AuthUser from "./components/Auth/AuthUser"
 import AuthAdmin from "./components/Auth/AuthAdmin"
 import { useDispatch } from "react-redux"
+import Memberships from "./container/user/Memberships";
 
 const App = () => {
 	let dispatch = useDispatch();
@@ -89,6 +90,7 @@ const App = () => {
 					<Route path='/dash/guidelines' element={<AuthUser><Guidelines /></AuthUser>} />
 					<Route path='/dash/curriculum' element={<AuthUser><Curriculum /></AuthUser>} />
 					<Route path='/dash/edit' element={<AuthUser><EditCourse /></AuthUser>} />
+					<Route path='/dash/memberships' element={<AuthUser><Memberships /></AuthUser>} />
 
 
 
