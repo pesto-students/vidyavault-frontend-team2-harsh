@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 
 const AuthUser = ({ children }) => {
 
@@ -23,7 +24,9 @@ const AuthUser = ({ children }) => {
     } else if (isAdmin == false || isAdmin == undefined) {
         return <Navigate to="/signin" replace />;
     }
-    return children;
+    
+    return <Outlet />;
+    // return children;
 }
 
 export default AuthUser;

@@ -4,7 +4,7 @@ import BackWrapper from '../../components/backWrapper/BackWrapper';
 import menuList from './menuList';
 import Card from '../../components/card/Card';
 // import courses from '../../Mock_Data/course.json';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 import { Createbanner } from '../../components/advertise/Ad';
 import { useDispatch, useSelector } from 'react-redux';
 import { add, addFiles, clearArr } from '../../store/courseSlice';
@@ -76,7 +76,7 @@ const Subscriptions = () => {
           })}
         </Grid>
       )}
-
+      
       <Createbanner />
     </BackWrapper>
   )
