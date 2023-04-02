@@ -77,7 +77,7 @@ function List(props) {
 	)
 }
 
-const Navbar = ({ todisplay }) => {
+const Navbar = () => {
 	let getState = useSelector((state) => state.auth)
 	let isLogin = getState.isLogin
 	let isAdmin = getState.isAdmin
@@ -109,7 +109,7 @@ const Navbar = ({ todisplay }) => {
 				<Stack
 					direction='row'
 					alignItems='center'
-					justifyContent={todisplay == "none" ? "start" : "space-around"}
+					justifyContent='space-around'
 					bgcolor='secondary.main'
 					p={1}
 					spacing={1}
@@ -175,7 +175,7 @@ const Navbar = ({ todisplay }) => {
 						<MenuItem onClick={handleClose}>Logout</MenuItem>
 					</Menu>
 
-					<Box sx={{ display: { xs: "none", sm: "none", md: todisplay == "none" ? "none" : "block" } }}>
+					<Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
 						<Stack direction='row' spacing={2}>
 							<Button color='primary' size='large' variant='text' component={Link} to='/'>
 								<Typography variant='h6' color='primary.main'>

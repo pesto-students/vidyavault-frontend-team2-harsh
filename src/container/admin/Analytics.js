@@ -21,12 +21,12 @@ const Analytics = () => {
 					Analytics 📈
 				</Typography>
 				<Card sx={{ width: "80vw", borderRadius: 5 }}>
-					<CardHeader title='Sales in last 4 months'></CardHeader>
+					<CardHeader title='Users joined in last 4 months'></CardHeader>
 					<Chart data={data} />
 					<CardContent>
 						<Stack direction='row'>
-							{data.map((item) => (
-								<Typography variant='h5' marginRight={5}>
+							{data.map((item, index) => (
+								<Typography key={index} variant='h5' marginRight={5}>
 									{item.name} : {item.value}
 								</Typography>
 							))}

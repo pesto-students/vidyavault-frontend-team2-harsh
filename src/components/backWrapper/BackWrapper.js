@@ -10,21 +10,20 @@ import Logo from "./assets/darkerlogo.png"
 const drawerWidth = 230
 
 const BackWrapper = (props) => {
-	let navigate = useNavigate();
+	let navigate = useNavigate()
 	let color = props.color
 	let menuList = props.menuList
 	const [mobileOpen, setMobileOpen] = React.useState(false)
 	const [selectedItem, setSelectedItem] = React.useState("")
 
 	const handleDrawerToggle = (e) => {
-		console.log("first")
 		setMobileOpen(!mobileOpen)
 	}
 
 	const drawer = (
 		<>
 			<Stack alignItems='center' m={2}>
-				<img src={Logo} alt='VidyaVault' height={80} width={80} onClick={() => navigate("/")}/>
+				<img src={Logo} alt='VidyaVault' height={80} width={80} onClick={() => navigate("/")} />
 				<Typography variant='h6' color='third.main' onClick={() => navigate("/")}>
 					VidyaVault
 				</Typography>
@@ -32,21 +31,22 @@ const BackWrapper = (props) => {
 			<Stack spacing={1} alignItems='flex-start' justifyContent='flex-start' ml={4} mt={2}>
 				{menuList.map((item, index) => {
 					return (
-						<NavLink
-							to={item.path}
+						<Button
 							key={index}
+							component={NavLink}
+							to={item.path}
+							end={true}
 							style={({ isActive }) => {
 								return {
-									color: isActive ? "#80d3c9" : "#F2F2F2",
-									textDecoration: "none"
+									color: isActive ? "#80d3c9" : "#F2F2F2"
 								}
 							}}
-							end
+							startIcon={item.icon}
+							size='large'
+							variant='text'
 						>
-							<Button startIcon={item.icon} size='large' variant='text'>
-								{item.name}
-							</Button>
-						</NavLink>
+							{item.name}
+						</Button>
 					)
 				})}
 				<Typography variant='h6' sx={{ position: "absolute", bottom: "1rem" }} color='third.main'>

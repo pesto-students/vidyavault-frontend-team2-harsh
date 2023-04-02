@@ -20,7 +20,6 @@ import { useDispatch } from "react-redux"
 import { openLogout } from "../../store/systemSlice"
 import Logout from "../logout/Logout"
 import { Button } from "@mui/material"
-import { SearchFn } from "../../components/Search/Search"
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -62,8 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	}
 }))
 
-export default function CustomAppBar({ data }) {
-	const [datas, setDatas] = React.useState(data)
+export default function CustomAppBar(props) {
+	let { query, setQuery } = props
 	const dispatch = useDispatch()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -93,7 +92,7 @@ export default function CustomAppBar({ data }) {
 	}
 
 	const handleSearch = (e) => {
-		setDatas(SearchFn(data, e.target.innerText))
+		setQuery(e.target.value)
 	}
 
 	const menuId = "primary-search-account-menu"
@@ -175,11 +174,13 @@ export default function CustomAppBar({ data }) {
 							<SearchIconWrapper>
 								<SearchIcon />
 							</SearchIconWrapper>
-							<StyledInputBase placeholder='Search…' inputProps={{ "aria-label": "search" }} onChange={handleSearch} />
+							<StyledInputBase
+								placeholder='Search…'
+								inputProps={{ "aria-label": "search" }}
+								onChange={(e) => handleSearch(e)}
+							/>
 						</Search>
 					</Box>
-
-					<TuneIcon fontSize='large' />
 					<Logout />
 
 					<Box sx={{ flexGrow: 1 }} />
@@ -187,16 +188,6 @@ export default function CustomAppBar({ data }) {
 						Log out
 					</Button>
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
-						<IconButton size='large' aria-label='show 4 new mails' color='inherit'>
-							<Badge badgeContent={4} color='error'>
-								<MailIcon />
-							</Badge>
-						</IconButton>
-						<IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
-							<Badge badgeContent={17} color='error'>
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
 						<IconButton
 							size='large'
 							edge='end'
