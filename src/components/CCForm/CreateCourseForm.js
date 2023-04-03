@@ -15,9 +15,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { openSnack, closeSnack, startLoading, stopLoading } from "../../store/systemSlice"
 import CustomSnackbar from "../snackbar/Snackbar"
 import { Cloudinary } from "@cloudinary/base"
-import { BACKEND_URL } from '../../Constant';
+import { BACKEND_URL } from "../../Constant"
+import { postData } from "../DataFetch/DataFetch"
 import { LoadingButton } from "@mui/lab"
-import {SaveIcon} from '../../components/atoms/icons/icons';
+import { SaveIcon } from "../../components/atoms/icons/icons"
 // import { CloudinaryContext, Image } from "@cloudinary/react"
 
 const steps = [
@@ -36,10 +37,9 @@ const steps = [
 
 export default function CreateCourseForm() {
 	let dispatch = useDispatch()
-	let sys = useSelector((state) => state.system);
-	let loading = sys.isLoading;
+	let sys = useSelector((state) => state.system)
+	let loading = sys.isLoading
 	let auth = useSelector((state) => state.auth)
-
 
 	const [activeStep, setActiveStep] = useState(0)
 	const [videoSuccess, setVideoSuccess] = useState(false)
@@ -128,8 +128,7 @@ export default function CreateCourseForm() {
 	}
 
 	let handleSubmit = async () => {
-
-		dispatch(startLoading());
+		dispatch(startLoading())
 		if (
 			formData.courseName == "" ||
 			formData.lecName == "" ||
@@ -138,9 +137,9 @@ export default function CreateCourseForm() {
 			formData.thumbnail == "" ||
 			formData.path == ""
 		) {
-			dispatch(openSnack({ msg: "Missing credentials", type: "error" }));
-			dispatch(stopLoading());
-			return;
+			dispatch(openSnack({ msg: "Missing credentials", type: "error" }))
+			dispatch(stopLoading())
+			return
 		}
 
 		const data = {
@@ -151,19 +150,19 @@ export default function CreateCourseForm() {
 			moduleName: formData.moduleName,
 			lecName: formData.lecName,
 			path: formData.path
-		};
-
-		const result = await axios.post(`${BACKEND_URL}/user/cc/${auth.id}`, data, {
-			headers: { authorization: `Bearer ${auth.token}` }
-		});
-
-		if (result.data.status) {
-			dispatch(openSnack({ msg: "congratulations! course created successfuly", type: "success" }));
-			dispatch(stopLoading());
-		} else {
-			dispatch(openSnack({ msg: "Failed", type: "error" }));
-			dispatch(stopLoading());
 		}
+		let header = {
+			headers: { authorization: `Bearer ${auth.token}` }
+		}
+		const result = postData(`cc`, data, header)
+		console.log(result)
+		// if (result.data.status) {
+		// 	dispatch(openSnack({ msg: "congratulations! course created successfuly", type: "success" }))
+		// 	dispatch(stopLoading())
+		// } else {
+		// 	dispatch(openSnack({ msg: "Failed", type: "error" }))
+		// 	dispatch(stopLoading())
+		// }
 	}
 
 	return (
@@ -262,17 +261,18 @@ export default function CreateCourseForm() {
 						{loading ? (
 							<LoadingButton
 								loading
-								loadingPosition="start"
+								loadingPosition='start'
 								startIcon={<SaveIcon />}
-								variant="outlined"
-								color="secondary"
+								variant='outlined'
+								color='secondary'
 							>
 								Signing in
 							</LoadingButton>
 						) : (
 							<Button variant='contained' color='secondary' onClick={(e) => handleSubmit(e)}>
 								<Typography>submit</Typography>
-							</Button>)}
+							</Button>
+						)}
 					</Stack>
 				</React.Fragment>
 			) : activeStep == steps.length - 2 ? (

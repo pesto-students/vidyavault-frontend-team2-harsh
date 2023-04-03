@@ -37,4 +37,4 @@ const AuthUser = () => {
     // return children;
 }
 
-export default AuthUser;
+export default AuthUser

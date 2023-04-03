@@ -4,9 +4,17 @@ import CheckIcon from "@mui/icons-material/Check"
 import { TextField, Box, Button, Stack, Card, CardHeader, CircularProgress, CardContent, Avatar } from "@mui/material"
 import Snackbar from "@mui/material/Snackbar"
 import CreateCourse from "../../container/user/CreateCourse"
+import { patchData } from "../DataFetch/DataFetch"
+import { useDispatch, useSelector } from "react-redux"
+import { openSnack, closeSnack, startLoading, stopLoading } from "../../store/systemSlice"
 import { Link } from "react-router-dom"
 
 const FormComponent = () => {
+	let dispatch = useDispatch()
+	let sys = useSelector((state) => state.system)
+	// let loading = sys.isLoading
+	let auth = useSelector((state) => state.auth)
+
 	const [avatarFile, setAvatarFile] = React.useState("")
 	const [success, setSuccess] = React.useState(false)
 	const [loading, setLoading] = React.useState(false)
@@ -52,7 +60,14 @@ const FormComponent = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		console.log(formData)
+		let header = { headers: { authorization: `Bearer ${auth.token}` } }
+		const result = patchData(`/user`, formData, header)
+		// if (result.data) {
+		// 	dispatch(openSnack({ msg: "congratulations! Updated Succesfully", type: "success" }))
+		// } else {
+		// 	dispatch(openSnack({ msg: "Failed to update", type: "error" }))
+		// }
+		console.log(result)
 	}
 
 	const handleAvatarChange = (event) => {
@@ -76,7 +91,7 @@ const FormComponent = () => {
 					alignItems: "center",
 					gap: "1rem",
 					bgcolor: "primary.light",
-					width: "60%",
+					width: { xs: "90%", sm: "60%" },
 					height: "90vh",
 					p: 5,
 					borderRadius: 2,
@@ -89,7 +104,7 @@ const FormComponent = () => {
 					titleTypographyProps={{ variant: "h2", fontWeight: "900" }}
 				/>
 
-				<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+				<Box sx={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center", flexGrow: 1 }}>
 					<Avatar
 						alt='avatar'
 						src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'

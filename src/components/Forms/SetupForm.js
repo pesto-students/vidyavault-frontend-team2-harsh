@@ -3,8 +3,11 @@ import axios from "axios"
 import Box from "@mui/material/Box"
 import CheckIcon from "@mui/icons-material/Check"
 import TextField from "@mui/material/TextField"
+import { useDispatch, useSelector } from "react-redux"
+import { patchData } from "../DataFetch/DataFetch"
 import { Typography, Button, Card, CardHeader, Stack, CircularProgress } from "@mui/material"
 const SetupForm = () => {
+	let auth = useSelector((state) => state.auth)
 	let currentGoal = "Amazing"
 	let currentslogan = "Just do it"
 	const [bannerFile, setBannerFile] = useState("")
@@ -12,9 +15,12 @@ const SetupForm = () => {
 	const [loading, setLoading] = useState(false)
 	const [uploadFlag, setUploadFlag] = useState(true)
 	const [formData, setFormData] = useState({
+		orgId: "6426eefc5b4c13814cbd6c5f",
+		orgName: "",
 		goal: currentGoal,
 		slogan: currentslogan,
-		banner: ""
+		banner: "",
+		desc: ""
 	})
 	const handleChange = (event) => {
 		const name = event.target.name
@@ -26,7 +32,9 @@ const SetupForm = () => {
 	}
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		console.log(formData)
+		let header = { headers: { authorization: `Bearer ${auth.token}` } }
+		const result = patchData(`admin/org`, formData, header)
+		console.log(result)
 	}
 
 	const handleBannerFileChange = (event) => {
@@ -70,17 +78,25 @@ const SetupForm = () => {
 					alignItems: "center",
 					gap: "1rem",
 					bgcolor: "primary.light",
-					width: "60%",
+					width: { xs: "90%", sm: "60%" },
 					height: "90vh",
-					p: 5,
+					p: 7,
 					borderRadius: 2,
 					color: "#F2f2f2"
 				}}
 			>
 				<CardHeader
-					sx={{ color: "secondary.main", height: "5rem" }}
+					sx={{ color: "secondary.main", height: "5rem", marginTop: "2rem" }}
 					title='Setup'
 					titleTypographyProps={{ variant: "h2", fontWeight: "900" }}
+				/>
+				<TextField
+					color='third'
+					fullWidth
+					name='orgName'
+					label='Organization Name'
+					value={formData.orgName}
+					onChange={handleChange}
 				/>
 				<TextField color='third' fullWidth name='goal' label='Goal' value={formData.goal} onChange={handleChange} />
 
@@ -90,6 +106,17 @@ const SetupForm = () => {
 					name='slogan'
 					label='Slogan'
 					value={formData.slogan}
+					onChange={handleChange}
+				/>
+
+				<TextField
+					color='third'
+					fullWidth
+					multiline
+					maxRows={4}
+					name='desc'
+					label='Description'
+					value={formData.desc}
 					onChange={handleChange}
 				/>
 				<label

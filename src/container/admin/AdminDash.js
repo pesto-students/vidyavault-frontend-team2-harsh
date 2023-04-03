@@ -10,30 +10,37 @@ import CustomAdminAppBar from "../../components/header/CustomAdminAppBar"
 import { data } from "../../Mock_Data/ChartData"
 import AnalyticsChart from "../../components/Charts/Chart"
 import EarningsCard from "../../components/card/EarningsCard"
+import { SearchFn } from "../../components/Search/Search"
 import { WhiteLabelBanner } from "../../components/advertise/Ad"
 import Quotes from "../../Mock_Data/Quotes"
 
 const AdminDash = () => {
 	let OrgName = "Saurabh School"
-	let totalsales = 0
+	let totalusers = 0
 	let members = 10
-	totalsales = data.reduce((prev, curr) => curr.value + prev, 0)
+	totalusers = data.reduce((prev, curr) => curr.value + prev, 0)
 	return (
 		<BackWrapper menuList={menuList}>
-			<CustomAdminAppBar OrgName={OrgName} />
+			<CustomAdminAppBar OrgName={OrgName} SearchFn={SearchFn} />
 			<Box
-				sx={{ padding: "2rem", backgroundColor: "#80d3c9", width: "100%", height: "fit-content", marginBottom: "2rem" }}
+				sx={{
+					padding: "1.5rem",
+					backgroundColor: "#80d3c9",
+					width: "100%",
+					height: "fit-content",
+					marginBottom: "2rem"
+				}}
 			>
-				<Typography sx={{ opacity: 0.6, textAlign: "center" }} variant='h4'>
+				<Typography sx={{ opacity: 0.6, textAlign: "center" }} fontWeight='bold' variant='body1'>
 					{Quotes[Math.floor(Math.random() * 9)]}
 				</Typography>
 			</Box>
-			<Container maxWidth={"lg"}>
+			<Container>
 				<Grid container spacing={{ xs: 2 }}>
 					{DashboardList.map((item, index) => (
-						<>
+						<React.Fragment key={index}>
 							{item.name == "Setup" && (
-								<Grid item key={index} xs={6}>
+								<Grid item xs={6}>
 									<Card elevation={2} sx={{ borderRadius: 5, border: "2px solid #80d3c9" }}>
 										<CardHeader
 											action={
@@ -57,7 +64,7 @@ const AdminDash = () => {
 							)}
 
 							{item.name == "Members" && (
-								<Grid item key={index} xs={6}>
+								<Grid item xs={6}>
 									<Card elevation={2} sx={{ borderRadius: 5, border: "2px solid #80d3c9" }}>
 										<CardHeader
 											action={
@@ -81,7 +88,7 @@ const AdminDash = () => {
 							)}
 
 							{item.name == "Analytics" && (
-								<Grid item key={index} xl={12} lg={12} sm={12} xs={12}>
+								<Grid item xl={12} lg={12} sm={12} xs={12}>
 									<Card
 										elevation={2}
 										sx={{
@@ -101,7 +108,7 @@ const AdminDash = () => {
 												</Link>
 											}
 											titleTypographyProps={{ variant: "h4" }}
-											title={`Total Sales:${totalsales}`}
+											title={`Users joined in last 4 months: ${totalusers}`}
 											sx={{ color: "#F2F2F2" }}
 										/>
 										<CardContent>
@@ -110,7 +117,7 @@ const AdminDash = () => {
 									</Card>
 								</Grid>
 							)}
-						</>
+						</React.Fragment>
 					))}
 				</Grid>
 			</Container>
