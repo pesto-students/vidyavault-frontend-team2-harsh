@@ -29,6 +29,7 @@ import AuthUser from "./components/Auth/AuthUser"
 import AuthAdmin from "./components/Auth/AuthAdmin"
 import MemberSignup from "./container/welcome/MemberSignup"
 import { useDispatch } from "react-redux"
+import Memberships from "./container/user/Memberships";
 
 const App = () => {
 	let dispatch = useDispatch()
@@ -84,129 +85,32 @@ const App = () => {
 					<Route path='/membersignup' element={<MemberSignup />} />
 					<Route path='/org' element={<Organization />} />
 					<Route path='/about' element={<About />} />
+          
 
-					<Route
-						path='/dash/'
-						element={
-							<AuthUser>
-								<UserDashboard />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/Subscriptions'
-						element={
-							<AuthUser>
-								<Subscriptions />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/manage'
-						element={
-							<AuthUser>
-								<Manage />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/cc'
-						element={
-							<AuthUser>
-								<CreateCourse />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/guidelines'
-						element={
-							<AuthUser>
-								<Guidelines />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/curriculum'
-						element={
-							<AuthUser>
-								<Curriculum />
-							</AuthUser>
-						}
-					/>
-					<Route
-						path='/dash/edit'
-						element={
-							<AuthUser>
-								<EditCourse />
-							</AuthUser>
-						}
-					/>
+          {/* <Route path='/dash/' element={<AuthUser />}> */}
+						<Route path='/dash/' element={<UserDashboard />} />
+						<Route path='/dash/Subscriptions' element={<Subscriptions />} />
+						<Route path='/dash/manage' element={<Manage />} />
+						<Route path='/dash/cc' element={<CreateCourse />} />
+						<Route path='/dash/guidelines' element={<Guidelines />} />
+						<Route path='/dash/curriculum' element={<Curriculum />} />
+						<Route path='/dash/edit' element={<EditCourse />} />
+						<Route path='/dash/memberships' element={<Memberships />} />
+					{/* </Route> */}
 
-					<Route
-						path='/admindash'
-						element={
-							<AuthAdmin>
-								<AdminDash />
-							</AuthAdmin>
-						}
-					/>
 
-					<Route
-						path='/admindash/cc'
-						element={
-							<AuthAdmin>
-								<AdminCreateCourse />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/manage'
-						element={
-							<AuthAdmin>
-								<AdminManage />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/members'
-						element={
-							<AuthAdmin>
-								<Members />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/members/id'
-						element={
-							<AuthAdmin>
-								<UserProfile />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/profile'
-						element={
-							<AuthAdmin>
-								<AdminProfile />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/setup'
-						element={
-							<AuthAdmin>
-								<AdminSetup />
-							</AuthAdmin>
-						}
-					/>
-					<Route
-						path='/admindash/analytics'
-						element={
-							<AuthAdmin>
-								<Analytics />
-							</AuthAdmin>
-						}
-					/>
+					{/* <Route path='/admindash/' element={<AuthAdmin />}> */}
+					<Route path='/admindash/' element={<AdminDash />} />
+					<Route path='/admindash/cc' element={<AdminCreateCourse />} />
+					<Route path='/admindash/manage' element={<AdminManage />} />
+					<Route path='/admindash/members' element={<Members />} />
+					<Route path='/admindash/members/id' element={<UserProfile />} />
+					<Route path='/admindash/profile' element={<AdminProfile />} />
+					<Route path='/admindash/setup' element={<AdminSetup />} />
+					<Route path='/admindash/analytics' element={<Analytics />} />
+					<Route path='/admindash/reset' element={<ResetPassword />} />
+					{/* </Route> */}
+
 				</Routes>
 			</BrowserRouter>
 		</>
