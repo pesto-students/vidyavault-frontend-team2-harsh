@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import React from "react"
+import React, { useEffect } from "react"
 import BackWrapper from "../../components/backWrapper/BackWrapper"
 import menuList from "./menuList"
 import MediaCard from "../../components/card/Card"
@@ -17,9 +17,13 @@ import IconButton from "@mui/material/IconButton"
 import { useState } from "react"
 import courses from "../../Mock_Data/course.json"
 import { Link } from "react-router-dom"
+import { SearchFn } from "../../components/Search/Search"
+import { getData } from "../../components/DataFetch/DataFetch"
 
 const AdminManage = () => {
 	let [data, setData] = useState([])
+	let [showdata, setShowData] = useState(courses)
+	let [query, setQuery] = useState("")
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const coursesPage = (item) => {
@@ -33,13 +37,29 @@ const AdminManage = () => {
 		navigate("/admindash")
 	}
 
+	useEffect(() => {
+		// let header = { headers: { authorization: `Bearer ${auth.token}` } }
+		// const result = getData(`/user , header)
+		// setData(result.data.ownCourses)
+	}, [])
+
+	useEffect(() => {
+		if (query !== "") {
+			let searchedData = SearchFn(data, query)
+			setShowData(searchedData)
+		} else {
+			setData(courses)
+		}
+		console.log("1")
+	}, [query])
+
 	return (
 		<BackWrapper menuList={menuList}>
-			<CustomAppBar data={data} />
+			<CustomAppBar query={query} setQuery={setQuery} />
 			<Snackbar />
 			<Grid container direction='row' justifyContent='center' alignItems='flex-start'>
-				{courses.length !== 0 ? (
-					courses.map((course, index) => {
+				{showdata.length !== 0 ? (
+					showdata.map((course, index) => {
 						return (
 							<Box sx={{ margin: 2 }} key={index} onClick={() => coursesPage(course)}>
 								<MediaCard course={course} btn='Edit' />

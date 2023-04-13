@@ -21,6 +21,12 @@ const About = () => {
 
       {/* <Typography variant='h3' color="third.main" mt={5}>"THE JOURNY OF A THOUSAND MILES BEGINS WITH SINGLE STEP"</Typography> */}
 
+<Box sx={{width: "100%", height: "fit-content", bgcolor: "third.main", textAlign: "center"}}>
+      <Typography color="secondary.main" variant='h3'>
+              Motive behind building "VIDYAVAULT" project is to bring enthusiastic learners and brilliant teachers together.  
+            </Typography>
+            </Box>
+
       <Stack direction="column">
 
         <Box mt={2} mb={2}>
@@ -39,16 +45,10 @@ const About = () => {
             </Box>
 
             <Box width="50%" m={4} textAlign="center">
-            <Typography variant='h4' color="third.dark">Full stack web developer</Typography>
-            <Typography variant='h6'>
-              Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard dummy
-              text ever since the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not only five centuries,
-              but also the leap into electronic typesetting, remaining essentially unchanged.
-              It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-              passages, and more recently with desktop publishing software like Aldus PageMaker including
-              versions of Lorem Ipsum.
+            <Typography variant='h4' color="third.dark">HELLO, I'M SAURABH GALGALE FULL STACK WEB DEVELOPER.</Typography>
+            <Typography variant='h5'>
+              I'M CURRENTLY STUDING JAVASCRIPT, NEXTJS/REACTJS, MUI/TAILWIND, NODEJS/EXPRESS, MONGODB/SQL AND WEB-3.
+              VIDYAVAULT IS MY ONE OF THE MERN LIVE(HOSTED) PROJECT.
             </Typography>
             </Box>
 

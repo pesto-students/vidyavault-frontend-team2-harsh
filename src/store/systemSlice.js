@@ -5,7 +5,10 @@ const initialState = {
     snackmsg: "",
     snackType: "",
     popLogout: false,
+    modelPayload: "",
     isModelOpen: false,
+    isFileModelOpen: false,
+    isModuleModelOpen: false,
     isLoading: false
 }
 
@@ -30,8 +33,18 @@ const systemSlice = createSlice({
         openModel(state, action) {
             state.isModelOpen = true;
         },
+        openFileModel(state, action) {
+            state.isFileModelOpen = true;
+            state.modelPayload = action.payload.id
+        },
+        openModuleModel(state, action) {
+            state.isModuleModelOpen = true;
+            state.modelPayload = action.payload.id
+        },
         closeModel(state, action) {
             state.isModelOpen = false;
+            state.isFileModelOpen = false;
+            state.isModuleModelOpen = false;
         },
         startLoading(state, action) {
             state.isLoading = true;
@@ -42,6 +55,6 @@ const systemSlice = createSlice({
     }
 });
 
-export const { openSnack, closeSnack, openLogout, closeLogout, openModel, closeModel, startLoading, stopLoading } = systemSlice.actions;
+export const { openSnack, closeSnack, openLogout, closeLogout, openModel, openFileModel, openModuleModel ,closeModel, startLoading, stopLoading } = systemSlice.actions;
 
 export default systemSlice.reducer;

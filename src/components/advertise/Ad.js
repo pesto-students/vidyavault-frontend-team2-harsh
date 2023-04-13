@@ -5,7 +5,7 @@ import { Button } from "@mui/material"
 import img1 from "../atoms/assets/img1.svg"
 import img2 from "../atoms/assets/img2.svg"
 import { Stack } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const JoinBanner = () => {
 	return (
@@ -26,10 +26,11 @@ export const JoinBanner = () => {
 }
 
 export const Createbanner = () => {
+	const navigate = useNavigate();
 	return (
 		<Box sx={{ bgcolor: "third.main", textAlign: "center" }}>
 			<Typography variant='h2'>Teaching is the greatest act of optimism.</Typography>
-			<Button variant='contained' color='secondary' sx={{ margin: 2 }}>
+			<Button variant='contained' color='secondary' sx={{ margin: 2 }} onClick={() => navigate('/dash/cc')}>
 				<Typography variant='h6' p={1}>
 					Create course
 				</Typography>

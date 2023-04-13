@@ -8,18 +8,20 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/system';
 import { KeyboardArrowRightIcon } from '../atoms/icons/icons';
+import axios from 'axios';
+import { BACKEND_URL } from '../../Constant';
+import { useSelector } from 'react-redux';
 
 export default function ImgMediaCard(props) {
+    let auth = useSelector((state) => state.auth)
     let course = props.course;
     let btn = props.btn;
 
-    let subFn = (e) => {
+    let subFn = async (e) => {
         e.stopPropagation();
+        let header = { headers: { authorization: `Bearer ${auth.token}` } }
+        let res = await axios.post(`${BACKEND_URL}/user/subscribe`, { courseId: course._id }, header)
     }
-
-    // let extendCard = (e) => {
-    //     e.stopPropagation();
-    // }
 
     return (
         <Box sx={{ position: "relative", bgcolor: "secondary.main", width: "max-content", height: "fit-content", borderRadius: 3 }}>
@@ -31,7 +33,7 @@ export default function ImgMediaCard(props) {
                     component="img"
                     alt={course.courseName}
                     height="140px"
-                    image={course.thumbnail}
+                    image={course.thumbnail || course.banner}
                 />
                 <Box width="100%" >
                     <Typography gutterBottom variant="h5">
@@ -41,7 +43,6 @@ export default function ImgMediaCard(props) {
                         {course.description}
                     </Typography>
                     <Stack direction="row" alignitems="center" justifyContent="center" spacing={1} m={2}>
-                        <Button size="small" color='secondary' variant='contained'>Share</Button>
                         {btn && <Button size="small" color='secondary' variant='contained' onClick={(e) => subFn(e)}>{btn}</Button>}
                     </Stack>
                 </Box>

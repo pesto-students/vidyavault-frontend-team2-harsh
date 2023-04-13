@@ -22,6 +22,11 @@ const menuList = [
         icon: <CreateIcon />,
     },
     {
+        name: "Memberships",
+        path: "/dash/memberships",
+        icon: <CreateIcon />,
+    },
+    {
         name: "Guidelines",
         path: "/dash/guidelines",
         icon: <CreateIcon />,

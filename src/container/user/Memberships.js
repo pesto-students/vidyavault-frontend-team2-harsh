@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import BackWrapper from '../../components/backWrapper/BackWrapper';
 import menuList from './menuList';
 import Card from '../../components/card/Card';
-import { Box, Button, Grid, Skeleton, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import { Createbanner } from '../../components/advertise/Ad';
 import { useDispatch, useSelector } from 'react-redux';
 import { add, addFiles, clearArr } from '../../store/courseSlice';
@@ -11,47 +11,45 @@ import courseFiles from '../../Mock_Data/courseFiles.json';
 import CustomAppBar from '../../components/header/CustomAppBar';
 import CustomChips from '../../components/header/CustomChips';
 import Snackbar from '../../components/snackbar/Snackbar';
-import { BACKEND_URL } from '../../Constant'
-import { startLoading, stopLoading } from '../../store/systemSlice';
-import { getUser } from './redux/userData';
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
+import { BACKEND_URL } from '../../Constant';
 import axios from 'axios';
+import { getUser } from './redux/userData';
+import { startLoading, stopLoading } from '../../store/systemSlice';
 
-const Subscriptions = () => {
-  const [courses, setCourses] = useState([]);
-  let auth = useSelector((state) => state.auth);
-  let sys = useSelector((state) => state.system);
+
+const Memberships = () => {
+
+  const [membershipList, setMembershipList] = useState([]);
+  let auth = useSelector((state) => state.auth)
+  let sys = useSelector((state) => state.system)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   let loading = sys.isLoading;
 
-  const coursesPage = async (item) => {
-    dispatch(add(item));
-    let header = {
-      headers: { authorization: `Bearer ${auth.token}` }
-    }
-    axios.post(`${BACKEND_URL}/course`, {"courseId": item._id}, header)
-    .then((x) => {
-      dispatch(addFiles(x.data.data.modules));
-    })
-    navigate('/dash/curriculum');
+  const orgCourses = (item) => {
+    // dispatch(clearArr());
+    // dispatch(add(item));
+    // let files = courseFiles.filter((list) => {
+    //   return list.CourseId == item._id;
+    // });
+    // let current = files[0].CourseData;
+    // dispatch(addFiles(current));
+    // navigate('/dash/edit');
   }
 
   useEffect(() => {
     dispatch(startLoading());
     let res = getUser(`${BACKEND_URL}/user`, auth.token);
     res.then((x) => {
-      setCourses(x.data.data.subscriptions);
+      setMembershipList(x.data.data.memberships);
       dispatch(stopLoading());
     })
   }, [])
 
-
   return (
     <BackWrapper menuList={menuList}>
-      <Box sx={{ position: "relative", minHeight: "100vh" }}>
+      <Box sx={{ position: "relative", minHeight: "100%" }}>
         <CustomAppBar />
         <Snackbar />
 
@@ -59,12 +57,12 @@ const Subscriptions = () => {
           <Stack width="100%" height="100%" alignItems="center" justifyContent="center">
             <CircularProgress color="third" size="5rem" />
           </Stack>
-        ) : (courses.length == 0) ? (
+        ) : (membershipList.length == 0) ? (
           <Box>
             <Stack alignItems="center" justifyContent="center" height="50vh" spacing={1.4}>
-              <Typography variant='h2'>Waiting for your first Subscribed course</Typography>
-              <Typography variant='h5'>You can search your favourite courses and subscribe them to watch</Typography>
-              <Button variant='contained' color='secondary' onClick={() => navigate("/dash")}>search Courses</Button>
+              <Typography variant='h2'>Waiting for you to join your first Organization</Typography>
+              <Typography variant='h4'>You can ask your admin for invite mail</Typography>
+              <Typography variant='h6'>-- This is the only way you can join any Organization --</Typography>
             </Stack>
           </Box>
         ) : (<Grid
@@ -73,9 +71,9 @@ const Subscriptions = () => {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {courses.map((item, index) => {
-            return (<Box sx={{ margin: 2 }} key={index} onClick={() => coursesPage(item)}>
-              <Card course={item} />
+          {membershipList.map((item, index) => {
+            return (<Box sx={{ margin: 2 }} key={index} onClick={() => orgCourses(item)}>
+              <Card course={item} btn="subscribe" />
             </Box>)
           })}
         </Grid>)
@@ -92,4 +90,4 @@ const Subscriptions = () => {
   )
 }
 
-export default Subscriptions;
+export default Memberships;
