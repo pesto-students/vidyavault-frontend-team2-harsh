@@ -14,9 +14,9 @@ export function getData(url) {
 }
 
 // Post Data
-export function postData(url, postData, header = null) {
-	let response = axios.post(`${BACKEND_URL}/${url}`, postData, header)
-	return response
+export async function postData(url, postData, header = null) {
+	let response = await axios.post(`${BACKEND_URL}/${url}`, postData, header)
+	return response;
 }
 
 export async function patchData(url, patchData, header = null) {

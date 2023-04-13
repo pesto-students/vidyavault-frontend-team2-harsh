@@ -3,12 +3,15 @@ import { Box, Button, Divider, FormControlLabel, Stack, Switch, TextField, Typog
 import axios from "axios"
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { BACKEND_URL } from "../../Constant"
 import SaveIcon from "@mui/icons-material/Save"
 import { startLoading, stopLoading } from "../../store/systemSlice"
+import ForgotPass from "../ForgotModal/ForgotPass"
+import { KeyboardBackspaceIcon } from "../atoms/icons/icons"
 
 let AdminSignin = () => {
+	const [openModal, setOpenModal] = useState(false)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [formData, setFormData] = useState({
@@ -84,7 +87,19 @@ let AdminSignin = () => {
 
 	return (
 		<>
-			<Box sx={{ width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" } }}>
+			<Box
+				sx={{
+					bgcolor: "primary.main",
+					width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
+					height: "fit-content",
+					margin: "auto auto",
+					borderRadius: 3
+				}}
+			>
+				<ForgotPass openModal={openModal} setOpenModal={setOpenModal} />
+				<Box sx={{ position: "absolute", marginLeft: "1.2rem", marginTop: "0.5rem" }}>
+					<KeyboardBackspaceIcon fontSize='large' onClick={handleBack} />
+				</Box>
 				<Stack
 					direction='column'
 					justifyContent='center'
@@ -136,6 +151,11 @@ let AdminSignin = () => {
 							Sign in
 						</Button>
 					)}
+					<Button variant='text' component={Link} to='/org'>
+						<Typography variant="h5" color='third.dark' sx={{ textTransform: "none" }}>
+							setup your organization and register admin   
+						</Typography>
+					</Button>
 				</Stack>
 			</Box>
 		</>

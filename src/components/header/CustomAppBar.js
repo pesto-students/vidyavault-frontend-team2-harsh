@@ -18,7 +18,7 @@ import MoreIcon from "@mui/icons-material/MoreVert"
 import { LogoutIcon, TuneIcon } from "../atoms/icons/icons"
 import { useDispatch } from "react-redux"
 import { openLogout } from "../../store/systemSlice"
-import Logout from "../logout/Logout"
+import Logout from "../customModel.js/Logout"
 import { Button } from "@mui/material"
 
 const Search = styled("div")(({ theme }) => ({
@@ -169,7 +169,7 @@ export default function CustomAppBar(props) {
 		<Box sx={{ flexGrow: 1, marginBottom: 3, width: "100%" }}>
 			<AppBar position='static' color='third'>
 				<Toolbar>
-					<Box sx={{ marginLeft: 5 }}>
+					{/* <Box sx={{ marginLeft: 5 }}>
 						<Search>
 							<SearchIconWrapper>
 								<SearchIcon />
@@ -180,7 +180,7 @@ export default function CustomAppBar(props) {
 								onChange={(e) => handleSearch(e)}
 							/>
 						</Search>
-					</Box>
+					</Box> */}
 					<Logout />
 
 					<Box sx={{ flexGrow: 1 }} />

@@ -2,6 +2,7 @@ import { Stack, Box, Divider, Button, TextField, FormControlLabel, Switch, Typog
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import logo from "../atoms/assets/darklogo.png"
 import { useDispatch, useSelector } from "react-redux"
 import GoogleIcon from "@mui/icons-material/Google"
 import { setLogin } from "../../store/authSlice"
@@ -60,54 +61,73 @@ const ResetPassword = () => {
 		}
 	}
 	return (
-		<Box sx={{ width: "100%", height: "100%" }}>
-			<Navbar todisplay={"none"} />
-			<Box
-				sx={{
-					bgcolor: "primary.main",
-					width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
-					height: "fit-content",
-					margin: "1rem auto auto",
-					padding: "2rem",
-					borderRadius: 3
-				}}
-			>
-				<Stack
-					direction='column'
-					justifyContent='center'
-					alignItems='center'
-					spacing={4}
-					height='fit-content'
-					margin={3}
+
+		<Box sx={{ width: "100vw", height: "100vh" }}>
+			<Box sx={{
+				width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
+				height: "fit-content",
+				bgcolor: "secondary.main",
+				padding: "0.6rem",
+				margin: "auto auto",
+				borderRadius: 3,
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center"
+			}}>
+				<Box sx={{ width: "110px" }} component={Link} to='/'>
+					<img src={logo} height='80px' width='80px' />
+					<Typography variant='h6' color='third.main' ml={1}>
+						VidyaVault
+					</Typography>
+				</Box>
+				<Box
+					sx={{
+						bgcolor: "primary.main",
+						height: "fit-content",
+						borderRadius: 3,
+						width: "100%",
+						marginTop: "1rem",
+						padding: "1rem"
+					}}
 				>
-					<Typography variant='h3'>Reset Password</Typography>
+					<Stack
+						direction='column'
+						justifyContent='center'
+						alignItems='center'
+						spacing={4}
+						height='fit-content'
+						margin={3}
+					>
+						<Typography variant='h3'>Reset Password</Typography>
 
-					<TextField
-						label='New password'
-						color='third'
-						error={error}
-						fullWidth
-						size='large'
-						name='password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
+						<TextField
+							label='New password'
+							color='third'
+							error={error}
+							fullWidth
+							size='large'
+							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 
-					<TextField
-						label='Confirm password'
-						color='third'
-						error={error}
-						fullWidth
-						size='large'
-						name='Confirmpass'
-						helperText={errorText}
-						value={confpassword}
-						onChange={(e) => setConfPassword(e.target.value)}
-					/>
-					<Button color='secondary' size='large' variant='contained' fullWidth onClick={submit}>
-						Reset
-					</Button>
-				</Stack>
+						<TextField
+							label='Confirm password'
+							color='third'
+							error={error}
+							fullWidth
+							size='large'
+							name='Confirmpass'
+							helperText={errorText}
+							value={confpassword}
+							onChange={(e) => setConfPassword(e.target.value)}
+						/>
+						<Button color='secondary' size='large' variant='contained' fullWidth onClick={submit}>
+							Reset
+						</Button>
+					</Stack>
+				</Box>
 			</Box>
 		</Box>
 	)

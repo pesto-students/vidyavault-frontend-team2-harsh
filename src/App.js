@@ -30,6 +30,9 @@ import AuthAdmin from "./components/Auth/AuthAdmin"
 import MemberSignup from "./container/welcome/MemberSignup"
 import { useDispatch } from "react-redux"
 import Memberships from "./container/user/Memberships";
+import ShowCurriculum from "./components/coursecontent/ShowCurriculum"
+import AdminSignup from "./components/adminForm/AdminSignup"
+import AdminSignin from "./components/adminForm/AdminSignin"
 
 const App = () => {
 	let dispatch = useDispatch()
@@ -83,11 +86,12 @@ const App = () => {
 					<Route path='/signin' element={<Signin />} />
 					<Route path='/resetpassword' element={<ResetPassword />} />
 					<Route path='/membersignup' element={<MemberSignup />} />
-					<Route path='/org' element={<Organization />} />
+					<Route path='/org' element={<AdminSignup />} />
+					<Route path='/adminsignin' element={<AdminSignin />} />
 					<Route path='/about' element={<About />} />
-          
 
-          {/* <Route path='/dash/' element={<AuthUser />}> */}
+
+					<Route path='/dash/' element={<AuthUser />}>
 						<Route path='/dash/' element={<UserDashboard />} />
 						<Route path='/dash/Subscriptions' element={<Subscriptions />} />
 						<Route path='/dash/manage' element={<Manage />} />
@@ -96,7 +100,8 @@ const App = () => {
 						<Route path='/dash/curriculum' element={<Curriculum />} />
 						<Route path='/dash/edit' element={<EditCourse />} />
 						<Route path='/dash/memberships' element={<Memberships />} />
-					{/* </Route> */}
+						<Route path='/dash/showcurriculum' element={<ShowCurriculum />} />
+					</Route>
 
 
 					{/* <Route path='/admindash/' element={<AuthAdmin />}> */}

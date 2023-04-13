@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import GoogleIcon from "@mui/icons-material/Google"
-import { setLogin } from "../../store/authSlice"
+import { addId, addLogin, addToken, addType, setLogin } from "../../store/authSlice"
 import { BACKEND_URL } from "../../Constant"
 import { KeyboardBackspaceIcon } from "../../components/atoms/icons/icons"
 import { openSnack, startLoading, stopLoading } from "../../store/systemSlice"
@@ -18,8 +18,8 @@ import { SaveIcon } from "../../components/atoms/icons/icons"
 import ForgotPass from "../../components/ForgotModal/ForgotPass"
 
 function Signin() {
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [formData, setFormData] = useState({
 		email: "",
 		password: ""
@@ -27,19 +27,10 @@ function Signin() {
 
 	let status = useSelector((state) => state.auth)
 	let sys = useSelector((state) => state.system)
+	dispatch(stopLoading())
 	let loading = sys.isLoading
 
 	const [openModal, setOpenModal] = useState(false)
-	// let submit = () => {
-	// 	dispatch(setLogin(true))
-	// 	if (status.type == "itsUser") {
-	// 		navigate("/dash/")
-	// 	}
-	// 	if (status.type == "itsAdmin") {
-	// 		navigate("/admindash/")
-	// 	}
-	// 	// console.log("submit Button", value);
-	// }
 
 	let handleBack = () => {
 		navigate("/")
@@ -88,6 +79,7 @@ function Signin() {
 		axios
 			.post(`${BACKEND_URL}/user/signin`, body)
 			.then((response) => {
+				dispatch(stopLoading())
 				let id = response.data.data.id
 				let token = response.data.data.token
 				localStorage.setItem("userId", JSON.stringify(id))
@@ -95,7 +87,11 @@ function Signin() {
 				localStorage.setItem("isAdmin", JSON.stringify(false))
 				localStorage.setItem("isLoggedIn", JSON.stringify(true))
 
-				dispatch(stopLoading())
+				dispatch(addLogin(true))
+				dispatch(addType(false))
+				dispatch(addId(id))
+				dispatch(addToken(token))
+
 				navigate("/dash")
 			})
 			.catch((x) => {
@@ -129,10 +125,6 @@ function Signin() {
 				>
 					<Typography variant='h3'>Sign in</Typography>
 					<Typography variant='h6'>Enter your credentials to continue</Typography>
-					<Button variant='contained' color='third' fullWidth startIcon={<GoogleIcon />}>
-						Sign up with google
-					</Button>
-					<Divider variant='middle'>OR</Divider>
 
 					<TextField
 						color='third'
@@ -160,7 +152,11 @@ function Signin() {
 						onChange={(e) => guestFn(e)}
 					/>
 
-					{loading ? (
+					{!loading ? (
+						<Button size='large' fullWidth variant='contained' color='secondary' onClick={handleSubmit}>
+							Sign in
+						</Button>
+					) : (
 						<LoadingButton
 							loading
 							loadingPosition='start'
@@ -170,19 +166,15 @@ function Signin() {
 						>
 							Signing in
 						</LoadingButton>
-					) : (
-						<Button type='submit' size='large' fullWidth variant='contained' color='secondary' onClick={handleSubmit}>
-							Sign in
-						</Button>
 					)}
 					<CustomSnackbar />
 					<Button variant='text' onClick={() => setOpenModal(!openModal)}>
-						<Typography color='secondary' sx={{ textTransform: "none" }}>
+						<Typography variant="h6" color='third.dark' sx={{ textTransform: "none" }}>
 							Forgot Password ?
 						</Typography>
 					</Button>
 					<Button variant='text' component={Link} to='/signup'>
-						<Typography color='secondary' sx={{ textTransform: "none" }}>
+						<Typography variant="h5" color='third.dark' sx={{ textTransform: "none" }}>
 							Go to registration/Sign up page
 						</Typography>
 					</Button>

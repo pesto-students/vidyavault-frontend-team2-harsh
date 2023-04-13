@@ -42,7 +42,7 @@ const LandingPage = () => {
 					</Typography>
 				</Box>
 				<HomeFeatures />
-				<FeaturedC />
+				{/* <FeaturedC /> */}
 				<JoinBanner />
 				{/* <CreatoresCategory /> */}
 				<Footer />

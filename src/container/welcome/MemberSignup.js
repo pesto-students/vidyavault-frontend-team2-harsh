@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
+import logo from "../../components/atoms/assets/darklogo.png"
 import { Box } from "@mui/system"
 import GoogleIcon from "@mui/icons-material/Google"
 import { Divider, Typography } from "@mui/material"
@@ -52,52 +53,70 @@ const UserInvite = () => {
 	}
 	return (
 		<>
-			{" "}
-			<Box sx={{ width: "100%", height: "100%" }}>
-				<Navbar todisplay={displayNavbar} />
-				<Box
-					sx={{
-						bgcolor: "primary.main",
-						width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
-						height: "fit-content",
-						margin: "auto auto",
-						borderRadius: 3
-					}}
-				>
-					<Stack
-						direction='column'
-						justifyContent='center'
-						alignItems='center'
-						spacing={4}
-						height='fit-content'
-						margin={3}
+			<Box sx={{ width: "100vw", height: "100vh" }}>
+				<Box sx={{ 
+					width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" }, 
+					height: "fit-content", 
+					bgcolor: "secondary.main", 
+					padding: "0.6rem", 
+					margin: "auto auto",
+					borderRadius: 3,
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center"
+					}}>
+					<Box sx={{ width: "110px" }} component={Link} to='/'>
+						<img src={logo} height='80px' width='80px' />
+						<Typography variant='h6' color='third.main' ml={1}>
+							VidyaVault
+						</Typography>
+					</Box>
+					<Box
+						sx={{
+							bgcolor: "primary.main",
+							height: "fit-content",
+							borderRadius: 3,
+							width: "100%",
+							marginTop: "1rem",
+							padding: "1rem"
+						}}
 					>
-						<Typography variant='h3'>Sign up</Typography>
-						<Typography variant='h6'>Enter your Credentials</Typography>
+						<Stack
+							direction='column'
+							justifyContent='center'
+							alignItems='center'
+							spacing={4}
+							height='fit-content'
+							margin={3}
+						>
+							<Typography variant='h3'>Sign up</Typography>
+							<Typography variant='h6'>Enter your Credentials</Typography>
 
-						<TextField
-							label='Name'
-							color='third'
-							fullWidth
-							size='large'
-							name='name'
-							value={formData.name}
-							onChange={(e) => handleChange(e)}
-						/>
+							<TextField
+								label='Name'
+								color='third'
+								fullWidth
+								size='large'
+								name='name'
+								value={formData.name}
+								onChange={(e) => handleChange(e)}
+							/>
 
-						<TextField
-							color='third'
-							label='Password'
-							fullWidth
-							name='password'
-							type='password'
-							value={formData.password}
-							onChange={(e) => handleChange(e)}
-						/>
-						<Button color='secondary' size='large' variant='contained' fullWidth onClick={submit}>
-							Sign up
-						</Button>
-					</Stack>
+							<TextField
+								color='third'
+								label='Password'
+								fullWidth
+								name='password'
+								type='password'
+								value={formData.password}
+								onChange={(e) => handleChange(e)}
+							/>
+							<Button color='secondary' size='large' variant='contained' fullWidth onClick={submit}>
+								Sign up
+							</Button>
+						</Stack>
+					</Box>
 				</Box>
 			</Box>
 		</>

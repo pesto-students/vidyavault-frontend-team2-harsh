@@ -9,73 +9,6 @@ import { useSelector } from "react-redux"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
 
-let data = [
-	{
-		id: 1,
-		text: "Devpulse"
-	},
-	{
-		id: 2,
-		text: "Linklinks"
-	},
-	{
-		id: 3,
-		text: "Centizu"
-	},
-	{
-		id: 4,
-		text: "Dynabox"
-	},
-	{
-		id: 5,
-		text: "Avaveo"
-	},
-	{
-		id: 6,
-		text: "Demivee"
-	},
-	{
-		id: 7,
-		text: "Jayo"
-	},
-	{
-		id: 8,
-		text: "Blognation"
-	},
-	{
-		id: 9,
-		text: "Podcat"
-	},
-	{
-		id: 10,
-		text: "Layo"
-	}
-]
-
-function List(props) {
-	// searching functionality
-
-	//create a new array by filtering the original array
-	const filteredData = data.filter((el) => {
-		//if no input the return the original
-		if (props.input === "") {
-			return el
-		}
-		//return the item which contains the user input
-		else {
-			return el.text.toLowerCase().includes(props.input)
-		}
-	})
-	return (
-		<ul>
-			{filteredData.map((item) => (
-				<li key={item.id} style={{ color: "white" }}>
-					{item.text}
-				</li>
-			))}
-		</ul>
-	)
-}
 
 const Navbar = ({ todisplay }) => {
 	let getState = useSelector((state) => state.auth)
@@ -185,7 +118,13 @@ const Navbar = ({ todisplay }) => {
 
 							<Button color='primary' size='large' variant='text' component={Link} to='/org'>
 								<Typography variant='h6' color='primary.main'>
-									Organization
+									Organization setup
+								</Typography>
+							</Button>
+
+							<Button color='primary' size='large' variant='text' component={Link} to='/adminsignin'>
+								<Typography variant='h6' color='primary.main'>
+									Admin signin
 								</Typography>
 							</Button>
 
