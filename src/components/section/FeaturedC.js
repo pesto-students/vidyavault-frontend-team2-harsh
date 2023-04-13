@@ -10,27 +10,29 @@ import Footer from "../../components/footer/Footer"
 import { Link } from "react-router-dom"
 import Navbar from "../../components/navbar/Navbar"
 import { styled } from "@mui/material/styles"
+import courses from '../../Mock_Data/course.json'
+
 
 const CourseImage = styled("img")({
-	width: "25rem",
-	height: "16rem"
+    width: "25rem",
+    height: "16rem"
 })
 
 const CourseTitle = styled(Typography)({
-	fontWeight: "bold"
+    fontWeight: "bold"
 })
 
 const CourseDescription = styled(Typography)({
-	marginBottom: "16px"
+    marginBottom: "16px"
 })
 
 const LearnMoreButton = styled(Button)({
-	borderColor: "#80d3c9",
-	color: "#80d3c9",
-	"&:hover": {
-		backgroundColor: "#99dcd8",
-		color: "#fff"
-	}
+    borderColor: "#80d3c9",
+    color: "#80d3c9",
+    "&:hover": {
+        backgroundColor: "#99dcd8",
+        color: "#fff"
+    }
 })
 
 const FeaturedC = () => {
@@ -71,8 +73,8 @@ const FeaturedC = () => {
                     </Grid>
                 </Grid>
             </Grid>
-    </>
-  )
+        </>
+    )
 }
 
 export default FeaturedC;

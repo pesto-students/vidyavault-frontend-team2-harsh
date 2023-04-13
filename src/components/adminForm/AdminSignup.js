@@ -1,8 +1,15 @@
 import { Box, Button, Divider, FormControlLabel, Stack, TextField, Typography } from "@mui/material"
 import axios from "axios"
 import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom";
+import { KeyboardBackspaceIcon } from "../atoms/icons/icons";
+import CustomSnackbar from "../snackbar/Snackbar";
+import { openSnack, startLoading, stopLoading } from "../../store/systemSlice";
+import { useDispatch } from "react-redux";
 
 let AdminSignup = () => {
+	const navigate = useNavigate();
+    const dispatch = useDispatch();
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -13,8 +20,12 @@ let AdminSignup = () => {
 	})
 
 	let submit = async () => {
-
-        // dispatch(addType("itsUser"));
+		dispatch(startLoading());
+        if (formData.name == "" || formData.email == "" || formData.orgName == "" || formData.goal == "" || formData.slogan == "" || formData.password == "") {
+            dispatch(openSnack({ msg: "Missing credentials", type: "error" }))
+            dispatch(stopLoading());
+            return;
+        }
 
         const body = {
             name: formData.name,
@@ -27,7 +38,15 @@ let AdminSignup = () => {
         axios.post(
             'https://vidyavault.onrender.com/api/admin/signup',
             body
-        ).then((x) => console.log(x)).catch((x) => console.log(x));
+        ).then((x) => {
+			navigate("/adminsignin");
+			dispatch(stopLoading());
+		})
+		.catch((x) => {
+			dispatch(openSnack({ msg: x.data.message, type: "error" }))
+            dispatch(stopLoading());
+		});
+		dispatch(stopLoading());
     }
 
 	let handleFormDataChange = (e) => {
@@ -39,9 +58,25 @@ let AdminSignup = () => {
 		})
 	}
 
+	let handleBack = () => {
+		navigate("/")
+	}
+
 	return (
 		<>
-			<Box sx={{ width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" } }}>
+			<Box
+				sx={{
+					bgcolor: "primary.main",
+					width: { sm: "55%", md: "50%", lg: "40%", xs: "85%" },
+					height: "fit-content",
+					margin: "auto auto",
+					borderRadius: 3
+				}}
+			>
+			<CustomSnackbar />
+				<Box sx={{ position: "absolute", marginLeft: "1.2rem", marginTop: "0.5rem" }}>
+					<KeyboardBackspaceIcon fontSize='large' onClick={handleBack} />
+				</Box>
 				<Stack direction='column' justifyContent='center' alignItems='center' spacing={4} height='fit-content' margin={3}>
 					<Typography variant='h5'>To create your Organization sign up here</Typography>
 					<Typography variant='h3'>Admin Sign up</Typography>
@@ -104,6 +139,11 @@ let AdminSignup = () => {
 					/>
 					<Button variant='contained' fullWidth color='secondary' onClick={submit}>
 						Sign up
+					</Button>
+					<Button variant='text' component={Link} to='/adminsignin'>
+						<Typography variant="h5" color='third.dark' sx={{ textTransform: "none" }}>
+							Already have Organization/ Go to admin signin
+						</Typography>
 					</Button>
 				</Stack>
 			</Box>

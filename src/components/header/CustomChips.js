@@ -9,15 +9,7 @@ export default function CustomChips() {
 
   return (
     <Stack direction="row" spacing={1} m={2}>
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
-      <Chip label="Clickable" variant="outlined" onClick={handleClick} />
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
-      <Chip label="Clickable" variant="outlined" onClick={handleClick} />
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
-      <Chip label="Clickable" variant="outlined" onClick={handleClick} />
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
-      <Chip label="Clickable" onClick={handleClick} color="secondary"/>
+      <Chip label="Recently searched" onClick={handleClick} color="secondary"/>
     </Stack>
   );
 }

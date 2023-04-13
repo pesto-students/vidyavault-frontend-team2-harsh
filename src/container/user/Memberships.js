@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import BackWrapper from '../../components/backWrapper/BackWrapper';
 import menuList from './menuList';
 import Card from '../../components/card/Card';
-import { Box, Button, CircularProgress, Grid, Stack, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 import { Createbanner } from '../../components/advertise/Ad';
 import { useDispatch, useSelector } from 'react-redux';
 import { add, addFiles, clearArr } from '../../store/courseSlice';
-// import courseFiles from '../../Mock_Data/courseFiles.json';
+import courseFiles from '../../Mock_Data/courseFiles.json';
 import CustomAppBar from '../../components/header/CustomAppBar';
 import CustomChips from '../../components/header/CustomChips';
 import Snackbar from '../../components/snackbar/Snackbar';
@@ -17,36 +17,32 @@ import { getUser } from './redux/userData';
 import { startLoading, stopLoading } from '../../store/systemSlice';
 
 
-const Manage = () => {
-  const [courses, setCourses] = useState([]);
-  let auth = useSelector((state) => state.auth);
-  let sys = useSelector((state) => state.system);
+const Memberships = () => {
+
+  const [membershipList, setMembershipList] = useState([]);
+  let auth = useSelector((state) => state.auth)
+  let sys = useSelector((state) => state.system)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   let loading = sys.isLoading;
 
-  const coursesPage = async (item) => {
-    dispatch(add(item));
-    let header = {
-      headers: { authorization: `Bearer ${auth.token}` }
-    }
-    axios.post(`${BACKEND_URL}/course`, {"courseId": item._id}, header)
-    .then((x) => {
-      dispatch(addFiles(x.data.data.modules));
-    })
-    navigate('/dash/edit');
-  }
-
-  let handleFn = () => {
-    navigate('/dash/cc');
+  const orgCourses = (item) => {
+    // dispatch(clearArr());
+    // dispatch(add(item));
+    // let files = courseFiles.filter((list) => {
+    //   return list.CourseId == item._id;
+    // });
+    // let current = files[0].CourseData;
+    // dispatch(addFiles(current));
+    // navigate('/dash/edit');
   }
 
   useEffect(() => {
     dispatch(startLoading());
     let res = getUser(`${BACKEND_URL}/user`, auth.token);
     res.then((x) => {
-      setCourses(x.data.data.ownCourses);
+      setMembershipList(x.data.data.memberships);
       dispatch(stopLoading());
     })
   }, [])
@@ -61,12 +57,12 @@ const Manage = () => {
           <Stack width="100%" height="100%" alignItems="center" justifyContent="center">
             <CircularProgress color="third" size="5rem" />
           </Stack>
-        ) : (courses.length == 0) ? (
+        ) : (membershipList.length == 0) ? (
           <Box>
             <Stack alignItems="center" justifyContent="center" height="50vh" spacing={1.4}>
-              <Typography variant='h2'>Waiting for your first course</Typography>
-              <Typography variant='h5'>Click on below button to upload your course</Typography>
-              <Button variant='contained' color='secondary' onClick={handleFn}>Go to create course</Button>
+              <Typography variant='h2'>Waiting for you to join your first Organization</Typography>
+              <Typography variant='h4'>You can ask your admin for invite mail</Typography>
+              <Typography variant='h6'>-- This is the only way you can join any Organization --</Typography>
             </Stack>
           </Box>
         ) : (<Grid
@@ -75,24 +71,24 @@ const Manage = () => {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {courses.map((item, index) => {
-            return (<Box sx={{ margin: 2 }} key={index} onClick={() => coursesPage(item)}>
-              <Card course={item} btn="delete" />
+          {membershipList.map((item, index) => {
+            return (<Box sx={{ margin: 2 }} key={index} onClick={() => orgCourses(item)}>
+              <Card course={item} btn="subscribe" />
             </Box>)
           })}
         </Grid>)
         }
-        
+
       </Box>
       <Box sx={{
-          position: "relative",
-          bottom: "0px",
-          width: "100%"
-        }}>
-          <Createbanner />
-        </Box>
+        position: "relative",
+        bottom: "0px",
+        width: "100%"
+      }}>
+        <Createbanner />
+      </Box>
     </BackWrapper>
   )
 }
 
-export default Manage;
+export default Memberships;

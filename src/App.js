@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-import { addLogin, addType, addId, addToken } from './store/authSlice';
+import { addLogin, addType, addId, addToken } from "./store/authSlice"
 
 import About from "./container/welcome/About"
 import LandingPage from "./container/welcome/LandingPage"
@@ -27,25 +27,30 @@ import Analytics from "./container/admin/Analytics"
 import ResetPassword from "./components/ResetPassword/ResetPassword"
 import AuthUser from "./components/Auth/AuthUser"
 import AuthAdmin from "./components/Auth/AuthAdmin"
+import MemberSignup from "./container/welcome/MemberSignup"
 import { useDispatch } from "react-redux"
+import Memberships from "./container/user/Memberships";
+import ShowCurriculum from "./components/coursecontent/ShowCurriculum"
+import AdminSignup from "./components/adminForm/AdminSignup"
+import AdminSignin from "./components/adminForm/AdminSignin"
 
 const App = () => {
-	let dispatch = useDispatch();
+	let dispatch = useDispatch()
 
-	const item1 = localStorage.getItem("isAdmin");
-	const item2 = localStorage.getItem("isLoggedIn");
-	const item3 = localStorage.getItem("userId");
-	const item4 = localStorage.getItem("token");
+	const item1 = localStorage.getItem("isAdmin")
+	const item2 = localStorage.getItem("isLoggedIn")
+	const item3 = localStorage.getItem("userId")
+	const item4 = localStorage.getItem("token")
 
-	let checkAdmin = JSON.parse(item1);
-	let checkLogin = JSON.parse(item2);
+	let checkAdmin = JSON.parse(item1)
+	let checkLogin = JSON.parse(item2)
 	let id = JSON.parse(item3)
 	let token = JSON.parse(item4)
 
-	dispatch(addLogin(checkLogin));
-	dispatch(addType(checkAdmin));
-	dispatch(addId(id));
-	dispatch(addToken(token));
+	dispatch(addLogin(checkLogin))
+	dispatch(addType(checkAdmin))
+	dispatch(addId(id))
+	dispatch(addToken(token))
 
 	// const [isAdmin, setIsAdmin] = useState();
 	// const [isLoggedIn, setIsLoggedIn] = useState();
@@ -79,29 +84,38 @@ const App = () => {
 					<Route path='/' element={<LandingPage />} />
 					<Route path='/signup' element={<Signup />} />
 					<Route path='/signin' element={<Signin />} />
-					<Route path='/org' element={<Organization />} />
+					<Route path='/resetpassword' element={<ResetPassword />} />
+					<Route path='/membersignup' element={<MemberSignup />} />
+					<Route path='/org' element={<AdminSignup />} />
+					<Route path='/adminsignin' element={<AdminSignin />} />
 					<Route path='/about' element={<About />} />
 
-					<Route path='/dash/' element={<AuthUser><UserDashboard /></AuthUser>} />
-					<Route path='/dash/Subscriptions' element={<AuthUser><Subscriptions /></AuthUser>} />
-					<Route path='/dash/manage' element={<AuthUser><Manage /></AuthUser>} />
-					<Route path='/dash/cc' element={<AuthUser><CreateCourse /></AuthUser>} />
-					<Route path='/dash/guidelines' element={<AuthUser><Guidelines /></AuthUser>} />
-					<Route path='/dash/curriculum' element={<AuthUser><Curriculum /></AuthUser>} />
-					<Route path='/dash/edit' element={<AuthUser><EditCourse /></AuthUser>} />
+
+					<Route path='/dash/' element={<AuthUser />}>
+						<Route path='/dash/' element={<UserDashboard />} />
+						<Route path='/dash/Subscriptions' element={<Subscriptions />} />
+						<Route path='/dash/manage' element={<Manage />} />
+						<Route path='/dash/cc' element={<CreateCourse />} />
+						<Route path='/dash/guidelines' element={<Guidelines />} />
+						<Route path='/dash/curriculum' element={<Curriculum />} />
+						<Route path='/dash/edit' element={<EditCourse />} />
+						<Route path='/dash/memberships' element={<Memberships />} />
+						<Route path='/dash/showcurriculum' element={<ShowCurriculum />} />
+					</Route>
 
 
+					<Route path='/admindash/' element={<AuthAdmin />}>
+						<Route path='/admindash/' element={<AdminDash />} />
+						<Route path='/admindash/cc' element={<AdminCreateCourse />} />
+						<Route path='/admindash/manage' element={<AdminManage />} />
+						<Route path='/admindash/members' element={<Members />} />
+						<Route path='/admindash/members/id' element={<UserProfile />} />
+						<Route path='/admindash/profile' element={<AdminProfile />} />
+						<Route path='/admindash/setup' element={<AdminSetup />} />
+						<Route path='/admindash/analytics' element={<Analytics />} />
+						<Route path='/admindash/reset' element={<ResetPassword />} />
+					</Route>
 
-					<Route path='/admindash' element={<AuthAdmin><AdminDash /></AuthAdmin>} />
-					{/* <Route path="/admindash/" element={<Signup />} /> */}
-					<Route path='/admindash/cc' element={<AuthAdmin><AdminCreateCourse /></AuthAdmin>} />
-					<Route path='/admindash/manage' element={<AuthAdmin><AdminManage /></AuthAdmin>} />
-					<Route path='/admindash/members' element={<AuthAdmin><Members /></AuthAdmin>} />
-					<Route path='/admindash/members/id' element={<AuthAdmin><UserProfile /></AuthAdmin>} />
-					<Route path='/admindash/profile' element={<AuthAdmin><AdminProfile /></AuthAdmin>} />
-					<Route path='/admindash/setup' element={<AuthAdmin><AdminSetup /></AuthAdmin>} />
-					<Route path='/admindash/analytics' element={<AuthAdmin><Analytics /></AuthAdmin>} />
-					<Route path='/admindash/reset' element={<ResetPassword />} />
 				</Routes>
 			</BrowserRouter>
 		</>

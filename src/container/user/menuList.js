@@ -1,4 +1,10 @@
 import { HomeIcon, CreateIcon, LogoutIcon, InfoIcon, HelpCenterIcon  } from '../../components/atoms/icons/icons';
+import {
+    Person,
+	InsertEmoticon,
+	LibraryBooks,
+	ManageAccounts,
+} from "@mui/icons-material"
 
 const menuList = [
     {
@@ -9,7 +15,7 @@ const menuList = [
     {
         name: "Subscriptions",
         path: "/dash/subscriptions",
-        icon: <CreateIcon />,
+        icon: <InsertEmoticon />,
     },
     {
         name: "Create course",
@@ -19,12 +25,17 @@ const menuList = [
     {
         name: "Manage",
         path: "/dash/manage",
-        icon: <CreateIcon />,
+        icon: <ManageAccounts />,
+    },
+    {
+        name: "Memberships",
+        path: "/dash/memberships",
+        icon: <LibraryBooks />,
     },
     {
         name: "Guidelines",
         path: "/dash/guidelines",
-        icon: <CreateIcon />,
+        icon: <InfoIcon />,
     },
 ]
 

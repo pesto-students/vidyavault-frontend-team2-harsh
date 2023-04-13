@@ -12,11 +12,12 @@ import { useDispatch } from 'react-redux';
 import { BACKEND_URL } from '../../Constant';
 import Navbar from '../../components/navbar/Navbar';
 import { KeyboardBackspaceIcon } from '../../components/atoms/icons/icons';
+import { openSnack, startLoading, stopLoading } from '../../store/systemSlice';
+import CustomSnackbar from '../../components/snackbar/Snackbar';
 
 function Signup() {
-    let navigate = useNavigate();
-    // const dispatch = useDispatch();
-    // https://vidyavault.onrender.com/
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = React.useState({
         name: '',
@@ -38,8 +39,12 @@ function Signup() {
     }
 
     let submit = async () => {
-
-        // dispatch(addType("itsUser"));
+        dispatch(startLoading());
+        if (formData.name == "" || formData.email == "" || formData.password == "") {
+            dispatch(openSnack({ msg: "Missing credentials", type: "error" }))
+            dispatch(stopLoading());
+            return;
+        }
 
         const body = {
             name: formData.name,
@@ -49,7 +54,14 @@ function Signup() {
         axios.post(
             'https://vidyavault.onrender.com/api/user/signup',
             body
-        ).then((x) => console.log(x)).catch((x) => console.log(x));
+        ).then((x) => {
+            navigate("/signin")
+            dispatch(stopLoading());
+        }).catch((x) => {
+            let res = x.response.data.message;
+            dispatch(openSnack({ msg: res, type: "error" }))
+            dispatch(stopLoading());
+        });
     }
 
     return (
@@ -59,6 +71,7 @@ function Signup() {
                     <Box sx={{ position: "absolute", marginLeft: "1.2rem", marginTop: "0.5rem" }}>
                         <KeyboardBackspaceIcon fontSize="large" onClick={handleBack} />
                     </Box>
+                    <CustomSnackbar />
                     <Stack
                         direction="column"
                         justifyContent="center"
@@ -69,8 +82,7 @@ function Signup() {
                     >
                         <Typography variant='h3'>Sign up</Typography>
                         <Typography variant='h6'>Enter your credentials to continue</Typography>
-                        <Button variant='contained' color='third' fullWidth startIcon={<GoogleIcon />}>Sign up with google</Button>
-                        <Divider variant='middle'>OR</Divider>
+
                         <TextField
                             label="Name"
                             color='third'
@@ -107,7 +119,7 @@ function Signup() {
 
                         <Divider variant='middle' />
                         <Link to="/signin" style={{ textDecoration: 'none' }}>
-                            <Button variant='text' sx={{ textTransform: "none" }}><Typography color="secondary">Already have an account?</Typography></Button>
+                            <Button variant='text' sx={{ textTransform: "none" }}><Typography variant="h5" color='third.dark'>Already have an account?</Typography></Button>
                         </Link>
                     </Stack>
                 </Box>
