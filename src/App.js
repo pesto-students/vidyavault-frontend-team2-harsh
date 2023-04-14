@@ -33,6 +33,7 @@ import Memberships from "./container/user/Memberships";
 import ShowCurriculum from "./components/coursecontent/ShowCurriculum"
 import AdminSignup from "./components/adminForm/AdminSignup"
 import AdminSignin from "./components/adminForm/AdminSignin"
+import SetProfile from "./container/user/SetProfile"
 
 const App = () => {
 	let dispatch = useDispatch()
@@ -100,6 +101,7 @@ const App = () => {
 						<Route path='/dash/curriculum' element={<Curriculum />} />
 						<Route path='/dash/edit' element={<EditCourse />} />
 						<Route path='/dash/memberships' element={<Memberships />} />
+						<Route path='/dash/profile' element={<SetProfile />} />
 						<Route path='/dash/showcurriculum' element={<ShowCurriculum />} />
 					</Route>
 

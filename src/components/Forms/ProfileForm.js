@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import axios from "axios"
 import CheckIcon from "@mui/icons-material/Check"
 import { TextField, Box, Button, Stack, Card, CardHeader, CircularProgress, CardContent, Avatar } from "@mui/material"
@@ -7,10 +7,15 @@ import CreateCourse from "../../container/user/CreateCourse"
 import { patchData } from "../DataFetch/DataFetch"
 import { useDispatch, useSelector } from "react-redux"
 import { openSnack, closeSnack, startLoading, stopLoading } from "../../store/systemSlice"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import CustomSnackbar from "../snackbar/Snackbar"
+import { getUser } from "../../container/user/redux/userData"
+import { BACKEND_URL } from "../../Constant"
 
 const FormComponent = () => {
-	let dispatch = useDispatch()
+	let [UserData, setUserData] = React.useState();
+	let dispatch = useDispatch();
+	let navigate = useNavigate();
 	let sys = useSelector((state) => state.system)
 	// let loading = sys.isLoading
 	let auth = useSelector((state) => state.auth)
@@ -26,6 +31,15 @@ const FormComponent = () => {
 	const [confPass, setConfPass] = React.useState("")
 
 	React.useEffect(() => {
+
+		dispatch(startLoading());
+		let res = getUser(`${BACKEND_URL}/user`, auth.token);
+		res.then((x) => {
+			console.log(x.data.data);
+			setUserData(x.data.data);
+		})
+		dispatch(stopLoading());
+
 		if (avatarFile) {
 			setLoading(true)
 			const Data = new FormData()
@@ -36,7 +50,6 @@ const FormComponent = () => {
 				.post("https://api.cloudinary.com/v1_1/dd2bmcpqv/upload", Data)
 				.then((response) => {
 					setFormData({ ...formData, avatar: response.data.secure_url })
-					console.log(formData.avatar)
 					setSuccess(true)
 					setLoading(false)
 					setTimeout(() => {
@@ -49,6 +62,7 @@ const FormComponent = () => {
 				})
 		}
 	}, [avatarFile])
+
 	const handleChange = (event) => {
 		const name = event.target.name
 		const value = event.target.value
@@ -59,15 +73,21 @@ const FormComponent = () => {
 	}
 
 	const handleSubmit = async (event) => {
+		if(formData.name == "" && formData.password == "" && formData.avatar == "") {
+			dispatch(openSnack({ msg: "Fill at least one input, Missing cridentials", type: "error" }))
+			return;
+		}
 		event.preventDefault()
 		let header = { headers: { authorization: `Bearer ${auth.token}` } }
 		const result = patchData(`/user`, formData, header)
-		// if (result.data) {
-		// 	dispatch(openSnack({ msg: "congratulations! Updated Succesfully", type: "success" }))
-		// } else {
-		// 	dispatch(openSnack({ msg: "Failed to update", type: "error" }))
-		// }
 		console.log(result)
+		result.then((x) => {
+			dispatch(openSnack({ msg: "congratulations! Updated Succesfully", type: "success" }))
+			navigate("/dash/profile");
+		})
+		result.catch((x) => {
+			dispatch(openSnack({ msg: "Failed to update", type: "error" }))
+		})
 	}
 
 	const handleAvatarChange = (event) => {
@@ -82,7 +102,7 @@ const FormComponent = () => {
 			alignItems='center'
 			bgcolor='#F2F2F2'
 		>
-			{/* <Snackbar anchorOrigin={{ vertical: "top", horizontal: "right" }} open='false' autoHideDuration={6000} /> */}
+			<CustomSnackbar />
 			<Card
 				sx={{
 					display: "flex",
@@ -107,7 +127,7 @@ const FormComponent = () => {
 				<Box sx={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center", flexGrow: 1 }}>
 					<Avatar
 						alt='avatar'
-						src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
+						src={UserData && UserData.avatar}
 						sx={{ width: 96, height: 96 }}
 					/>
 					<Button
@@ -136,7 +156,7 @@ const FormComponent = () => {
 						)
 					)}
 				</Box>
-				<TextField color='third' fullWidth name='name' label='Name' value={formData.name} onChange={handleChange} />
+				<TextField color='third' fullWidth name='name' label={UserData && UserData.name} value={formData.name} onChange={handleChange} />
 
 				<TextField
 					color='third'
@@ -160,7 +180,7 @@ const FormComponent = () => {
 				<Button
 					sx={{ width: { xs: 150, sm: 200, md: 300 }, borderRadius: 1, mt: 3 }}
 					variant='contained'
-					disabled={formData.password !== confPass || formData.password === ""}
+					disabled={formData.password !== confPass  && formData.name == ""}
 					color='secondary'
 					onClick={handleSubmit}
 				>

@@ -33,6 +33,11 @@ const menuList = [
         icon: <LibraryBooks />,
     },
     {
+        name: "Profile",
+        path: "/dash/profile",
+        icon: <Person />,
+    },
+    {
         name: "Guidelines",
         path: "/dash/guidelines",
         icon: <InfoIcon />,
