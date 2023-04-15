@@ -73,7 +73,7 @@ const Memberships = () => {
         >
           {membershipList.map((item, index) => {
             return (<Box sx={{ margin: 2 }} key={index} onClick={() => orgCourses(item)}>
-              <Card course={item} btn="subscribe" />
+              <Card course={item} />
             </Box>)
           })}
         </Grid>)

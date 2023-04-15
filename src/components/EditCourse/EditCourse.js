@@ -81,11 +81,29 @@ const EditCourse = () => {
             }
             axios.post(`${BACKEND_URL}/filedelete`, { "moduleId": item._id, "fileId": videoFile._id }, header)
                 .then((x) => {
-                    // dispatch(openSnack())
-                    console.log("deletefn:", x);
+                    dispatch(openSnack({ msg: "video deleted", type: "success" }));
                 })
             navigate('/dash/manage');
-        }else {
+        } else {
+            return;
+        }
+    }
+
+    let deleteModuleFn = (e, cou, mod) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let result = window.confirm("Want to delete this Module?");
+        if (result) {
+            e.preventDefault();
+            let header = {
+                headers: { authorization: `Bearer ${auth.token}` }
+            }
+            axios.post(`${BACKEND_URL}/moduledelete`, { "moduleId": mod._id, "courseId": cou._id }, header)
+                .then((x) => {
+                    dispatch(openSnack({ msg: "Module deleted", type: "success" }));
+                })
+            navigate('/dash/manage');
+        } else {
             return;
         }
     }
@@ -109,8 +127,9 @@ const EditCourse = () => {
                                 return (
                                     <Box key={index} sx={{ width: "100%", height: "100%" }}>
                                         <Box bgcolor='third.main' sx={{ margin: 0.8, padding: 1, borderRadius: 1 }} onClick={() => toggleFn(index)}>
-                                            <Stack direction="row" flexWrap="wrap">
+                                            <Stack direction="row" flexWrap="wrap" alignItems="center" justifyContent="center">
                                                 <Typography variant='h5' margin={1} >{item.moduleName}</Typography>
+                                                <DeleteIcon onClick={(e) => deleteModuleFn(e, data, item)} />
                                                 <Button variant='outlined' color="secondary" sx={{ marginLeft: "auto" }} onClick={(e) => addFiles(e, item)}>
                                                     <Typography variant='h6'>Add video in this module</Typography>
                                                 </Button>

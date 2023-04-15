@@ -8,8 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
 import Slide from "@mui/material/Slide"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
+import { BACKEND_URL } from '../../Constant';
 import axios from "axios"
-import { getData, postData } from "../../components/DataFetch/DataFetch"
 import {
 	Avatar,
 	Button,
@@ -27,15 +27,24 @@ import {
 	TextField
 } from "@mui/material"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import MockMembers from "../../Mock_Data/Mockmembers.json"
 import CustomAdminAppBar from "../../components/header/CustomAdminAppBar"
+import { getUser } from "../user/redux/userData"
+import { openSnack, startLoading, stopLoading } from "../../store/systemSlice"
+import { useDispatch, useSelector } from "react-redux"
+import CustomSnackbar from "../../components/snackbar/Snackbar"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction='up' ref={ref} {...props} />
 })
 
 const Members = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	let auth = useSelector((state) => state.auth)
+	let sys = useSelector((state) => state.system)
+	let [orgMembers, setOrgMembers] = useState();
 	const [memberDetails, setMemberDetails] = useState({
 		name: "",
 		Avatar: ""
@@ -46,30 +55,26 @@ const Members = () => {
 	const [errorText, setErrorText] = useState("")
 	const [openModal, setOpenModal] = useState(false)
 
-	const postData = async () => {
-		axios
-			.post("https://vidyavault.onrender.com/api/admin/memberinviteemail", { email })
-			.then((response) => {
-				if (response.data === "send email success") {
-					setEmail("")
-					setError(false)
-					setErrorText("")
-					setOpenModal(false)
-				}
-			})
-			.catch((error) => {
-				setError(true)
-				setErrorText(error)
-			})
-		// console.log(response)
+	let handleClose = () => {
+		setOpenModal(false);
 	}
 
-	const handleClose = (e) => {
-		if (email.length === 0 && e.target.innerText == "SEND") {
+	const sendEmail = (e) => {
+		if (email.length == 0 && e.target.innerText == "SEND") {
 			setError(true)
 			setErrorText("Field can't be empty")
 		} else {
-			postData()
+			let header = {
+				headers: { authorization: `Bearer ${auth.token}` }
+			}
+			axios.post(`${BACKEND_URL}/admin/memberinviteemail`, { "email": email }, header)
+				.then((res) => {
+					dispatch(openSnack({ msg: res.data, type: "success" }))
+					console.log(res);
+				})
+				.catch((error) => {
+					dispatch(openSnack({ msg: "failure! Try again", type: "succes" }))
+				})
 		}
 	}
 
@@ -77,10 +82,28 @@ const Members = () => {
 		// axios.("/api", {})
 	}
 
-	// axios.get("/api", {})
+	useEffect(() => {
+		let org;
+		dispatch(startLoading());
+		let res = getUser(`${BACKEND_URL}/user`, auth.token);
+		res.then((x) => {
+			org = x.data.data.org;
+			let header = {
+				headers: { authorization: `Bearer ${auth.token}` }
+			}
+			axios.post(`${BACKEND_URL}/admin/org`, { "orgId": org }, header)
+				.then((res) => {
+					setOrgMembers(res.data.data.members)
+				})
+			dispatch(stopLoading());
+		})
+
+		dispatch(stopLoading());
+	}, [])
 
 	return (
 		<BackWrapper menuList={menuList}>
+			<CustomSnackbar />
 			<Dialog
 				open={openModal}
 				TransitionComponent={Transition}
@@ -103,7 +126,7 @@ const Members = () => {
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 
-					<Button onClick={(e) => handleClose(e)} variant='contained' color='secondary'>
+					<Button onClick={(e) => sendEmail(e)} variant='contained' color='secondary'>
 						Send
 					</Button>
 				</DialogActions>
@@ -133,8 +156,8 @@ const Members = () => {
 				</Button>
 
 				<Grid sx={{ padding: "2rem" }} container spacing={2}>
-					{MockMembers.map((member, index) => (
-						<Grid item xs={12} sm={6} md={4} key={index}>
+					{orgMembers ? (orgMembers.map((member, index) => {
+						return (<Grid item xs={12} sm={6} md={4} key={index}>
 							<Card sx={{ height: "100%", bgcolor: "primary.dark", boxShadow: "0px 3px 10px #80d3c9" }}>
 								<CardContent sx={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%" }}>
 									<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
@@ -163,8 +186,11 @@ const Members = () => {
 									</IconButton>
 								</CardContent>
 							</Card>
-						</Grid>
-					))}
+						</Grid>)
+					})
+					) : (
+						<Typography variant="h4">Invite members</Typography>
+					)}
 				</Grid>
 			</Box>
 		</BackWrapper>

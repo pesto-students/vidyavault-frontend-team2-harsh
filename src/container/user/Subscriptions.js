@@ -73,7 +73,7 @@ const Subscriptions = () => {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {courses.map((item, index) => {
+          {courses && courses.map((item, index) => {
             return (<Box sx={{ margin: 2 }} key={index} onClick={() => coursesPage(item)}>
               <Card course={item} />
             </Box>)
