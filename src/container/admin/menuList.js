@@ -26,7 +26,7 @@ const menuList = [
 	},
 	{
 		name: "Manage",
-		path: "/admindash/manage",
+		path: "/admindash/ismanage",
 		icon: <ManageAccounts />
 	},
 	{
