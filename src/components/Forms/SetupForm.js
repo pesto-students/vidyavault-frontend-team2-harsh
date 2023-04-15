@@ -1,15 +1,17 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
 import Box from "@mui/material/Box"
 import CheckIcon from "@mui/icons-material/Check"
 import TextField from "@mui/material/TextField"
 import { useDispatch, useSelector } from "react-redux"
+import { openSnack, closeSnack, startLoading, stopLoading } from "../../store/systemSlice"
 import { patchData } from "../DataFetch/DataFetch"
+import { getUser } from "../../container/user/redux/userData"
+import { BACKEND_URL } from "../../Constant"
 import { Typography, Button, Card, CardHeader, Stack, CircularProgress } from "@mui/material"
+
 const SetupForm = () => {
 	let auth = useSelector((state) => state.auth)
-	let currentGoal = "Amazing"
-	let currentslogan = "Just do it"
 	const [bannerFile, setBannerFile] = useState("")
 	const [success, setSuccess] = useState(false)
 	const [loading, setLoading] = useState(false)
@@ -17,11 +19,12 @@ const SetupForm = () => {
 	const [formData, setFormData] = useState({
 		orgId: "6426eefc5b4c13814cbd6c5f",
 		orgName: "",
-		goal: currentGoal,
-		slogan: currentslogan,
+		goal: "",
+		slogan: "",
 		banner: "",
 		desc: ""
 	})
+
 	const handleChange = (event) => {
 		const name = event.target.name
 		const value = event.target.value
@@ -67,7 +70,7 @@ const SetupForm = () => {
 			direction='column'
 			justifyContent='center'
 			alignItems='center'
-			bgcolor='#F2F2F2'
+			bgcolor='#f6f8e2'
 		>
 			{/* <Snackbar anchorOrigin={{ vertical: "top", horizontal: "right" }} open='false' autoHideDuration={6000} /> */}
 			<Card
@@ -82,7 +85,7 @@ const SetupForm = () => {
 					height: "90vh",
 					p: 7,
 					borderRadius: 2,
-					color: "#F2f2f2"
+					color: "#f6f8e2"
 				}}
 			>
 				<CardHeader
@@ -125,7 +128,7 @@ const SetupForm = () => {
 						width: "100%",
 						fontWeight: "600",
 						fontSize: "1rem",
-						color: "#20262e",
+						color: "#3c3d42",
 						marginBottom: "1rem"
 					}}
 				>

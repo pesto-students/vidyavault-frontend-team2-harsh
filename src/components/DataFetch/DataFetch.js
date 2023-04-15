@@ -2,21 +2,15 @@ import axios from "axios"
 import { BACKEND_URL } from "../../Constant"
 
 // Fetch Data
-export function getData(url) {
-	axios
-		.get(`${BACKEND_URL}/${url}`)
-		.then((response) => {
-			return response
-		})
-		.catch((error) => {
-			return error
-		})
+export async function getData(url, header = null) {
+	let response = await axios.get(`${BACKEND_URL}/${url}`, header)
+	return response
 }
 
 // Post Data
 export async function postData(url, postData, header = null) {
 	let response = await axios.post(`${BACKEND_URL}/${url}`, postData, header)
-	return response;
+	return response
 }
 
 export async function patchData(url, patchData, header = null) {

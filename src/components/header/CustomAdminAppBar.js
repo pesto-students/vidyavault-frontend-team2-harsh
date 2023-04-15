@@ -109,11 +109,11 @@ export default function CustomAppBar(props) {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<Link to='/admindash/profile' style={{ color: "#20262e", textDecoration: "none" }}>
+			<Link to='/admindash/profile' style={{ color: "#3c3d42", textDecoration: "none" }}>
 				<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
 			</Link>
 
-			<Link to='/admindash/setup' style={{ color: "#20262e", textDecoration: "none" }}>
+			<Link to='/admindash/setup' style={{ color: "#3c3d42", textDecoration: "none" }}>
 				<MenuItem color='third' onClick={handleMenuClose}>
 					My account
 				</MenuItem>

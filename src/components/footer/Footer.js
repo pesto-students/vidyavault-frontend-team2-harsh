@@ -11,8 +11,8 @@ const FooterContainer = styled("footer")({
 	flexDirection: "row",
 	flexWrap: "wrap",
 	padding: "5rem",
-	color: "#F2F2F2",
-	backgroundColor: "#20262e"
+	color: "#f6f8e2",
+	backgroundColor: "#3c3d42"
 })
 
 const BrandContainer = styled("div")({
@@ -50,55 +50,55 @@ const Footer = () => {
 					</BrandContainer>
 				</Typography>
 				<LinksContainer
-					onMouseOver={(e) => (e.target.style.color = "#80d3c9")}
+					onMouseOver={(e) => (e.target.style.color = "#9ccd62")}
 					onMouseOut={(e) => {
-						e.target.style.color = "#F2F2F2"
+						e.target.style.color = "#f6f8e2"
 					}}
 				>
 					<Link
 						style={{
 							textDecoration: "none",
-							color: "#F2F2F2"
+							color: "#f6f8e2"
 						}}
 						to='/'
 					>
 						About Us
 					</Link>
-					<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+					<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 						Contact Us
 					</Link>
-					<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+					<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 						Careers
 					</Link>
-					<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+					<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 						Privacy Policy
 					</Link>
-					<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+					<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 						Terms
 					</Link>
 					<Stack direction='row' gap='2rem'>
-						<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+						<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 							<Facebook />
 						</Link>
-						<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+						<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 							<Twitter />
 						</Link>
-						<Link style={{ textDecoration: "none", color: "#F2F2F2" }} to='/'>
+						<Link style={{ textDecoration: "none", color: "#f6f8e2" }} to='/'>
 							<LinkedIn />
 						</Link>
 					</Stack>
 				</LinksContainer>
 			</Stack>
-			<Stack direction='row' gap='2rem' flexWrap="wrap">
+			<Stack direction='row' gap='2rem' flexWrap='wrap'>
 				<TextField
-					sx={{ width: {xs: "14rem", sm: "18rem"} }}
+					sx={{ width: { xs: "14rem", sm: "18rem" } }}
 					id='email-input'
 					size='small'
 					label='Enter your email'
 					variant='outlined'
 					color='third'
 					InputLabelProps={{
-						style: { color: "#F2F2F2", borderColor: "#F2F2F2" }
+						style: { color: "#f6f8e2", borderColor: "#f6f8e2" }
 					}}
 				/>
 				<Button variant='contained' color='third'>
@@ -109,4 +109,4 @@ const Footer = () => {
 	)
 }
 
-export default Footer;
+export default Footer

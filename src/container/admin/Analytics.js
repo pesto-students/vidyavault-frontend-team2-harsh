@@ -12,11 +12,15 @@ const Analytics = () => {
 				sx={{
 					display: "flex",
 					flexDirection: "column",
-					height: "100vh",
+					position: "relative",
+					minHeight: "90vh",
 					justifyContent: "center",
 					alignItems: "center"
 				}}
 			>
+				<Typography marginBottom='2rem' variant='h3'>
+					Working on it ,currently have not enough data to show
+				</Typography>
 				<Typography marginBottom='2rem' variant='h2'>
 					Analytics 📈
 				</Typography>

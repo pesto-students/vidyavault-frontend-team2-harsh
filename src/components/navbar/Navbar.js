@@ -1,4 +1,13 @@
-import { IconButton, InputBase, TextField, Typography } from "@mui/material"
+import {
+	SwipeableDrawer,
+	ListItem,
+	ListItemText,
+	List,
+	IconButton,
+	InputBase,
+	TextField,
+	Typography
+} from "@mui/material"
 import { Box, Stack } from "@mui/system"
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -8,7 +17,6 @@ import { MenuIcon, SearchIcon } from "../../components/atoms/icons/icons"
 import { useSelector } from "react-redux"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
-
 
 const Navbar = ({ todisplay }) => {
 	let getState = useSelector((state) => state.auth)
@@ -42,20 +50,18 @@ const Navbar = ({ todisplay }) => {
 				<Stack
 					direction='row'
 					alignItems='center'
-					justifyContent={todisplay == "none" ? "start" : "space-around"}
+					justifyContent={todisplay == "none" ? "start" : "space-between"}
 					bgcolor='secondary.main'
 					p={1}
 					spacing={1}
 				>
-					<Box sx={{ width: "110px", marginLeft: 3 }} component={Link} to='/'>
+					<Box sx={{ width: "110px", marginLeft: "5rem" }} component={Link} to='/'>
 						<img src={logo} height='80px' width='80px' />
 						<Typography variant='h6' color='third.main' ml={1}>
 							VidyaVault
 						</Typography>
 					</Box>
-
 					{/* <List input={inputText} /> */}
-
 					{/* <Box>
                         <InputBase
                             sx={{ ml: 1, flex: 1, color: "primary.main" }}
@@ -67,7 +73,6 @@ const Navbar = ({ todisplay }) => {
                             <SearchIcon />
                         </IconButton>
                     </Box> */}
-
 					<IconButton
 						edge='start'
 						color='third'
@@ -81,34 +86,94 @@ const Navbar = ({ todisplay }) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Menu
-						id='basic-menu'
-						anchorEl={anchorEl}
-						open={open}
-						onClose={handleClose}
-						MenuListProps={{
-							"aria-labelledby": "basic-button"
-						}}
-					>
-						<MenuItem onClick={handleClose} component={Link} to='/'>
-							Home
-						</MenuItem>
-						<MenuItem onClick={handleClose} component={Link} to='/org'>
-							Organization
-						</MenuItem>
-						<MenuItem onClick={handleClose} component={Link} to='/about'>
-							About
-						</MenuItem>
-						<MenuItem onClick={handleClose} component={Link} to='/signup'>
-							Sign up
-						</MenuItem>
-						<MenuItem onClick={handleClose} component={Link} to='/signin'>
-							Sign in
-						</MenuItem>
-						<MenuItem onClick={handleClose}>Logout</MenuItem>
-					</Menu>
 
-					<Box sx={{ display: { xs: "none", sm: "none", md: todisplay == "none" ? "none" : "block" } }}>
+					<SwipeableDrawer anchor='right' open={open} onClose={handleClose} onOpen={open}>
+						<List
+							sx={{
+								display: "flex",
+								flexDirection: "column",
+								width: 250,
+								height: "100vh",
+								backgroundColor: "#3c3d42",
+								color: "#9ccd62"
+							}}
+						>
+							<ListItem
+								sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+								button
+								onClick={handleClose}
+								component={Link}
+								to='/'
+							>
+								<ListItemText primary='Home' />
+							</ListItem>
+							<ListItem
+								sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+								button
+								onClick={handleClose}
+								component={Link}
+								to='/org'
+							>
+								<ListItemText primary='Organization' />
+							</ListItem>
+							<ListItem
+								sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+								button
+								onClick={handleClose}
+								component={Link}
+								to='/about'
+							>
+								<ListItemText primary='About' />
+							</ListItem>
+							{isLogin && isAdmin && (
+								<ListItem
+									sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+									button
+									onClick={handleClose}
+									component={Link}
+									to='/admindash'
+								>
+									<ListItemText primary='Dashboard' />
+								</ListItem>
+							)}
+
+							{isLogin && !isAdmin && (
+								<ListItem
+									sx={{ padding: "2rem", boxShadow: "1px 1px 3px #222222" }}
+									button
+									onClick={handleClose}
+									component={Link}
+									to='/dash'
+								>
+									<ListItemText primary='Dashboard' />
+								</ListItem>
+							)}
+							<ListItem
+								sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+								button
+								onClick={handleClose}
+								component={Link}
+								to='/signup'
+							>
+								<ListItemText primary='Sign up' />
+							</ListItem>
+							<ListItem
+								sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }}
+								button
+								onClick={handleClose}
+								component={Link}
+								to='/signin'
+							>
+								<ListItemText primary='Sign in' />
+							</ListItem>
+							<ListItem sx={{ padding: "2rem", boxShadow: "1px 1px 10px #000000" }} button onClick={handleClose}>
+								<ListItemText primary='Logout' />
+							</ListItem>
+						</List>
+					</SwipeableDrawer>
+					<Box
+						sx={{ translate: "-2rem", display: { xs: "none", sm: "none", md: todisplay == "none" ? "none" : "block" } }}
+					>
 						<Stack direction='row' spacing={2}>
 							<Button color='primary' size='large' variant='text' component={Link} to='/'>
 								<Typography variant='h6' color='primary.main'>

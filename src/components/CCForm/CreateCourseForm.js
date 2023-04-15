@@ -155,14 +155,15 @@ export default function CreateCourseForm() {
 			headers: { authorization: `Bearer ${auth.token}` }
 		}
 		const result = postData(`cc`, data, header)
-		console.log(result)
-		// if (result.data.status) {
-		// 	dispatch(openSnack({ msg: "congratulations! course created successfuly", type: "success" }))
-		// 	dispatch(stopLoading())
-		// } else {
-		// 	dispatch(openSnack({ msg: "Failed", type: "error" }))
-		// 	dispatch(stopLoading())
-		// }
+		result.then((response) => {
+			if ((result.status = 200)) {
+				dispatch(openSnack({ msg: "congratulations! course created successfuly", type: "success" }))
+				dispatch(stopLoading())
+			} else {
+				dispatch(openSnack({ msg: "Failed", type: "error" }))
+				dispatch(stopLoading())
+			}
+		})
 	}
 
 	return (
@@ -266,11 +267,11 @@ export default function CreateCourseForm() {
 								variant='outlined'
 								color='secondary'
 							>
-								Signing in
+								Uploading
 							</LoadingButton>
 						) : (
 							<Button variant='contained' color='secondary' onClick={(e) => handleSubmit(e)}>
-								<Typography>submit</Typography>
+								<Typography>Submit</Typography>
 							</Button>
 						)}
 					</Stack>

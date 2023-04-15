@@ -16,7 +16,7 @@ export const JoinBanner = () => {
 					<Typography variant='h3'>
 						Share what you know.<br></br>Sign up today.
 					</Typography>
-					<Button variant='contained' color='secondary' sx={{ marginTop: 1 }} component={Link} to="/signup">
+					<Button variant='contained' color='secondary' sx={{ marginTop: 1 }} component={Link} to='/signup'>
 						<Typography variant='h6'>Join right now</Typography>
 					</Button>
 				</Box>
@@ -26,11 +26,11 @@ export const JoinBanner = () => {
 }
 
 export const Createbanner = () => {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 	return (
 		<Box sx={{ bgcolor: "third.main", textAlign: "center" }}>
 			<Typography variant='h2'>Teaching is the greatest act of optimism.</Typography>
-			<Button variant='contained' color='secondary' sx={{ margin: 2 }} onClick={() => navigate('/dash/cc')}>
+			<Button variant='contained' color='secondary' sx={{ margin: 2 }} onClick={() => navigate("/dash/cc")}>
 				<Typography variant='h6' p={1}>
 					Create course
 				</Typography>
@@ -61,7 +61,7 @@ export const WhiteLabelBanner = ({ img }) => {
 			sx={{
 				objectFit: "fill",
 				bgcolor: "secondary.main",
-				width: "100vw",
+				width: "100%",
 				height: "4rem",
 				textAlign: "center"
 			}}

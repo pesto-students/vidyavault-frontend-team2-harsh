@@ -13,9 +13,9 @@ import { getUser } from "../../container/user/redux/userData"
 import { BACKEND_URL } from "../../Constant"
 
 const FormComponent = () => {
-	let [UserData, setUserData] = React.useState();
-	let dispatch = useDispatch();
-	let navigate = useNavigate();
+	let [UserData, setUserData] = React.useState()
+	let dispatch = useDispatch()
+	let navigate = useNavigate()
 	let sys = useSelector((state) => state.system)
 	// let loading = sys.isLoading
 	let auth = useSelector((state) => state.auth)
@@ -31,14 +31,13 @@ const FormComponent = () => {
 	const [confPass, setConfPass] = React.useState("")
 
 	React.useEffect(() => {
-
-		dispatch(startLoading());
-		let res = getUser(`${BACKEND_URL}/user`, auth.token);
+		dispatch(startLoading())
+		let res = getUser(`${BACKEND_URL}/user`, auth.token)
 		res.then((x) => {
-			console.log(x.data.data);
-			setUserData(x.data.data);
+			console.log(x.data.data)
+			setUserData(x.data.data)
 		})
-		dispatch(stopLoading());
+		dispatch(stopLoading())
 
 		if (avatarFile) {
 			setLoading(true)
@@ -73,17 +72,16 @@ const FormComponent = () => {
 	}
 
 	const handleSubmit = async (event) => {
-		if(formData.name == "" && formData.password == "" && formData.avatar == "") {
+		if (formData.name == "" && formData.password == "" && formData.avatar == "") {
 			dispatch(openSnack({ msg: "Fill at least one input, Missing cridentials", type: "error" }))
-			return;
+			return
 		}
 		event.preventDefault()
 		let header = { headers: { authorization: `Bearer ${auth.token}` } }
 		const result = patchData(`/user`, formData, header)
-		console.log(result)
 		result.then((x) => {
 			dispatch(openSnack({ msg: "congratulations! Updated Succesfully", type: "success" }))
-			navigate("/dash/profile");
+			navigate("/dash/profile")
 		})
 		result.catch((x) => {
 			dispatch(openSnack({ msg: "Failed to update", type: "error" }))
@@ -100,7 +98,7 @@ const FormComponent = () => {
 			direction='column'
 			justifyContent='center'
 			alignItems='center'
-			bgcolor='#F2F2F2'
+			bgcolor='#f6f8e2'
 		>
 			<CustomSnackbar />
 			<Card
@@ -115,7 +113,7 @@ const FormComponent = () => {
 					height: "90vh",
 					p: 5,
 					borderRadius: 2,
-					color: "#F2f2f2"
+					color: "#f6f8e2"
 				}}
 			>
 				<CardHeader
@@ -125,11 +123,7 @@ const FormComponent = () => {
 				/>
 
 				<Box sx={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "center", flexGrow: 1 }}>
-					<Avatar
-						alt='avatar'
-						src={UserData && UserData.avatar}
-						sx={{ width: 96, height: 96 }}
-					/>
+					<Avatar alt='avatar' src={UserData && UserData.avatar} sx={{ width: 96, height: 96 }} />
 					<Button
 						variant='outlined'
 						color='secondary'
@@ -156,7 +150,14 @@ const FormComponent = () => {
 						)
 					)}
 				</Box>
-				<TextField color='third' fullWidth name='name' label={UserData && UserData.name} value={formData.name} onChange={handleChange} />
+				<TextField
+					color='third'
+					fullWidth
+					name='name'
+					label={UserData && UserData.name}
+					value={formData.name}
+					onChange={handleChange}
+				/>
 
 				<TextField
 					color='third'
@@ -180,7 +181,7 @@ const FormComponent = () => {
 				<Button
 					sx={{ width: { xs: 150, sm: 200, md: 300 }, borderRadius: 1, mt: 3 }}
 					variant='contained'
-					disabled={formData.password !== confPass  && formData.name == ""}
+					disabled={formData.password !== confPass && formData.name == ""}
 					color='secondary'
 					onClick={handleSubmit}
 				>

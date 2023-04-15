@@ -8,6 +8,10 @@ const DashboardList = [
 		path: "/admindash/setup"
 	},
 	{
+		name: "Course",
+		path: "/admindash/manage"
+	},
+	{
 		name: "Analytics",
 		path: "/admindash/analytics"
 	}

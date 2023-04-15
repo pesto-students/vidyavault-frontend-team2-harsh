@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle"
 import Slide from "@mui/material/Slide"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
 import { getData, postData } from "../../components/DataFetch/DataFetch"
 import {
 	Avatar,
@@ -36,48 +37,73 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 const Members = () => {
+	let auth = useSelector((state) => state.auth)
+	let sys = useSelector((state) => state.system)
 	const [memberDetails, setMemberDetails] = useState({
 		name: "",
 		Avatar: ""
 	})
+
+	const [members, setMembers] = useState([])
 
 	const [email, setEmail] = useState("")
 	const [error, setError] = useState(false)
 	const [errorText, setErrorText] = useState("")
 	const [openModal, setOpenModal] = useState(false)
 
-	const postData = async () => {
-		axios
-			.post("https://vidyavault.onrender.com/api/admin/memberinviteemail", { email })
+	useEffect(() => {
+		let header = {
+			headers: { authorization: `Bearer ${auth.token}` }
+		}
+		const res = postData("admin/org", { orgId: auth.id }, header)
+		res
 			.then((response) => {
-				if (response.data === "send email success") {
-					setEmail("")
-					setError(false)
-					setErrorText("")
-					setOpenModal(false)
-				}
+				setMembers(response.data.data)
 			})
 			.catch((error) => {
-				setError(true)
-				setErrorText(error)
+				alert(error)
 			})
-		// console.log(response)
-	}
+	}, [])
 
 	const handleClose = (e) => {
 		if (email.length === 0 && e.target.innerText == "SEND") {
 			setError(true)
 			setErrorText("Field can't be empty")
+		} else if (e.target.innerText !== "SEND") {
+			setOpenModal(false)
 		} else {
-			postData()
+			let header = {
+				headers: { authorization: `Bearer ${auth.token}` }
+			}
+			const res = postData("admin/memberinviteemail", { email: email }, header)
+			res
+				.then((response) => {
+					if (response.status === 200) {
+						setEmail("")
+						setError(false)
+						setErrorText("")
+						setOpenModal(false)
+					}
+				})
+				.catch((error) => {
+					setError(true)
+					setErrorText(error)
+				})
 		}
 	}
-
-	const handleKickout = () => {
-		// axios.("/api", {})
+	const handleKickout = (member) => {
+		let header = {
+			headers: { authorization: `Bearer ${auth.token}` }
+		}
+		const res = postData("admin/removemember", { memId: member.memId }, header)
+		res
+			.then((response) => {
+				console.log(response)
+			})
+			.catch((error) => {
+				alert(error)
+			})
 	}
-
-	// axios.get("/api", {})
 
 	return (
 		<BackWrapper menuList={menuList}>
@@ -108,7 +134,7 @@ const Members = () => {
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Box sx={{ flexGrow: 1 }}>
+			<Box sx={{ flexGrow: 1, position: "relative", minHeight: "90vh" }}>
 				<CustomAdminAppBar OrgName={"Saurabh School"} />
 				<Button
 					color='secondary'
@@ -116,15 +142,22 @@ const Members = () => {
 					onClick={() => setOpenModal(!openModal)}
 					sx={{
 						zIndex: "100",
-						position: "absolute",
-						bottom: "1rem",
-						right: "1rem",
+						position: "fixed",
+						bottom: "20px",
+						right: "20px",
 						width: "6rem",
 						height: "6rem",
 						borderRadius: "8rem"
 					}}
 				>
-					<Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "center",
+							alignItems: "center"
+						}}
+					>
 						<Typography variant='subtitle1' marginTop={2}>
 							Invite
 						</Typography>
@@ -133,38 +166,59 @@ const Members = () => {
 				</Button>
 
 				<Grid sx={{ padding: "2rem" }} container spacing={2}>
-					{MockMembers.map((member, index) => (
-						<Grid item xs={12} sm={6} md={4} key={index}>
-							<Card sx={{ height: "100%", bgcolor: "primary.dark", boxShadow: "0px 3px 10px #80d3c9" }}>
-								<CardContent sx={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%" }}>
-									<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
-										<Avatar
-											alt={member.name}
-											src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
-											sx={{ width: 80, height: 80, mb: 1 }}
-										/>
-										<Typography gutterBottom variant='h5' component='div'>
-											{member.name}
-										</Typography>
-									</Box>
+					{members !== null ? (
+						members.map((member, index) => {
+							return (
+								<Grid item xs={12} sm={6} md={4} key={index}>
+									<Card sx={{ height: "100%", bgcolor: "primary.dark", boxShadow: "0px 3px 10px #9ccd62" }}>
+										<CardContent
+											sx={{ display: "flex", flexDirection: "column", alignItems: "center", height: "100%" }}
+										>
+											<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
+												<Avatar
+													alt={member.name}
+													src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
+													sx={{ width: 80, height: 80, mb: 1 }}
+												/>
+												<Typography gutterBottom variant='h5' component='div'>
+													{member.name}
+												</Typography>
+											</Box>
 
-									<Button
-										color='secondary'
-										variant='contained'
-										component={Link}
-										// to={`/members/${member.id}`}
-										to='id'
-										sx={{ mt: 2, borderRadius: 5 }}
-									>
-										View Profile
-									</Button>
-									<IconButton sx={{ mt: 2 }} onClick={handleKickout}>
-										<PersonRemoveIcon color='secondary' />
-									</IconButton>
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
+											<Button
+												color='secondary'
+												variant='contained'
+												component={Link}
+												// to={`/members/${member.id}`}
+												to='id'
+												sx={{ mt: 2, borderRadius: 5 }}
+											>
+												View Profile
+											</Button>
+											<IconButton sx={{ mt: 2 }} onClick={() => handleKickout(member)}>
+												<PersonRemoveIcon color='secondary' />
+											</IconButton>
+										</CardContent>
+									</Card>
+								</Grid>
+							)
+						})
+					) : (
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								backgroundColor: "#f6f8e2",
+								height: "100vh",
+								width: "100vw"
+							}}
+						>
+							<Typography color='secondary' variant='h3'>
+								Click the invite buttom below to invite new members
+							</Typography>
+						</Box>
+					)}
 				</Grid>
 			</Box>
 		</BackWrapper>

@@ -16,7 +16,7 @@ const EarningsCard = ({ earnings, item }) => {
 					</Link>
 				}
 				title={item.name}
-				sx={{ color: "#20262E" }}
+				sx={{ color: "#3c3d42" }}
 			/>
 			<CardContent>
 				<Typography variant='h5' component='h2'>

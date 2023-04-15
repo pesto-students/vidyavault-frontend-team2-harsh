@@ -8,7 +8,7 @@ const chartStyle = {
 	flexGrow: 2,
 	justifyContent: "center",
 	alignItems: "center",
-	backgroundColor: "#20262e"
+	backgroundColor: "#3c3d42"
 }
 
 function AnalyticsChart({ data }) {
@@ -23,14 +23,14 @@ function AnalyticsChart({ data }) {
 				categories: data.map((item) => item.name),
 				labels: {
 					style: {
-						colors: "#F2F2F2"
+						colors: "#f6f8e2"
 					}
 				}
 			},
 			yaxis: {
 				labels: {
 					style: {
-						colors: "#F2F2F2"
+						colors: "#f6f8e2"
 					}
 				}
 			}
@@ -45,12 +45,7 @@ function AnalyticsChart({ data }) {
 
 	return (
 		<div style={chartStyle}>
-			<Chart
-				options={chartData.options}
-				series={chartData.series}
-				type='bar'
-				color='#20262E'
-			/>
+			<Chart options={chartData.options} series={chartData.series} type='bar' color='#3c3d42' />
 		</div>
 	)
 }
