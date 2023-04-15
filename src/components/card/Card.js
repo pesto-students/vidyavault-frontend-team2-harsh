@@ -37,10 +37,10 @@ export default function ImgMediaCard(props) {
                 />
                 <Box width="100%" >
                     <Typography gutterBottom variant="h5">
-                        {course.courseName}
+                        {course.courseName || course.orgName}
                     </Typography>
                     <Typography variant="body2" color="secondary.main">
-                        {course.description}
+                        {course.description || course.goal}
                     </Typography>
                     <Stack direction="row" alignitems="center" justifyContent="center" spacing={1} m={2}>
                         {btn && <Button size="small" color='secondary' variant='contained' onClick={(e) => subFn(e)}>{btn}</Button>}

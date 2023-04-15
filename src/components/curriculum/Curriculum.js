@@ -69,7 +69,7 @@ const Curriculum = () => {
                     <Box sx={{ width: "40%", height: "100vh", borderRadius: 5, float: "right", display: { sm: open, md: "block", xs: open } }}>
                         <Stack alignItems="center">
                             <Typography variant='h3' margin={2}>curriculum</Typography>
-                            {CourseData.map((item, index) => {
+                            {CourseData && CourseData.map((item, index) => {
                                 return (
                                     <Box key={index} sx={{ width: "100%", height: "100%" }}>
                                         <Button variant='contained' size="small" fullWidth color='third' sx={{ margin: 0.4, textTransform: "none" }} onClick={() => toggleFn(index)}><Typography variant='h5' margin={1} >{item.moduleName}</Typography></Button>

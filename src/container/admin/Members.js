@@ -69,8 +69,7 @@ const Members = () => {
 			}
 			axios.post(`${BACKEND_URL}/admin/memberinviteemail`, { "email": email }, header)
 				.then((res) => {
-					dispatch(openSnack({ msg: res.data, type: "success" }))
-					console.log(res);
+					dispatch(openSnack({ msg: res.data, type: "success" }));
 				})
 				.catch((error) => {
 					dispatch(openSnack({ msg: "failure! Try again", type: "succes" }))
@@ -78,8 +77,18 @@ const Members = () => {
 		}
 	}
 
-	const handleKickout = () => {
-		// axios.("/api", {})
+	const handleKickout = (mem) => {
+		let header = {
+			headers: { authorization: `Bearer ${auth.token}` }
+		}
+		axios.post(`${BACKEND_URL}/admin/removemember`, { "memId": mem._id }, header)
+			.then((res) => {
+				dispatch(openSnack({ msg: "member removed", type: "success" }))
+				navigate("/admindash");
+			})
+			.catch((error) => {
+				dispatch(openSnack({ msg: "failure! Try again", type: "succes" }))
+			})
 	}
 
 	useEffect(() => {
@@ -93,6 +102,7 @@ const Members = () => {
 			}
 			axios.post(`${BACKEND_URL}/admin/org`, { "orgId": org }, header)
 				.then((res) => {
+					console.log(res)
 					setOrgMembers(res.data.data.members)
 				})
 			dispatch(stopLoading());
@@ -163,7 +173,7 @@ const Members = () => {
 									<Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", flexGrow: 1 }}>
 										<Avatar
 											alt={member.name}
-											src='https://www.mtsolar.us/wp-content/uploads/2020/04/avatar-placeholder.png'
+											src={member.avatar}
 											sx={{ width: 80, height: 80, mb: 1 }}
 										/>
 										<Typography gutterBottom variant='h5' component='div'>
@@ -181,7 +191,7 @@ const Members = () => {
 									>
 										View Profile
 									</Button>
-									<IconButton sx={{ mt: 2 }} onClick={handleKickout}>
+									<IconButton sx={{ mt: 2 }} onClick={() => handleKickout(member)}>
 										<PersonRemoveIcon color='secondary' />
 									</IconButton>
 								</CardContent>

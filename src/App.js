@@ -34,6 +34,7 @@ import ShowCurriculum from "./components/coursecontent/ShowCurriculum"
 import AdminSignup from "./components/adminForm/AdminSignup"
 import AdminSignin from "./components/adminForm/AdminSignin"
 import SetProfile from "./container/user/SetProfile"
+import AdminEditCourse from "./components/EditCourse/AdminEditCourse"
 
 const App = () => {
 	let dispatch = useDispatch()
@@ -52,31 +53,6 @@ const App = () => {
 	dispatch(addType(checkAdmin))
 	dispatch(addId(id))
 	dispatch(addToken(token))
-
-	// const [isAdmin, setIsAdmin] = useState();
-	// const [isLoggedIn, setIsLoggedIn] = useState();
-
-	// const resId = localStorage.getItem("userId");
-	// 	const resToken = localStorage.getItem("token");
-	// 	const checkAdmin = localStorage.getItem("isAdmin");
-	// 	const checkLogin = localStorage.getItem("isLoggedIn");
-
-	// const checkLog = () => {
-
-	// 	if (resId == "" || resToken == "" || !resId || !resToken || !isLoggedIn) {
-	// 		return // <Navigate to="/" replace />;
-	// 	} else {
-	// 		let item1 = JSON.parse(resId);
-	// 		let item2 = JSON.parse(resToken);
-	// 		console.log("localStorage", item1, item2);
-	// 		setIsAdmin(checkAdmin);
-	// 		setIsLoggedIn(checkLogin);
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	checkLog();
-	// }, [])
 
 	return (
 		<>
@@ -109,13 +85,14 @@ const App = () => {
 					<Route path='/admindash/' element={<AuthAdmin />}>
 						<Route path='/admindash/' element={<AdminDash />} />
 						<Route path='/admindash/cc' element={<AdminCreateCourse />} />
-						<Route path='/admindash/manage' element={<AdminManage />} />
+						<Route path='/admindash/ismanage' element={<AdminManage />} />
 						<Route path='/admindash/members' element={<Members />} />
 						<Route path='/admindash/members/id' element={<UserProfile />} />
 						<Route path='/admindash/profile' element={<AdminProfile />} />
 						<Route path='/admindash/setup' element={<AdminSetup />} />
 						<Route path='/admindash/analytics' element={<Analytics />} />
 						<Route path='/admindash/reset' element={<ResetPassword />} />
+						<Route path='/admindash/courseedit' element={<AdminEditCourse />} />
 					</Route>
 
 				</Routes>
@@ -124,60 +101,4 @@ const App = () => {
 	)
 }
 
-{
-	/* {(status.isLogedin && status.type == "itsUser") ? (
-		<UserDash />) : (status.isLogedin && status.type == "itsAdmin") ? (
-		  <AdminDash />) : (<Welcome />)
-	  } */
-}
-
-// function App() {
-//   return (
-//     <>
-//       <Typography variant="h3" color="secondary">App</Typography>
-//       <Button color="secondary" variant="contained">
-//         <Typography variant="button" color="third.main">
-//           Primary
-//         </Typography>
-//       </Button>
-//       <Button color="secondary" variant="contained">
-//         Secondary
-//       </Button>
-//       <Button color="third" variant="contained">
-//         Third
-//       </Button>
-
-//       <div>
-//         <Box sx={{ bgcolor: "secondary.main" }}>
-//           <Typography variant="h1" color="third.main">
-//             h1 Lorem Ipsum is simply dummy text of the industry.
-//           </Typography>
-//         </Box>
-//         <br />
-//         <Typography variant="h2">
-//           h2 Lorem Ipsum is simply dummy text of the industry.
-//         </Typography>
-//         <br />
-//         <Typography variant="h3">
-//           h3 Lorem Ipsum is simply dummy text of the industry.
-//         </Typography>
-//         <br />
-//         <Typography variant="h4">
-//           h4 Lorem Ipsum is simply dummy text of the industry.
-//         </Typography>
-//         <br />
-//         <Typography variant="h5">
-//           h5 Lorem Ipsum is simply dummy text of the industry.
-//         </Typography>
-//         <br />
-//         <Typography variant="h6">
-//           h6 Lorem Ipsum is simply dummy text of the industry.
-//         </Typography>
-//       </div>
-//       <hr></hr>
-//       <hr></hr>
-//     </>
-//   );
-// }
-
-export default App
+export default App;

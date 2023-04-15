@@ -71,7 +71,7 @@ const Memberships = () => {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {membershipList.map((item, index) => {
+          {membershipList && membershipList.map((item, index) => {
             return (<Box sx={{ margin: 2 }} key={index} onClick={() => orgCourses(item)}>
               <Card course={item} />
             </Box>)

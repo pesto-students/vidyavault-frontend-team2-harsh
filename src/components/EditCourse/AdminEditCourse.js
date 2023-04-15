@@ -2,7 +2,7 @@ import { Button, Checkbox, Drawer, Typography } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import BackWrapper from '../backWrapper/BackWrapper';
-import menuList from '../../container/user/menuList';
+import menuList from '../../container/admin/menuList';
 import { useDispatch, useSelector } from 'react-redux';
 import { openFileModel, openModel, openModuleModel, openSnack, startLoading, stopLoading } from '../../store/systemSlice';
 import { EditIcon, DeleteIcon, AddIcon } from '../atoms/icons/icons';
@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AddModule from '../customModel.js/AddModule';
 
-const EditCourse = () => {
+const AdminEditCourse = () => {
     let dispatch = useDispatch();
     const navigate = useNavigate();
     let auth = useSelector((state) => state.auth);
@@ -82,7 +82,7 @@ const EditCourse = () => {
                 .then((x) => {
                     dispatch(openSnack({ msg: "video deleted", type: "success" }));
                 })
-            navigate('/dash/manage');
+            navigate('/admindash/ismanage');
         } else {
             return;
         }
@@ -101,7 +101,7 @@ const EditCourse = () => {
                 .then((x) => {
                     dispatch(openSnack({ msg: "Module deleted", type: "success" }));
                 })
-            navigate('/dash/manage');
+            navigate('/admindash/ismanage');
         } else {
             return;
         }
@@ -168,4 +168,4 @@ const EditCourse = () => {
     )
 }
 
-export default EditCourse;
+export default AdminEditCourse;

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { addId, addLogin, addToken, addType } from '../../store/authSlice';
 import { useDispatch } from 'react-redux';
 
-const AuthUser = ({ children }) => {
+const AuthUser = () => {
     let dispatch = useDispatch();
     let isAdmin
     let isLoggedIn
