@@ -1,0 +1,102 @@
+[
+    {
+        "_id": "123451",
+        "name": "Saurabh",
+        "email": "Saurabh@gmail.com",
+        "password": "12345678",
+        "ownCourses": [
+            {
+                "courseName": "JS",
+                "courseId": "JS12345"
+            },
+            {
+                "courseName": "Astronomy",
+                "courseId": "Astronomy12345"
+            },
+            {
+                "courseName": "Economics",
+                "courseId": "Economics12345"
+            }
+        ],
+        "subscriptions": [
+            {
+                "courseName": "",
+                "courseId": ""
+            }
+        ],
+        "memberships": [
+            {
+                "org": "",
+                "orgId": ""
+            }
+        ]
+    },
+    {
+        "_id": "123452",
+        "name": "Kirti",
+        "email": "Kirti@gmail.com",
+        "password": "12345678",
+        "ownCourses": [
+            {
+                "courseName": "Physics",
+                "courseId": "Physics12345"
+            },
+            {
+                "courseName": "Chemistry",
+                "courseId": "Chemistry12345"
+            },
+            {
+                "courseName": "Biology",
+                "courseId": "Biology12345"
+            }
+        ],
+        "subscriptions": [
+            {
+                "courseName": "",
+                "courseId": ""
+            }
+        ],
+        "memberships": [
+            {
+                "org": "",
+                "orgId": ""
+            }
+        ]
+    },
+    {
+        "_id": "123453",
+        "name": "Harsh",
+        "email": "Harsh@gmail.com",
+        "password": "12345678",
+        "ownCourses": [
+            {
+                "courseName": "DSA",
+                "courseId": "DSA12345"
+            },
+            {
+                "courseName": "Geography",
+                "courseId": "Geography12345"
+            },
+            {
+                "courseName": "NodeJS",
+                "courseId": "NodeJS12345"
+            },
+            {
+                "courseName": "Quantum Physics",
+                "courseId": "QuantumPhysics12345"
+            }
+        ],
+        "subscriptions": [
+            {
+                "courseName": "",
+                "courseId": ""
+            }
+        ],
+        "memberships": [
+            {
+                "org": "",
+                "orgId": ""
+            }
+        ]
+    }
+]

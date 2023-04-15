@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #20262e;
+      font-family: Arial;
+      overflow-y: hidden;
+    }
+
+    #logo {
+      position: absolute;
+      top: 4rem;
+      height: 220px;
+      width: 220px;
+    }
+
+    .appState {
+      position: absolute;
+      bottom: 12rem;
+      color: #f2f2f2;
+      font-size: 2em;
+    }
+
+    .en {
+      position: absolute;
+      bottom: 8rem;
+      color: #f2f2f2;
+      font-size: 2em;
+    }
+
+    .meaning {
+      position: absolute;
+      bottom: 5rem;
+      color: #f2f2f2;
+      font-size: 2em;
+    }
+
+    .content {
+      position: relative;
+    }
+
+    .content h1 {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-size: 10em;
+    }
+
+    .content h1:nth-child(1) {
+      color: transparent;
+      -webkit-text-stroke: 2px #f2f2f2;
+    }
+
+    .content h1:nth-child(2) {
+      color: #80d3c9;
+      animation: animate 2s ease-in-out 0s infinite reverse;
+    }
+
+    @keyframes animate {
+
+      0%,
+      100% {
+        clip-path: polygon(0% 54%, 8% 49%, 18% 44%, 29% 44%, 38% 45%, 49% 50%, 56% 53%, 65% 57%, 77% 57%, 84% 54%, 92% 50%, 100% 44%, 100% 100%, 0% 100%);
+      }
+
+      50% {
+        clip-path: polygon(0 53%, 9% 57%, 19% 60%, 29% 62%, 40% 59%, 48% 54%, 56% 49%, 65% 44%, 74% 41%, 84% 41%, 92% 41%, 100% 45%, 100% 100%, 0% 100%);
+      }
+    }
+  </style>
+  <title>VidyaVault</title>
+</head>
+
+<body onload="removeLoader()">
+
+  <div id="main">
+    <img src="https://res.cloudinary.com/dgj1tfu0j/image/upload/v1679290037/darklogo_nhxib0.png" alt="vidyavault"
+      id="logo">
+    <div class="content">
+      <h1>VidyaVault</h1>
+      <h1>VidyaVault</h1>
+    </div>
+  </div>
+
+  <div id="root"></div>
+
+  <script>
+    let main = document.getElementById("main");
+    function removeLoader() {
+      main.style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
